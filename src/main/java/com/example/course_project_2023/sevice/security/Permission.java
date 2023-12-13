@@ -1,4 +1,4 @@
-package com.example.course_project_2023.repository.sevice.security;
+package com.example.course_project_2023.sevice.security;
 
 public enum Permission {
     USER_PERMISSION,

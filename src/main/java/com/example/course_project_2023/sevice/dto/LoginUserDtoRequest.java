@@ -1,4 +1,4 @@
-package com.example.course_project_2023.repository.sevice.dto;
+package com.example.course_project_2023.sevice.dto;
 
 import lombok.Data;
 

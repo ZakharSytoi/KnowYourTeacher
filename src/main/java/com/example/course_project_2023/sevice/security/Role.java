@@ -1,19 +1,17 @@
-package com.example.course_project_2023.repository.sevice.security;
+package com.example.course_project_2023.sevice.security;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.example.course_project_2023.repository.sevice.security.Permission.*;
-
 public enum Role {
 
     ADMIN(Set.of(
-            ADMIN_PERMISSION
+            Permission.ADMIN_PERMISSION
     )),
     USER(Set.of(
-            USER_PERMISSION
+            Permission.USER_PERMISSION
     ));
 
 
