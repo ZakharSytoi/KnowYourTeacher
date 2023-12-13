@@ -1,5 +1,6 @@
 package com.example.course_project_2023.web.controllers;
 
+import com.example.course_project_2023.sevice.AuthService;
 import com.example.course_project_2023.sevice.dto.JwtResponse;
 import com.example.course_project_2023.sevice.dto.LoginUserDtoRequest;
 import com.example.course_project_2023.sevice.dto.UserRegistrationDtoRequest;
