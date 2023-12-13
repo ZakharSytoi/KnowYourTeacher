@@ -12,8 +12,10 @@ public class User {
     private String nickname;
     @Column(name = "field_of_study")
     private String fieldOfStudies;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id")
     private University university;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private SecurityUser securityUser;
 }
