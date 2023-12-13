@@ -1,7 +1,7 @@
 package com.example.course_project_2023.sevice.security;
 
 public enum Permission {
-    USER_PERMISSION,
-    ADMIN_PERMISSION,
+    USER_SPECIFIC_PERMISSION,
+    ADMIN_SPECIFIC_PERMISSION,
     SEMI_PERMISSION
 }
