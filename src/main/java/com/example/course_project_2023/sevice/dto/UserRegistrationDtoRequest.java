@@ -4,7 +4,6 @@ public record UserRegistrationDtoRequest(String nickname,
                                          Long universityId,
                                          String fieldOfStudies,
                                          String email,
-                                         String password,
-                                         RequestedRole role
+                                         String password
 ) {
 }

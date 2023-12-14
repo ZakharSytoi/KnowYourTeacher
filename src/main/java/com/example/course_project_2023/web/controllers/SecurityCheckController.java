@@ -9,7 +9,7 @@ import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/knowyourteacher-api/v1/v1/security_checks")
+@RequestMapping("/knowyourteacher-api/v1/security_checks")
 public class SecurityCheckController {
     @GetMapping("unauthorized_get")
     public ResponseEntity<String> unauthorizedGet() {

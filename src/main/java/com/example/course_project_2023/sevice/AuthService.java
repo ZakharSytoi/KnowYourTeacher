@@ -54,7 +54,7 @@ public class AuthService {
         SecurityUser securityUser = new SecurityUser();
         securityUser.setEmail(request.email());
         securityUser.setPassword(passwordEncoder.encode(request.password()));
-        securityUser.setRoles(Set.of(roleService.findRoleByName(request.role().name())));
+        securityUser.setRoles(Set.of(roleService.findRoleByName("USER")));
 
         user.setSecurityUser(securityUser);
         securityUser.setUser(user);
