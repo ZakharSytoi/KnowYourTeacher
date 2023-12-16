@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from 'express';
 import { UserLoginRequestDto } from '../models/UserLoginRequestDto';
 import { BASE_API_URL } from './consts';
 import { UserRegistrationRequestDto } from '../models/UserRegistrationRequestDto';

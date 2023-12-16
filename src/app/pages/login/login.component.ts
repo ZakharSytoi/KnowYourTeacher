@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ShortHeaderComponent } from '../../components/short-header/short-header.component';
 import { NgStyle, NgClass } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   FormGroup,
   FormControl,
@@ -14,17 +16,21 @@ import { JwtResponseDto } from '../../models/JwtResponseDto';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ShortHeaderComponent, NgStyle, NgClass, ReactiveFormsModule],
+  imports: [
+    ShortHeaderComponent,
+    NgStyle,
+    NgClass,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  
   userData: FormGroup;
   jwtDto = new JwtResponseDto();
 
-
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.userData = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -39,7 +45,6 @@ export class LoginComponent {
     });
   }
 
-
   onSubmit() {
     if (this.userData.valid) {
       this.authService
@@ -49,14 +54,16 @@ export class LoginComponent {
             this.userData.controls['password'].value
           )
         )
-        .subscribe((jwtDto) => localStorage.setItem('token', jwtDto.token));
+        .subscribe((jwtDto) => {
+          localStorage.setItem('token', jwtDto.token);
+          this.router.navigate(['/']);
+        });
 
-      console.log(localStorage.getItem('authToken'));
+      console.log(localStorage.getItem('token'));
     } else {
       console.log('invalid data');
     }
   }
-
 
   getEmailErrorStatus(): boolean {
     return (
@@ -65,7 +72,6 @@ export class LoginComponent {
         this.userData.controls['email'].dirty)
     );
   }
-
 
   getPasswordErrorStatus(): boolean {
     return (

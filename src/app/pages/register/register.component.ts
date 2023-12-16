@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { ShortHeaderComponent } from '../../components/short-header/short-header.component';
 import { NgStyle, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   FormGroup,
   FormControl,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { UserRegistrationRequestDto } from '../../models/UserRegistrationRequestDto';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +28,7 @@ import {
 export class RegisterComponent {
   userData: FormGroup;
 
-  constructor() {
+  constructor(private authService: AuthService,private router: Router) {
     this.userData = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -57,7 +60,18 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.userData.valid) {
-      console.log(this.userData.value);
+      this.authService
+        .register(
+          new UserRegistrationRequestDto(
+            this.userData.controls['nickname'].value,
+            //this.userData.controls['universityId'].value,
+            1,
+            this.userData.controls['fieldOfStudies'].value,
+            this.userData.controls['email'].value,
+            this.userData.controls['password'].value
+          )
+        )
+        .subscribe(()=>this.router.navigate(['/login']));
     } else {
       console.log('invalid data');
     }
