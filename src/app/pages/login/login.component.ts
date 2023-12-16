@@ -7,6 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { UserLoginRequestDto } from '../../models/UserLoginRequestDto';
+import { JwtResponseDto } from '../../models/JwtResponseDto';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +19,12 @@ import {
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  
   userData: FormGroup;
+  jwtDto = new JwtResponseDto();
 
-  constructor() {
+
+  constructor(private authService: AuthService) {
     this.userData = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -27,18 +33,30 @@ export class LoginComponent {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(4),
         Validators.maxLength(30),
       ]),
     });
   }
+
+
   onSubmit() {
     if (this.userData.valid) {
-      console.log(this.userData.value);
+      this.authService
+        .login(
+          new UserLoginRequestDto(
+            this.userData.controls['email'].value,
+            this.userData.controls['password'].value
+          )
+        )
+        .subscribe((jwtDto) => localStorage.setItem('token', jwtDto.token));
+
+      console.log(localStorage.getItem('authToken'));
     } else {
       console.log('invalid data');
     }
   }
+
 
   getEmailErrorStatus(): boolean {
     return (
@@ -47,6 +65,8 @@ export class LoginComponent {
         this.userData.controls['email'].dirty)
     );
   }
+
+
   getPasswordErrorStatus(): boolean {
     return (
       this.userData.controls['password'].invalid &&

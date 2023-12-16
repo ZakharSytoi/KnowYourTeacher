@@ -1,4 +1,9 @@
 export class UserLoginRequestDto {
-  email: string = '';
-  password: string = '';
+  private username: string = '';
+  private password: string = '';
+  
+  constructor($email: string, $password: string) {
+    this.username = $email;
+    this.password = $password;
+  }
 }
