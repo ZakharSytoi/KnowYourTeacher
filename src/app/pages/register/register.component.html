@@ -2,22 +2,25 @@
 <div class="form-container">
   <div class="form-block">
     <div class="form-header">
-      <img
-        src="assets/graduation-cap-solid-2.svg"
-        alt="logoImg"
-      />
+      <img src="assets/graduation-cap-solid-2.svg" alt="logoImg" />
       <h1>Registration</h1>
       <h3>Create a new account</h3>
     </div>
-    <form [formGroup]="userData" action="" class="form">
+    <form [formGroup]="userData" (ngSubmit)="onSubmit()" action="" class="form">
       <div class="form-content">
-        <div class="input-box">
-          <svg class="inputBoxImg"
-               width="21"
-               height="23"
-               viewBox="0 0 21 23"
-               fill="none"
-               xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="input-box"
+          [ngClass]="{
+            error: getEmailErrorStatus()
+          }"
+        >
+          <svg
+            class="inputBoxImg"
+            width="21"
+            height="23"
+            viewBox="0 0 21 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M10.5 11.5C12.0913 11.5 13.6174 10.8942 14.7426 9.81586C15.8679 8.73753 16.5 7.27499 16.5 5.75C16.5 4.22501 15.8679 2.76247 14.7426 1.68414C13.6174 0.605802 12.0913 0 10.5 0C8.9087 0 7.38258 0.605802 6.25736 1.68414C5.13214 2.76247 4.5 4.22501 4.5 5.75C4.5 7.27499 5.13214 8.73753 6.25736 9.81586C7.38258 10.8942 8.9087 11.5 10.5 11.5ZM8.35781 13.6562C3.74063 13.6562 0 17.241 0 21.6658C0 22.4025 0.623438 23 1.39219 23H19.6078C20.3766 23 21 22.4025 21 21.6658C21 17.241 17.2594 13.6562 12.6422 13.6562H8.35781Z"
@@ -30,18 +33,23 @@
             placeholder="Email"
             required
           />
-          @if (
-            getEmailErrorStatus()
-          ) {<p class="errorMessage">invalid email</p>}
-          
+          @if ( getEmailErrorStatus() ) {
+          <p class="errorMessage">Not an email</p>
+          }
         </div>
-        <div class="input-box">
-          <svg class="inputBoxImg"
-               width="21"
-               height="23"
-               viewBox="0 0 21 23"
-               fill="none"
-               xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="input-box"
+          [ngClass]="{
+            error: getNicknameErrorStatus()
+          }"
+        >
+          <svg
+            class="inputBoxImg"
+            width="21"
+            height="23"
+            viewBox="0 0 21 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M10.5 11.5C12.0913 11.5 13.6174 10.8942 14.7426 9.81586C15.8679 8.73753 16.5 7.27499 16.5 5.75C16.5 4.22501 15.8679 2.76247 14.7426 1.68414C13.6174 0.605802 12.0913 0 10.5 0C8.9087 0 7.38258 0.605802 6.25736 1.68414C5.13214 2.76247 4.5 4.22501 4.5 5.75C4.5 7.27499 5.13214 8.73753 6.25736 9.81586C7.38258 10.8942 8.9087 11.5 10.5 11.5ZM8.35781 13.6562C3.74063 13.6562 0 17.241 0 21.6658C0 22.4025 0.623438 23 1.39219 23H19.6078C20.3766 23 21 22.4025 21 21.6658C21 17.241 17.2594 13.6562 12.6422 13.6562H8.35781Z"
@@ -50,16 +58,21 @@
           </svg>
           <input
             type="text"
+            formControlName="nickname"
             placeholder="Nickname"
             required
           />
+          @if ( getNicknameErrorStatus() ) {
+            <p class="errorMessage">6 to 20 characters</p>
+            }
         </div>
         <div class="input-box">
-          <svg class="selectBoxImg"
-               width="21px"
-               height=""
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 512 512"
+          <svg
+            class="selectBoxImg"
+            width="21px"
+            height=""
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
           >
             <path
               fill="#75D8F6"
@@ -73,11 +86,17 @@
             <option value="3">University 1</option>
           </select>
         </div>
-        <div class="input-box">
-          <svg class="inputBoxImg"
-               width="21px"
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 384 512"
+        <div
+          class="input-box"
+          [ngClass]="{
+            error: getFieldOfStudiesErrorStatus()
+          }"
+        >
+          <svg
+            class="inputBoxImg"
+            width="21px"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 384 512"
           >
             <path
               fill="#75D8F6"
@@ -86,17 +105,27 @@
           </svg>
           <input
             type="text"
+            formControlName="fieldOfStudies"
             placeholder="Field of Studies"
             required
           />
+          @if ( getFieldOfStudiesErrorStatus() ) {
+            <p class="errorMessage">3 to 50 characters</p>
+            }
         </div>
-        <div class="input-box">
-          <svg class="inputBoxImg"
-               width="20"
-               height="23"
-               viewBox="0 0 20 23"
-               fill="none"
-               xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="input-box"
+          [ngClass]="{
+            error: getPasswordErrorStatus()
+          }"
+        >
+          <svg
+            class="inputBoxImg"
+            width="20"
+            height="23"
+            viewBox="0 0 20 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <g clip-path="url(#clip0_6_33)">
               <path
@@ -106,27 +135,36 @@
             </g>
             <defs>
               <clipPath id="clip0_6_33">
-                <rect
-                  width="20"
-                  height="23"
-                  fill="white"
-                />
+                <rect width="20" height="23" fill="white" />
               </clipPath>
             </defs>
           </svg>
           <input
             type="password"
+            formControlName="password"
             placeholder="Password"
             required
           />
+          @if ( getPasswordErrorStatus() ) {
+            <p class="errorMessage">8 to 30 characters</p>
+            }
+            @else if (!doesPasswordsMathch() && this.userData.controls['password'].touched) {
+              <p class="errorMessage">Passwords should match</p>
+            }
         </div>
-        <div class="input-box">
-          <svg class="inputBoxImg"
-               width="20"
-               height="23"
-               viewBox="0 0 20 23"
-               fill="none"
-               xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="input-box"
+          [ngClass]="{
+            error: getRepeatedPasswordErrorStatus()
+          }"
+        >
+          <svg
+            class="inputBoxImg"
+            width="20"
+            height="23"
+            viewBox="0 0 20 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <g clip-path="url(#clip0_6_33)">
               <path
@@ -136,28 +174,27 @@
             </g>
             <defs>
               <clipPath id="clip0_6_33">
-                <rect
-                  width="20"
-                  height="23"
-                  fill="white"
-                />
+                <rect width="20" height="23" fill="white" />
               </clipPath>
             </defs>
           </svg>
           <input
             type="password"
+            formControlName="repeatedPassword"
             placeholder="Repeat password"
             required
           />
+          @if ( getRepeatedPasswordErrorStatus() ) {
+            <p class="errorMessage">8 to 30 characters</p>
+            }
         </div>
-        <button type="submit" class="signInBtn">Sign in</button>
+        <button [disabled]="!userData.valid" type="submit" class="signInBtn">Register</button>
       </div>
-
     </form>
     <div class="form-footer">
       <div class="bottomRegisterText">
-        <span>Don’t have an account? </span>
-        <a href="#">Register</a>
+        <span>Already have an account? </span>
+        <a routerLink="/login" href="#">Log in</a>
       </div>
     </div>
   </div>
