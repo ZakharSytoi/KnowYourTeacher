@@ -18,3 +18,11 @@ services:
       - 8082:8082
     depends_on:
       - KYT_db
+
+
+  know_your_teacher_app_frontend:
+    image: knowyourteacher:0.6
+    ports:
+      - 8077:80
+    depends_on:
+      - know_your_teacher_app

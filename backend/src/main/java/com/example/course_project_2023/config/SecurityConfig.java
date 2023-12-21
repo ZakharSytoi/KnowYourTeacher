@@ -17,6 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import static com.example.course_project_2023.sevice.security.Permission.ADMIN_SPECIFIC_PERMISSION;
 import static com.example.course_project_2023.sevice.security.Permission.USER_SPECIFIC_PERMISSION;
@@ -29,7 +33,6 @@ import static com.example.course_project_2023.sevice.security.Permission.USER_SP
 public class SecurityConfig {
 
     private final JwtRequestFilter jwtRequestFilter;
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
