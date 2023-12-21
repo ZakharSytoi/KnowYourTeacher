@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit{
 
   responseData: string = '';
-
+  
   headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
   
   getDataWithToken(): Observable<any>{
