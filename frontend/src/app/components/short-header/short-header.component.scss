@@ -1,0 +1,67 @@
+.header {
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #d4f3fd;
+}
+
+.header-container {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 15px;
+}
+
+.header-container .header_logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-container .logo-text {
+  font-size: 32px;
+  font-family: "Doppio One", sans-serif;
+  color: #398dca;
+}
+@media (max-width: 767px) {
+  .header-container {
+    justify-content: center;
+  }
+}
+@media (max-width: 479px) {
+  .header-container .header_logo > img {
+    width: 44px;
+  }
+  .header-container .logo-text {
+    font-size: 24px;
+  }
+}
+
+.header-container .header_logo :hover {
+  color: #00b6ef;
+}
+
+@media (max-width: 767px) {
+  .auth_links-container {
+    display: none;
+  }
+}
+
+/* .header-container .auth_links-container {
+    margin-top: px;
+} */
+
+.header-container .auth_links-container > a {
+  text-decoration: none;
+  color: #398dca;
+  font-size: 24px;
+}
+
+.header-container .auth_links-container :hover {
+  color: #00b6ef;
+}
+
+.header-container .registration-link {
+  opacity: 70%;
+  margin-right: 40px;
+}
