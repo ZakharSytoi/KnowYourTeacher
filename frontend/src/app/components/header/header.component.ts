@@ -10,4 +10,12 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
 
+  handleLogout(){
+    localStorage.removeItem('token')
+  }
+  isLoggedIn(): boolean{
+    return localStorage.getItem('token') != null;
+  }
+
+  
 }
