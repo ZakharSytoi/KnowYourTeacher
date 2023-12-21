@@ -55,11 +55,15 @@ export class LoginComponent {
           )
         )
         .subscribe((jwtDto) => {
-          localStorage.setItem('token', jwtDto.token);
+          if(localStorage.getItem('token') === null){
+            localStorage.setItem('token', jwtDto.token);
+          }
+          else{
+            localStorage.removeItem('token');
+            localStorage.setItem('token', jwtDto.token);
+          }
           this.router.navigate(['/']);
         });
-
-      console.log(localStorage.getItem('token'));
     } else {
       console.log('invalid data');
     }
