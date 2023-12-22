@@ -1,0 +1,93 @@
+.search-from-container {
+  margin-top: 15px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.search-from-container .search-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.search-from-container .form-block {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.form-block .input-box {
+  padding: 0 10px;
+  display: flex;
+  width: 170px;
+  height: 40px;
+  background-color: white;
+  border-style: solid;
+  border-color: #00b6ef;
+}
+
+.form-block .__nameBox {
+  border-width: 0 1px 0 1px;
+}
+.form-block .__uniBox {
+  border-width: 0 0 0 0;
+}
+.form-block .__subjectBox {
+  border-width: 0 1px 0 0;
+}
+
+.input-box > input::placeholder {
+  color: #8abfe2;
+  font-size: 18px;
+}
+
+.form-select {
+  color: #8abfe28e;
+  font-size: 18px;
+}
+.find-Btn {
+  height: 40px;
+  width: 120px;
+  font-size: 24px;
+  background-color: #00b6ef;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  padding: 0 15px;
+}
+
+@media (max-width: 930px) {
+  .form-block {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-block .input-box {
+    width: 250px;
+  }
+  .form-block .__nameBox {
+    border-width: 0 0 1px 0;
+  }
+  .form-block .__uniBox {
+    border-width: 0 0 1px 0;
+    margin-top: 10px;
+  }
+  .form-block .__subjectBox {
+    border-width: 0 0 1px 0;
+    margin-top: 10px;
+  }
+
+  .find-Btn {
+    margin-top: 10px;
+    width: 200px;
+  }
+}
+
+/* ---------BETWEEN------------------------------------------------------------- */
+
+.main-horizontal-line {
+  border-style: solid;
+  border-color: #00b7ef3f;
+  border-width: 0.5px;
+  border-radius: 100%;
+  margin: 10px 0;
+}

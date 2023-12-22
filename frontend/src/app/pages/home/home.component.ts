@@ -5,13 +5,15 @@ import {HeaderComponent} from "../../components/header/header.component";
 import {BASE_API_URL} from '../../services/consts';
 import {Observable} from 'rxjs';
 import {isPlatformBrowser} from "@angular/common";
+import {SearchComponent} from "../../components/search/search.component";
 
 
 @Component({
     selector: 'app-home',
     standalone: true,
     imports: [
-        HeaderComponent
+        HeaderComponent,
+        SearchComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
