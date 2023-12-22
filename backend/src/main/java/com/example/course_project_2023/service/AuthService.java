@@ -1,14 +1,14 @@
-package com.example.course_project_2023.sevice;
+package com.example.course_project_2023.service;
 
 import com.example.course_project_2023.repository.daos.UniversityRepository;
 import com.example.course_project_2023.repository.daos.UserRepository;
 import com.example.course_project_2023.repository.model.SecurityUser;
 import com.example.course_project_2023.repository.model.User;
-import com.example.course_project_2023.sevice.dto.LoginUserDtoRequest;
-import com.example.course_project_2023.sevice.dto.UserRegistrationDtoRequest;
-import com.example.course_project_2023.sevice.exception.UserAlreadyExistsException;
-import com.example.course_project_2023.sevice.security.UserDetailServiceImpl;
-import com.example.course_project_2023.sevice.security.util.JwtUtil;
+import com.example.course_project_2023.service.dto.LoginUserDtoRequest;
+import com.example.course_project_2023.service.dto.UserRegistrationDtoRequest;
+import com.example.course_project_2023.service.exception.UserAlreadyExistsException;
+import com.example.course_project_2023.service.security.UserDetailServiceImpl;
+import com.example.course_project_2023.service.security.util.JwtUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

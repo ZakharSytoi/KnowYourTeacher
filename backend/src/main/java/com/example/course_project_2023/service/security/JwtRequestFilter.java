@@ -1,6 +1,6 @@
-package com.example.course_project_2023.sevice.security;
+package com.example.course_project_2023.service.security;
 
-import com.example.course_project_2023.sevice.security.util.JwtUtil;
+import com.example.course_project_2023.service.security.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

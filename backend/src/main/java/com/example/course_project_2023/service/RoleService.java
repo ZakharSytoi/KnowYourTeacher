@@ -1,4 +1,4 @@
-package com.example.course_project_2023.sevice;
+package com.example.course_project_2023.service;
 
 import com.example.course_project_2023.repository.daos.RoleRepository;
 import com.example.course_project_2023.repository.model.Role;

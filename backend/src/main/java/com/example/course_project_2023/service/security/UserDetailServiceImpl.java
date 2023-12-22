@@ -1,7 +1,7 @@
-package com.example.course_project_2023.sevice.security;
+package com.example.course_project_2023.service.security;
 
 import com.example.course_project_2023.repository.model.SecurityUser;
-import com.example.course_project_2023.sevice.SecurityUserService;;
+import com.example.course_project_2023.service.SecurityUserService;;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

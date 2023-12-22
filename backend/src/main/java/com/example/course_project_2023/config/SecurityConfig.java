@@ -1,7 +1,7 @@
 package com.example.course_project_2023.config;
 
-import com.example.course_project_2023.sevice.security.JwtRequestFilter;
-import com.example.course_project_2023.sevice.security.UserDetailServiceImpl;
+import com.example.course_project_2023.service.security.JwtRequestFilter;
+import com.example.course_project_2023.service.security.UserDetailServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,16 +18,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
-import static com.example.course_project_2023.sevice.security.Permission.ADMIN_SPECIFIC_PERMISSION;
-import static com.example.course_project_2023.sevice.security.Permission.USER_SPECIFIC_PERMISSION;
+import static com.example.course_project_2023.service.security.Permission.ADMIN_SPECIFIC_PERMISSION;
+import static com.example.course_project_2023.service.security.Permission.USER_SPECIFIC_PERMISSION;
 
 
 @EnableWebSecurity

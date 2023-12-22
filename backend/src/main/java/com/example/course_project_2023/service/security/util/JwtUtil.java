@@ -1,7 +1,7 @@
-package com.example.course_project_2023.sevice.security.util;
+package com.example.course_project_2023.service.security.util;
 
 
-import com.example.course_project_2023.sevice.security.Role;
+import com.example.course_project_2023.service.security.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 
-import static com.example.course_project_2023.sevice.security.Permission.USER_SPECIFIC_PERMISSION;
+import static com.example.course_project_2023.service.security.Permission.USER_SPECIFIC_PERMISSION;
 
 @Component
 public class JwtUtil {

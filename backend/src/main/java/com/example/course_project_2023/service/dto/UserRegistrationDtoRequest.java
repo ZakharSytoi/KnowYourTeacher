@@ -1,4 +1,4 @@
-package com.example.course_project_2023.sevice.dto;
+package com.example.course_project_2023.service.dto;
 
 public record UserRegistrationDtoRequest(String nickname,
                                          Long universityId,

@@ -1,10 +1,10 @@
 package com.example.course_project_2023.web.controllers;
 
-import com.example.course_project_2023.sevice.AuthService;
-import com.example.course_project_2023.sevice.dto.JwtResponse;
-import com.example.course_project_2023.sevice.dto.LoginUserDtoRequest;
-import com.example.course_project_2023.sevice.dto.UserRegistrationDtoRequest;
-import com.example.course_project_2023.sevice.exception.UserAlreadyExistsException;
+import com.example.course_project_2023.service.AuthService;
+import com.example.course_project_2023.service.dto.JwtResponse;
+import com.example.course_project_2023.service.dto.LoginUserDtoRequest;
+import com.example.course_project_2023.service.dto.UserRegistrationDtoRequest;
+import com.example.course_project_2023.service.exception.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
