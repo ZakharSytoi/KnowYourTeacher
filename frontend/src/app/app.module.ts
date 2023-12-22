@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpAuthorizationInterceptorService} from "./services/http-authorization-interceptor.service";
+import {FooterComponent} from "./components/footer/footer.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import {HttpAuthorizationInterceptorService} from "./services/http-authorization
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FooterComponent,
   ],
   providers: [provideClientHydration(),
     {

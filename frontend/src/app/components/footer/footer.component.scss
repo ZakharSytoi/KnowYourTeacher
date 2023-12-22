@@ -1,0 +1,119 @@
+footer {
+    margin-top: auto;
+    background-color: #d4f3fd;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    min-height: 100%;
+}
+.copyrigth-text {
+    color: #0e77a888;
+    font-size: 12px;
+    text-align: center;
+}
+.contact-container {
+    margin: 0 10px;
+    width: 100%;
+}
+.privacy-container {
+    text-align: end;
+    margin: 0 10px;
+    width: 100%;
+}
+.contact,
+.privacy {
+    display: inline-block;
+    text-align: center;
+}
+.privacy-text,
+.contact-text {
+    color: #0e77a888;
+    font-size: 12px;
+    text-align: center;
+}
+.privacy-text > a,
+.contact-text > a {
+    text-decoration: underline;
+    color: #398dca;
+}
+
+.footer-vertical-line {
+    height: 35px;
+    border-style: solid;
+    border-color: #00b7ef3f;
+    border-width: 0.5px;
+    border-radius: 100%;
+}
+
+.footer-horizontal-line {
+    border-style: solid;
+    border-color: #00b7ef3f;
+    border-width: 0.5px;
+    border-radius: 100%;
+    margin-bottom: 5px;
+}
+
+.social-media-container .social {
+    display: flex;
+    flex-direction: row;
+}
+
+.social__icon {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px #00000080;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social__icon i {
+    font-size: 26px;
+    color: #67798e;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.social__icon:after {
+    content: "";
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    transform: translate(0, 70px);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social__icon.git:after {
+    background-color: #333;
+}
+.social__icon.linkedin:after {
+    background-color: #0e76a8;
+}
+.social__icon:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 0px 15px #00000080;
+}
+
+.social__icon:hover i {
+    color: #fff;
+}
+
+.social__icon:hover:after {
+    transform: translate(0);
+}
