@@ -70,9 +70,7 @@ export class LoginComponent {
                         this.router.navigate(["/"]);
                     },
                     error: (err) => {
-                        console.log("error occured and handled");
                         this.handleUnsuccessfulLogin(err);
-                        console.log(this.wrongLoginOrPassword);
                     },
                 });
         } else {
