@@ -90,14 +90,16 @@ CREATE TABLE likes
 (
     id        SERIAL PRIMARY KEY,
     review_id INTEGER REFERENCES review (id),
-    user_id   INTEGER REFERENCES users (id)
+    user_id   INTEGER REFERENCES users (id),
+    CONSTRAINT unique_like_constraint UNIQUE (review_id, user_id)
 );
 
 CREATE TABLE dislikes
 (
     id        SERIAL PRIMARY KEY,
     review_id INTEGER REFERENCES review (id),
-    user_id   INTEGER REFERENCES users (id)
+    user_id   INTEGER REFERENCES users (id),
+    CONSTRAINT unique_dislike_constraint UNIQUE (review_id, user_id)
 );
 
 
@@ -141,3 +143,24 @@ FROM review r
          LEFT JOIN likes l ON r.id = l.review_id
          LEFT JOIN dislikes d ON r.id = d.review_id
 GROUP BY r.id;
+
+
+CREATE VIEW top_teachers_with_most_popular_review_text AS
+WITH RankedReviews AS (
+    SELECT
+        rw.*,
+        ROW_NUMBER() OVER (PARTITION BY rw.teacher_id ORDER BY rw.like_count DESC) AS rank
+    FROM review_with_likes_dislikes_count rw
+)
+SELECT
+    teacher_id,
+    teacher.name as teacher_name,
+    teacher.surname as teacher_surname,
+    u.name as university_name,
+    teacher.avg_score,
+    review_text as most_popular_review_text
+FROM RankedReviews
+         JOIN teacher ON teacher_id = teacher.id
+         JOIN university u on teacher.university_id = u.id
+WHERE rank = 1
+ORDER BY teacher.avg_score DESC;

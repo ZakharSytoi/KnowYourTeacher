@@ -1,8 +1,10 @@
-package com.example.course_project_2023.repository.model;
+package com.example.course_project_2023.repository.model.views;
 
+import com.example.course_project_2023.repository.model.Teacher;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Immutable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
@@ -11,6 +13,7 @@ import java.util.Date;
 @Table(name = "review_with_likes_dislikes_count")
 @Data
 @EntityListeners(AuditingEntityListener.class)
+@Immutable
 public class ReviewView {
     @Id
     @Column(name = "review_id")

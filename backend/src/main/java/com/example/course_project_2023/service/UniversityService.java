@@ -5,10 +5,11 @@ import com.example.course_project_2023.service.dto.UniversityDto;
 import com.example.course_project_2023.service.mappers.UniversityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class UniversityService {
     private final UniversityRepository universityRepository;
