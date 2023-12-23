@@ -28,13 +28,8 @@ public class AuthController {
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
     }
 
-    @ExceptionHandler({UserWithEmailAlreadyExistsException.class})
-    public ResponseEntity<?> handleUserWithEmailAlreadyExistsException(UserWithEmailAlreadyExistsException exception){
-        return ResponseEntity.status(409).body(exception.getMessage());
-    }
-
-    @ExceptionHandler({UserWithNicknameAlreadyExistsException.class})
-    public ResponseEntity<?> handleUserWithNicknameAlreadyExistsException(UserWithEmailAlreadyExistsException exception){
+    @ExceptionHandler({UserWithEmailAlreadyExistsException.class, UserWithNicknameAlreadyExistsException.class})
+    public ResponseEntity<?> handleUserWithEmailAlreadyExistsException(Exception exception){
         return ResponseEntity.status(409).body(exception.getMessage());
     }
 

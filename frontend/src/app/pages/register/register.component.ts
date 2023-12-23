@@ -107,12 +107,18 @@ export class RegisterComponent {
         console.log(errorMessage);
         if (errorMessage.includes(" email ")) {
             this.existingEmailError = true;
+            this.existingNicknameError = false;
+            this.unknownRegistrationError = false;
             console.log('email error')
         } else if (errorMessage.includes(" nickname ")) {
             this.existingNicknameError = true;
+            this.existingEmailError = false;
+            this.unknownRegistrationError = false;
             console.log('nickname error')
         } else if (!this.existingEmailError && !this.existingNicknameError) {
             this.unknownRegistrationError = true;
+            this.existingEmailError = false;
+            this.existingNicknameError = false;
             console.log('unknown error')
         }
     }
