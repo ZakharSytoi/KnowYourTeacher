@@ -6,6 +6,7 @@ import {BASE_API_URL} from '../../services/consts';
 import {Observable} from 'rxjs';
 import {isPlatformBrowser} from "@angular/common";
 import {SearchComponent} from "../../components/search/search.component";
+import {TopTeachersComponent} from "../../components/topteachers/top-teachers.component";
 
 
 @Component({
@@ -13,14 +14,21 @@ import {SearchComponent} from "../../components/search/search.component";
     standalone: true,
     imports: [
         HeaderComponent,
-        SearchComponent
+        SearchComponent,
+        TopTeachersComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent  {
+    //for testes add this
 
-    responseData: string = '';
+
+    //implements OnInit
+
+
+
+    /*responseData: string = '';
     isBrowser: boolean;
 
     constructor(@Inject(PLATFORM_ID) private platformId: any, private readonly http: HttpClient,) {
@@ -45,7 +53,7 @@ export class HomeComponent implements OnInit {
                 console.error('Error fetching data:', error);
             }
         );
-    }
+    }*/
 
 
 }

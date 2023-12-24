@@ -1,0 +1,80 @@
+<div class="content-container _container">
+    <div class="content-block">
+        <div *ngFor="let teacher of topTeachersList" class="teacher-card">
+            <div class="teacher-card-content-container">
+                <div class="teacher-photo">
+                    <img
+                        src="{{teacher.teacherPictureUri}}"
+                        alt="teacherPhoto"
+                    />
+                </div>
+                <div class="card-content">
+                    <div class="card-content-top">
+                        <span class="teacher-name">
+                            {{teacher.teacherName + ' ' + teacher.teacherSurname}}
+                        </span>
+                        <div class="card-vertical-line"></div>
+                        <span class="teacher-university">
+                            {{teacher.universityName}}
+                        </span>
+                        <div class="teacher-rating">
+                            <div class="rating">
+                                <div class="rating-body">
+                                    <div
+                                        class="rating-active"
+                                    ></div>
+                                    <div class="rating-items">
+                                        <input
+                                            type="radio"
+                                            class="rating-item"
+                                            value="1"
+                                            name="rating"
+                                        />
+                                        <input
+                                            type="radio"
+                                            class="rating-item"
+                                            value="2"
+                                            name="rating"
+                                        />
+                                        <input
+                                            type="radio"
+                                            class="rating-item"
+                                            value="3"
+                                            name="rating"
+                                        />
+                                        <input
+                                            type="radio"
+                                            class="rating-item"
+                                            value="4"
+                                            name="rating"
+                                        />
+                                        <input
+                                            type="radio"
+                                            class="rating-item"
+                                            value="5"
+                                            name="rating"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="rating-value">
+                                    {{teacher.avgScore}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-horizontal-line"></div>
+                    <div class="card-content-bottom">
+                        <span class="defaultText"
+                            >Most popular review:</span
+                        >
+                        <div class="review-container">
+                            <p class="review-text">
+                                {{teacher.mostPopularReviewText}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,19 +1,19 @@
-import { Component } from "@angular/core";
-import { ShortHeaderComponent } from "../../components/short-header/short-header.component";
-import { NgStyle, NgClass, NgFor } from "@angular/common";
-import { RouterModule } from "@angular/router";
-import { Router } from "@angular/router";
+import {Component} from "@angular/core";
+import {ShortHeaderComponent} from "../../components/short-header/short-header.component";
+import {NgStyle, NgClass, NgFor} from "@angular/common";
+import {RouterModule} from "@angular/router";
+import {Router} from "@angular/router";
 import {
     FormGroup,
     FormControl,
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import { UserRegistrationRequestDto } from "../../models/UserRegistrationRequestDto";
-import { AuthService } from "../../services/auth.service";
-import { UniversityDto } from "../../models/UniversityDto";
-import { UniversityService } from "../../services/university.service";
-import { HttpErrorResponse } from "@angular/common/http";
+import {UserRegistrationRequestDto} from "../../models/UserRegistrationRequestDto";
+import {AuthService} from "../../services/auth.service";
+import {UniversityDto} from "../../models/UniversityDto";
+import {UniversityService} from "../../services/university.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: "app-register",
@@ -36,17 +36,22 @@ export class RegisterComponent {
     existingEmailError: boolean = false;
     existingNicknameError: boolean = false;
     unknownRegistrationError: boolean = false;
+
     constructor(
         private authService: AuthService,
         private universityService: UniversityService,
         private router: Router
     ) {
+
+
         this.universityList = [];
         universityService.getUniversitiesList().subscribe({
             next: (universitiesList) => {
                 this.universityList = universitiesList;
             },
         });
+
+
         this.userData = new FormGroup({
             email: new FormControl("", [
                 Validators.required,
@@ -103,7 +108,7 @@ export class RegisterComponent {
     }
 
     handleUnsuccessfulLogin(error: HttpErrorResponse): any {
-        const errorMessage:string = JSON.stringify(error.error);
+        const errorMessage: string = JSON.stringify(error.error);
         console.log(errorMessage);
         if (errorMessage.includes(" email ")) {
             this.existingEmailError = true;
