@@ -5,5 +5,6 @@ public record TeacherWithMostPopularReviewDtoResponse(
         String teacherSurname,
         String universityName,
         Double avgScore,
-        String mostPopularReviewText
+        String mostPopularReviewText,
+        String teacherPictureUri
 ) {}

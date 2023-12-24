@@ -25,4 +25,6 @@ public class TeacherWithMostPopularReview {
     private Double avgScore;
     @Column(name = "most_popular_review_text")
     private String mostPopularReviewText;
+    @Column(name = "teacher_picture_id")
+    private String teacherPictureId;
 }

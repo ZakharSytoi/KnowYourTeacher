@@ -146,21 +146,19 @@ GROUP BY r.id;
 
 
 CREATE VIEW top_teachers_with_most_popular_review_text AS
-WITH RankedReviews AS (
-    SELECT
-        rw.*,
-        ROW_NUMBER() OVER (PARTITION BY rw.teacher_id ORDER BY rw.like_count DESC) AS rank
-    FROM review_with_likes_dislikes_count rw
-)
-SELECT
-    teacher_id,
-    teacher.name as teacher_name,
-    teacher.surname as teacher_surname,
-    u.name as university_name,
-    teacher.avg_score,
-    review_text as most_popular_review_text
+WITH RankedReviews AS (SELECT rw.*,
+                              ROW_NUMBER() OVER (PARTITION BY rw.teacher_id ORDER BY rw.like_count DESC) AS rank
+                       FROM review_with_likes_dislikes_count rw)
+SELECT teacher_id,
+       teacher.name    as teacher_name,
+       teacher.surname as teacher_surname,
+       u.name          as university_name,
+       teacher.avg_score,
+       review_text     as most_popular_review_text,
+       p.id            as teacher_picture_id
 FROM RankedReviews
          JOIN teacher ON teacher_id = teacher.id
          JOIN university u on teacher.university_id = u.id
+         JOIN picture p on teacher.picture_id = p.id
 WHERE rank = 1
 ORDER BY teacher.avg_score DESC;

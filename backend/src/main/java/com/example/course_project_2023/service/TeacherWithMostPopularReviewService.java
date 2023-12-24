@@ -4,9 +4,9 @@ import com.example.course_project_2023.repository.daos.TeacherWithMostPopularRev
 import com.example.course_project_2023.service.dto.TeacherWithMostPopularReviewDtoResponse;
 import com.example.course_project_2023.service.mappers.TeacherWithMostPopularReviewMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -18,6 +18,6 @@ public class TeacherWithMostPopularReviewService {
     private final TeacherWithMostPopularReviewMapper teacherMapper = TeacherWithMostPopularReviewMapper.INSTANCE;
 
     public List<TeacherWithMostPopularReviewDtoResponse> getNTeachersWithMostPopularReviews(int n){
-        return teacherMapper.teacherToTeacherDtoResponse(teacherRepository.findAll(PageRequest.of(0, 10)).getContent());
+        return teacherMapper.teacherListToTeacherDtoResponseList(teacherRepository.findAll(PageRequest.of(0, 10)).getContent());
     }
 }

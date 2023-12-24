@@ -17,6 +17,5 @@ public class Picture {
     @Column(name = "type")
     private String type;
     @Column(name = "data")
-    @Lob
     private byte[] data;
 }
