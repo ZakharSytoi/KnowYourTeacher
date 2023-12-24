@@ -1,6 +1,6 @@
 package com.example.course_project_2023.service.dto;
 
-public record TeacherWithMostPopularReviewDtoResponse(
+public record TeacherPreviewDto(
         String teacherName,
         String teacherSurname,
         String universityName,
