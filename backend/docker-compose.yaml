@@ -12,7 +12,7 @@ services:
       - "./sql/data.sql:/docker-entrypoint-initdb.d/2.sql"
       - "./sql/defaultPictures:/docker-entrypoint-initdb.d/pics"
   know_your_teacher_app:
-    image: experimental
+    image: zakharsytoi/know_your_teacher_app:1.2
     ports:
       - 8082:8082
     depends_on:
@@ -20,7 +20,7 @@ services:
 
 
   know_your_teacher_app_frontend:
-    image: zakharsytoi/know_your_teacher_frontend:0.7
+    image: zakharsytoi/know_your_teacher_frontend:0.71
     ports:
       - 8077:80
     depends_on:

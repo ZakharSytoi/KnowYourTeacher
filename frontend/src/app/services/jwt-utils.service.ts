@@ -20,4 +20,12 @@ export class JwtUtilsService {
       return jwtDecode<DecodedToken>(token).roles
     } else return ['tokenDecodingError']
   }
+
+  isTokenExpired(token:string): boolean{
+    let expires = jwtDecode(token).exp;
+    if(expires){
+      return expires < Date.now() / 1000;
+    }
+    return true;
+  }
 }
