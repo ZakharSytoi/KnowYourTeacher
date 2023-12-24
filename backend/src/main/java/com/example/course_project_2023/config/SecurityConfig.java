@@ -1,12 +1,13 @@
 package com.example.course_project_2023.config;
 
-import com.example.course_project_2023.sevice.security.JwtRequestFilter;
-import com.example.course_project_2023.sevice.security.UserDetailServiceImpl;
+import com.example.course_project_2023.service.security.JwtRequestFilter;
+import com.example.course_project_2023.service.security.UserDetailServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,13 +18,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
-import static com.example.course_project_2023.sevice.security.Permission.ADMIN_SPECIFIC_PERMISSION;
-import static com.example.course_project_2023.sevice.security.Permission.USER_SPECIFIC_PERMISSION;
+import java.util.Arrays;
+
+import static com.example.course_project_2023.service.security.Permission.ADMIN_SPECIFIC_PERMISSION;
+import static com.example.course_project_2023.service.security.Permission.USER_SPECIFIC_PERMISSION;
 
 
 @EnableWebSecurity
@@ -55,10 +57,21 @@ public class SecurityConfig {
     }
 
     @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8077", "http://localhost:80", "http://3.70.177.167"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_Admin_get").hasAuthority(ADMIN_SPECIFIC_PERMISSION.toString());
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_Admin_post").hasAuthority(ADMIN_SPECIFIC_PERMISSION.toString());

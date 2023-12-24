@@ -74,6 +74,11 @@
           Please fulfill all required fields correctly
         </p>
         }
+        @if (wrongLoginOrPassword) {
+          <p class="fulfillmentError">
+            Incorrect login or password
+          </p>
+          }
         <button [disabled]="!userData.valid" type="submit" class="signInBtn">
           Sign in
         </button>

@@ -1,65 +1,74 @@
 <header class="header">
-  <div class="header-container _container">
-    <div class="logo-cntainer">
-      <a routerLink="/" class="header_logo">
-        <img class="logo-img" src="assets/logo.svg" />
-        <span class="logo-text">KnowYourTeacher</span>
-      </a>
+    <div class="header-container _container">
+        <div class="logo-cntainer">
+            <a routerLink="/" class="header_logo">
+                <img class="logo-img" src="assets/logo.svg"/>
+                <span class="logo-text">KnowYourTeacher</span>
+            </a>
+        </div>
+        <div class="burger-menu-container">
+            <div class="header_menu-container">
+                <nav class="header_menu">
+                    <ul class="menu_list">
+                        <li class="menu_item">
+                            <a href="#" class="menu_link"
+                            >About Us</a
+                            >
+                        </li>
+                        <li class="menu_item">
+                            <a href="#" class="menu_link">Q&A</a>
+                        </li>
+                        <li class="menu_item">
+                            <a href="#" class="menu_link"
+                            >Contact</a
+                            >
+                        </li>
+                        <li class="menu_item">
+                            <a href="#" class="menu_link">Guides</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="auth_links-container">
+                <a href="#" class="registration-link">Register</a>
+                <a href="#" class="signIn-link">Sign in</a>
+            </div>
+        </div>
+        <div class="header_menu-container">
+            <nav class="header_menu">
+                <ul class="menu_list">
+                    <li class="menu_item">
+                        <a href="#" class="menu_link">About Us</a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#" class="menu_link">Q&A</a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#" class="menu_link">Contact</a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#" class="menu_link">Guides</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="auth_links-container">
+            @if (
+            isLoggedIn()
+            ) {
+              <a routerLink="/profile" class="registration-link">{{getEmail()}}</a>
+              <a routerLink="/home" (click)="handleLogout()" class="signIn-link">Logout</a>
+            }
+            @else{
+            <a routerLink="/register" class="registration-link">Register</a>
+            <a routerLink="/login" class="signIn-link">Sign in</a>
+            }
+
+        </div>
+        <div class="menu-icon-wrapper">
+            <div class="menu-icon">
+                <span></span>
+            </div>
+        </div>
     </div>
-    <div class="burger-menu-container">
-      <div class="header_menu-container">
-        <nav class="header_menu">
-          <ul class="menu_list">
-            <li class="menu_item">
-              <a href="#" class="menu_link"
-              >About Us</a
-              >
-            </li>
-            <li class="menu_item">
-              <a href="#" class="menu_link">Q&A</a>
-            </li>
-            <li class="menu_item">
-              <a href="#" class="menu_link"
-              >Contact</a
-              >
-            </li>
-            <li class="menu_item">
-              <a href="#" class="menu_link">Guides</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="auth_links-container">
-        <a href="#" class="registration-link">Register</a>
-        <a href="#" class="signIn-link">Sign in</a>
-      </div>
-    </div>
-    <div class="header_menu-container">
-      <nav class="header_menu">
-        <ul class="menu_list">
-          <li class="menu_item">
-            <a href="#" class="menu_link">About Us</a>
-          </li>
-          <li class="menu_item">
-            <a href="#" class="menu_link">Q&A</a>
-          </li>
-          <li class="menu_item">
-            <a href="#" class="menu_link">Contact</a>
-          </li>
-          <li class="menu_item">
-            <a href="#" class="menu_link">Guides</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <div class="auth_links-container">
-      <a routerLink="/register" class="registration-link">Register</a>
-      <a routerLink="/login" class="signIn-link">Sign in</a>
-    </div>
-    <div class="menu-icon-wrapper">
-      <div class="menu-icon">
-        <span></span>
-      </div>
-    </div>
-  </div>
 </header>

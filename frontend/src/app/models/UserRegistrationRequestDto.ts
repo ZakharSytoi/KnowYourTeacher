@@ -10,7 +10,7 @@ export class UserRegistrationRequestDto {
 	
 	constructor($nickname: string , $universityId: number , $fieldOfStudies: string , $email: string , $password: string ) {
 		this.nickname = $nickname;
-		this.universityId = 1;
+		this.universityId = $universityId;
 		this.fieldOfStudies = $fieldOfStudies;
 		this.email = $email;
 		this.password = $password;
