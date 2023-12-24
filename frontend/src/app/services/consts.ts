@@ -1,1 +1,0 @@
-export const BASE_API_URL:string = 'https://localhost:8082/knowyourteacher-api/v1/';

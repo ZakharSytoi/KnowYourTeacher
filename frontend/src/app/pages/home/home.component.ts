@@ -2,9 +2,6 @@ import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {HeaderComponent} from "../../components/header/header.component";
-import {BASE_API_URL} from '../../services/consts';
-import {Observable} from 'rxjs';
-import {isPlatformBrowser} from "@angular/common";
 import {SearchComponent} from "../../components/search/search.component";
 import {TopTeachersComponent} from "../../components/topteachers/top-teachers.component";
 
