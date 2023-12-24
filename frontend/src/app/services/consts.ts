@@ -1,1 +1,1 @@
-export const BASE_API_URL:string = 'http://localhost:8082/knowyourteacher-api/v1/';
+export const BASE_API_URL:string = 'https://localhost:8082/knowyourteacher-api/v1/';
