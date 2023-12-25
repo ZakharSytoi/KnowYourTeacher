@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
+import {NgIf} from "@angular/common";
 import {RouterModule} from '@angular/router';
 import {JwtUtilsService} from "../../services/jwt-utils.service";
+import { ClickOutsideDirective } from './clickOutside.directive';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [RouterModule],
+    imports: [RouterModule,NgIf, ClickOutsideDirective],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
@@ -30,6 +32,16 @@ export class HeaderComponent {
     }
     getRoles():string[]{
         return this.jwtUtilService.GetUserRoles()
+    }
+
+    isMenuOpened: boolean = false;
+
+    toggleMenu(): void {
+        this.isMenuOpened = !this.isMenuOpened;
+    }
+
+    clickedOutside(): void {
+        this.isMenuOpened = false;
     }
 
 }
