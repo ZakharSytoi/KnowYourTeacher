@@ -88,18 +88,16 @@ CREATE TABLE review
 
 CREATE TABLE likes
 (
-    id        SERIAL PRIMARY KEY,
     review_id INTEGER REFERENCES review (id),
     user_id   INTEGER REFERENCES users (id),
-    CONSTRAINT unique_like_constraint UNIQUE (review_id, user_id)
+    PRIMARY KEY(review_id, user_id)
 );
 
 CREATE TABLE dislikes
 (
-    id        SERIAL PRIMARY KEY,
     review_id INTEGER REFERENCES review (id),
     user_id   INTEGER REFERENCES users (id),
-    CONSTRAINT unique_dislike_constraint UNIQUE (review_id, user_id)
+    PRIMARY KEY(review_id, user_id)
 );
 
 
@@ -137,8 +135,8 @@ SELECT r.id           AS review_id,
        r.user_id      AS user_id,
        r.review_text  AS review_text,
        r.created_date AS created_date,
-       COUNT(l.id)    AS like_count,
-       COUNT(d.id)    AS dislike_count
+       COUNT(l.user_id)    AS like_count,
+       COUNT(d.user_id)    AS dislike_count
 FROM review r
          LEFT JOIN likes l ON r.id = l.review_id
          LEFT JOIN dislikes d ON r.id = d.review_id
