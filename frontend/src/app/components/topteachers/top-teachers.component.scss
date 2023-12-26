@@ -95,7 +95,14 @@
 .teacher-card .card-content-top > span {
     color: #398dca;
 }
-
+.teacher-card .card-content-top > span >a{
+    color: #398dca;
+}
+.teacher-card .card-content-top > span >a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+}
 @media (max-width: 930px) {
     .teacher-card .teacher-photo {
         min-width: 80px;

@@ -14,6 +14,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 /* ---------TEACHER-CARD------------------------------------------------------------- */
 
 .teacher-card {
@@ -26,11 +27,13 @@
   margin: 10px 0;
 
 }
+
 .teacher-card .teacher-card-content-container {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
+
 .teacher-card .teacher-photo {
   min-width: 200px;
   min-height: 200px;
@@ -38,6 +41,7 @@
   max-height: 200px;
   margin-right: 5px;
 }
+
 .teacher-card .teacher-photo > img {
   max-width: 100%;
 }
@@ -59,12 +63,13 @@
   align-items: center;
   min-height: 20px;
 }
-.card-content-top .card-content-right{
+
+.card-content-top .card-content-right {
   width: 100%;
   height: 100%;
 }
 
-.card-content-right .teacher-info-container{
+.card-content-right .teacher-info-container {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -80,12 +85,12 @@
 }
 
 .teacher-card .teacher-university {
-  margin: 0 10px;
-}
-
-.teacher-card .teacher-name {
   margin-right: 10px;
 }
+
+//.teacher-card .teacher-name {
+//  margin-right: 10px;
+//}
 
 .teacher-card .card-vertical-line {
   height: 80%;
@@ -93,23 +98,31 @@
   border-color: #00b7ef3f;
   border-width: 0.5px;
   border-radius: 100%;
+  margin: 0 10px
 }
 
-.card-content-right .user-review-container{
+.card-content-right .user-review-container {
   margin: 10px 0;
 }
 
-.card-content-right .user-review-container .signInAlertText{
+.card-content-right .user-review-container {
+
+  //TODO here is input
+}
+
+
+.card-content-right .user-review-container .signInAlertText {
   font-size: 19px;
   color: #398dca;
 }
 
-.card-content-right .user-review-container .sign-in-link{
+.card-content-right .user-review-container .sign-in-link {
   font-size: 19px;
   color: #398dca;
   font-weight: 600;
 }
-.card-content-right .user-review-container .sign-in-link:hover{
+
+.card-content-right .user-review-container .sign-in-link:hover {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -128,16 +141,27 @@
   flex-direction: column;
 }
 
-.teacher-card .card-content-bottom .review-container .review-top{
+//-------review top-------
+.teacher-card .card-content-bottom .review-container .review-top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 30px;
+  margin-top: -5px;
+  margin-bottom: 8px;
 }
 
+.teacher-card .card-content-bottom .review-container .review-top .reviewer-info {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+}
 
-
+.teacher-card .card-content-bottom .review-container .review-top .reviewer-info > div > span {
+  color: #398dca;
+}
 
 .teacher-card .card-horizontal-line {
   height: 0.5px;
@@ -148,7 +172,10 @@
   border-radius: 100%;
 }
 
-
+//-------review bottom-------
+.teacher-card .card-content-bottom .review-bottom{
+  margin-top: 7px;
+}
 
 @media (max-width: 930px) {
   .teacher-card .teacher-photo {
@@ -160,15 +187,16 @@
 }
 
 @media (max-width: 730px) {
+  //-------------CARD TOP-------------
   .teacher-card .teacher-card-content-container {
     flex-direction: column;
     align-items: center;
   }
   .teacher-card .teacher-photo {
-    min-width: 130px;
-    min-height: 130px;
-    max-width: 130px;
-    max-height: 130px;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 150px;
+    max-height: 150px;
     margin-bottom: 10px;
     margin-right: 0;
   }
@@ -177,11 +205,11 @@
     flex-direction: column;
     align-items: center;
   }
-  .teacher-card .teacher-info-container{
+  .teacher-card .teacher-info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 75px;
+    height: 55%;
   }
 
   .teacher-card .user-review-container {
@@ -189,16 +217,34 @@
     //TODO here is input
   }
 
+  //----------CARD BOTTOM-------------
+  .teacher-card .card-content-bottom .review-container .review-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
 
-  .teacher-card .user-review-container .sign-in-link{
+  .teacher-card .card-content-bottom .review-container .review-top .reviewer-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: start;
+  }
+  .teacher-card .card-content-bottom .review-container .review-top .reviewer-info > div {
+    margin: 2px 0;
+  }
+
+  .teacher-card .user-review-container .sign-in-link {
     white-space: nowrap;
   }
   .teacher-card .teacher-name {
-    margin-top: 5px;
+    //margin-top: 5px;
     text-align: center;
   }
   .teacher-card .teacher-university {
-    margin: 5px 10px;
+    margin: 5px 0;
     text-align: center;
   }
 
@@ -206,11 +252,13 @@
     display: none;
   }
 }
+
 /* ---------STAR-RATING------------------------------------------------------------- */
-ngb-rating{
+ngb-rating {
   color: rgb(255, 196, 0);
   font-size: 30px;
 }
+
 .teacher-rating .rating {
   display: flex;
   align-items: flex-end;
@@ -221,7 +269,7 @@ ngb-rating{
   position: relative;
 }
 
-.teacher-rating .rating-active{
+.teacher-rating .rating-active {
   position: absolute;
   width: 0%;
   height: 100%;
@@ -230,20 +278,20 @@ ngb-rating{
   overflow: hidden;
 }
 
-.teacher-rating .rating-active::before{
+.teacher-rating .rating-active::before {
   content: "★★★★★";
-  position:absolute;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  color:rgb(255, 196, 0);
+  color: rgb(255, 196, 0);
 }
 
 .teacher-rating .rating-body::before {
   content: "★★★★★";
   display: block;
-  color:#b3b3b3;
+  color: #b3b3b3;
 }
 
 .teacher-rating .rating-items {
@@ -255,7 +303,7 @@ ngb-rating{
   left: 0;
 }
 
-.teacher-rating .rating-item{
+.teacher-rating .rating-item {
   height: 100%;
   flex: 20%;
   opacity: 0;

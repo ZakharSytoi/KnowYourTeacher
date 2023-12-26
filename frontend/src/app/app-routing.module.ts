@@ -14,15 +14,15 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    title: 'Home'
+    title: 'Login'
   },
   {
     path: 'register',
     component: RegisterComponent,
-    title: 'Home'
+    title: 'Registration'
   },
   {
-    path: 'teacher',
+    path: 'teacher/:id',
     component: TeacherPageComponent,
     title: 'Teacher'
   },

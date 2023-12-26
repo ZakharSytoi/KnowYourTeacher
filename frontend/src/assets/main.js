@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const burgerMenu = document.querySelector('.menu-icon-wrapper')
-    const navLinks = document.querySelector('.burger-menu-container')
-
-    burgerMenu.addEventListener('click', function () {
-        navLinks.classList.toggle('show')
-    })
-})
+// document.addEventListener('DOMContentLoaded', function () {
+//     const burgerMenu = document.querySelector('.menu-icon-wrapper')
+//     const navLinks = document.querySelector('.burger-menu-container')
+//
+//     burgerMenu.addEventListener('click', function () {
+//         navLinks.classList.toggle('show')
+//     })
+// })
 
 // -------------------------STAR-RATING----------------------------------
 
