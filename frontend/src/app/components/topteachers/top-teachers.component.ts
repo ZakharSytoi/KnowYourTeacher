@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component} from '@angular/core';
 import {NgStyle, NgClass, NgFor} from "@angular/common";
 
 
 import {TeacherPreviewDto} from "../../models/TeacherPreviewDto";
 import {TopTeacherService} from "../../services/top-teacher.service";
-
+declare function initRatings():void;
 @Component({
     selector: 'app-topteachers',
     standalone: true,
@@ -12,7 +12,7 @@ import {TopTeacherService} from "../../services/top-teacher.service";
     templateUrl: './top-teachers.component.html',
     styleUrl: './top-teachers.component.scss'
 })
-export class TopTeachersComponent {
+export class TopTeachersComponent{
 
     topTeachersList: TeacherPreviewDto[];
 
@@ -26,4 +26,12 @@ export class TopTeachersComponent {
             }
         })
     }
+    ngAfterViewChecked(): void{
+        initRatings();
+    }
+    // ngAfterViewInit(): void {
+    //     initRatings();
+    // }
+
+
 }

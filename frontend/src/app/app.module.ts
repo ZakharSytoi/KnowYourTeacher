@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpAuthorizationInterceptorService} from "./services/http-authorization-interceptor.service";
 import {FooterComponent} from "./components/footer/footer.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import {FooterComponent} from "./components/footer/footer.component";
     ReactiveFormsModule,
     HttpClientModule,
     FooterComponent,
+    NgbModule,
   ],
   providers: [provideClientHydration(),
     {
