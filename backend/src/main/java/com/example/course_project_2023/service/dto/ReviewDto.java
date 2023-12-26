@@ -7,11 +7,11 @@ public record ReviewDto(
         Short score,
         String subjectName,
         String reviewText,
-        Date createDate,
+        Date createdDate,
         String likeLink,
         String dislikeLink,
-        boolean isLiked,
-        boolean isDisliked
+        Boolean isLiked,
+        Boolean isDisliked
 ) {
 
 }
