@@ -1,5 +1,5 @@
 CREATE
-EXTENSION IF NOT EXISTS "uuid-ossp";
+    EXTENSION IF NOT EXISTS "uuid-ossp";
 
 
 DROP TABLE IF EXISTS
@@ -90,30 +90,29 @@ CREATE TABLE likes
 (
     review_id INTEGER REFERENCES review (id),
     user_id   INTEGER REFERENCES users (id),
-    PRIMARY KEY(review_id, user_id)
+    PRIMARY KEY (review_id, user_id)
 );
 
 CREATE TABLE dislikes
 (
     review_id INTEGER REFERENCES review (id),
     user_id   INTEGER REFERENCES users (id),
-    PRIMARY KEY(review_id, user_id)
+    PRIMARY KEY (review_id, user_id)
 );
 
 
 CREATE
-OR
-REPLACE
-FUNCTION update_average_teacher_score()
-RETURNS TRIGGER AS $$
+    OR
+    REPLACE
+    FUNCTION update_average_teacher_score()
+    RETURNS TRIGGER AS
+$$
 BEGIN
     UPDATE teacher
-    SET avg_score = (
-        SELECT AVG(score)
-        FROM review
-        WHERE review.teacher_id = NEW.teacher_id
-        GROUP BY teacher_id
-    )
+    SET avg_score = (SELECT AVG(score)
+                     FROM review
+                     WHERE review.teacher_id = NEW.teacher_id
+                     GROUP BY teacher_id)
     WHERE teacher.id = NEW.teacher_id;
 
     RETURN NEW;
@@ -125,22 +124,27 @@ CREATE TRIGGER update_average_score_trigger
     AFTER INSERT
     ON review
     FOR EACH ROW
-    EXECUTE FUNCTION update_average_teacher_score();
+EXECUTE FUNCTION update_average_teacher_score();
 
 CREATE VIEW review_with_likes_dislikes_count AS
-SELECT r.id           AS review_id,
-       r.score        AS score,
-       r.teacher_id   AS teacher_id,
-       r.subject_name AS subject_name,
-       r.user_id      AS user_id,
-       r.review_text  AS review_text,
-       r.created_date AS created_date,
-       COUNT(l.user_id)    AS like_count,
-       COUNT(d.user_id)    AS dislike_count
+SELECT r.id                       AS review_id,
+       r.score                    AS score,
+       r.teacher_id               AS teacher_id,
+       r.subject_name             AS subject_name,
+       r.user_id                  AS user_id,
+       r.review_text              AS review_text,
+       r.created_date             AS created_date,
+       COALESCE(like_count, 0)    AS like_count,
+       COALESCE(dislike_count, 0) AS dislike_count
 FROM review r
-         LEFT JOIN likes l ON r.id = l.review_id
-         LEFT JOIN dislikes d ON r.id = d.review_id
-GROUP BY r.id;
+         LEFT JOIN
+     (SELECT review_id, COUNT(user_id) AS like_count
+      FROM likes
+      GROUP BY review_id) l ON r.id = l.review_id
+         LEFT JOIN
+     (SELECT review_id, COUNT(user_id) AS dislike_count
+      FROM dislikes
+      GROUP BY review_id) d ON r.id = d.review_id;
 
 
 CREATE VIEW top_teachers_with_most_popular_review_text AS
