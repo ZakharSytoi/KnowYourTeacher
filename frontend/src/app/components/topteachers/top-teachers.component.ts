@@ -3,9 +3,11 @@ import {NgStyle, NgClass, NgFor} from "@angular/common";
 
 
 import {TeacherPreviewDto} from "../../models/TeacherPreviewDto";
-import {TopTeacherService} from "../../services/top-teacher.service";
 import {RouterLink} from "@angular/router";
-declare function initRatings():void;
+import {TeacherService} from "../../services/teacher.service";
+
+declare function initRatings(): void;
+
 @Component({
     selector: 'app-topteachers',
     standalone: true,
@@ -13,12 +15,12 @@ declare function initRatings():void;
     templateUrl: './top-teachers.component.html',
     styleUrl: './top-teachers.component.scss'
 })
-export class TopTeachersComponent{
+export class TopTeachersComponent {
 
     topTeachersList: TeacherPreviewDto[];
 
     constructor(
-        private topTeacherService: TopTeacherService
+        private topTeacherService: TeacherService
     ) {
         this.topTeachersList = [];
         topTeacherService.getTopTeachersList().subscribe({
@@ -27,9 +29,11 @@ export class TopTeachersComponent{
             }
         })
     }
-    ngAfterViewChecked(): void{
+
+    ngAfterViewChecked(): void {
         initRatings();
     }
+
     // ngAfterViewInit(): void {
     //     initRatings();
     // }
