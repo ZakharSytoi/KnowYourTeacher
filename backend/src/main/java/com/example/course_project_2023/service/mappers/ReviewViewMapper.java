@@ -1,7 +1,7 @@
 package com.example.course_project_2023.service.mappers;
 
 import com.example.course_project_2023.repository.model.views.ReviewView;
-import com.example.course_project_2023.service.LikingUtil;
+import com.example.course_project_2023.service.util.LikingUtil;
 import com.example.course_project_2023.service.dto.ReviewDto;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;

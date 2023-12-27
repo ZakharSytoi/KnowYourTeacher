@@ -8,6 +8,8 @@ public record ReviewDto(
         String subjectName,
         String reviewText,
         Date createdDate,
+        Long likeCount,
+        Long dislikeCount,
         String likeLink,
         String dislikeLink,
         Boolean isLiked,

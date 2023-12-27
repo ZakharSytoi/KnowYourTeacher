@@ -1,5 +1,6 @@
 package com.example.course_project_2023.web.controllers;
 
+import com.example.course_project_2023.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,13 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/knowyourteacher-api/v1/reviews")
 public class ReviewController {
+    private final ReviewService reviewService;
 
     @PostMapping("/{id:\\d+}/like")
-    public ResponseEntity<?> likePost(@PathVariable Long id){
+    public ResponseEntity<?> likeReview(@PathVariable Long id){
+        reviewService.likeReview(id);
         return ResponseEntity.ok().body("post " + id + " liked");
     }
     @PostMapping("/{id:\\d+}/dislike")
-    public ResponseEntity<?> dislikePost(@PathVariable Long id){
+    public ResponseEntity<?> dislikeReview(@PathVariable Long id){
+        reviewService.dislikeReview(id);
         return ResponseEntity.ok().body("post " + id + " disliked");
     }
 }

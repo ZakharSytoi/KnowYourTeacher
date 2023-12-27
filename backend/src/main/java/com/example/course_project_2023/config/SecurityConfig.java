@@ -77,6 +77,8 @@ public class SecurityConfig {
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_Admin_post").hasAuthority(ADMIN_SPECIFIC_PERMISSION.toString());
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_User_get").hasAuthority(USER_SPECIFIC_PERMISSION.toString());
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_User_post").hasAuthority(USER_SPECIFIC_PERMISSION.toString());
+                    auth.requestMatchers("/knowyourteacher-api/v1/reviews/{id:\\d+}/like").authenticated();
+                    auth.requestMatchers("/knowyourteacher-api/v1/reviews/{id:\\d+}/dislike").authenticated();
                     auth.anyRequest().permitAll();
 
                 })
