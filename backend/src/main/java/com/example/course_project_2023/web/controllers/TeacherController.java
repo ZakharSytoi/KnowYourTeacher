@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,7 +35,8 @@ public class TeacherController {
     }
 
     @GetMapping("/{id:\\d+}")
-    public ResponseEntity<TeacherCardDto> getTeacherById(@PathVariable Long id){
+    public ResponseEntity<TeacherCardDto> getTeacherById(@PathVariable Long id) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
         return ResponseEntity.ok().body(teacherService.getTeacherById(id));
     }
 
