@@ -88,8 +88,14 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container *ngSwitchCase="'LOADEDING'"> </ng-container>
-            <ng-container *ngSwitchCase="'ERROR'"> </ng-container>
+            <ng-container *ngSwitchCase="'LOADING'">
+                <div class="spinner-border" role="status" style="margin-top: 25%; color: #01A5D9FF"  >
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'ERROR'">
+            <app-error></app-error>
+            </ng-container>
         </ng-container>
     </div>
 </main>

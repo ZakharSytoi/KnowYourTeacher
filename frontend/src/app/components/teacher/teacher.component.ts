@@ -10,12 +10,13 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NgIf, NgSwitch} from "@angular/common";
 import { CommonModule } from '@angular/common';
 import { json } from "stream/consumers";
+import {ErrorComponent} from "../error/error.component";
 declare function initRatings(): void;
 
 @Component({
     selector: "app-teacher",
     standalone: true,
-    imports: [RouterModule, NgbRating, TeacherReviewsComponent, NgIf, NgSwitch,CommonModule],
+    imports: [RouterModule, NgbRating, TeacherReviewsComponent, NgIf, NgSwitch, CommonModule, ErrorComponent],
     templateUrl: "./teacher.component.html",
     styleUrl: "./teacher.component.scss",
 })

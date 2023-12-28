@@ -1,6 +1,17 @@
 .review-container {
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
+  padding: 15px;
+}
+
+.review-container .review {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #ebfafe;
+  border-radius: 15px;
 }
 
 //-------review top-------
@@ -33,7 +44,7 @@
   border-color: #00b7ef3f;
   border-width: 0.5px;
   border-radius: 100%;
-  margin: 0 10px
+  margin: 0 10px;
 }
 
 .review .card-horizontal-line {
@@ -50,12 +61,30 @@
   margin-top: 7px;
 }
 
-.review .like-dislike-container {
-  margin-top: 20px;
+//-------review bottom info-------
+
+.review .review-bottom-info-container {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  width: 100%;
-  justify-content: end;
+  justify-content: space-between;
+}
+
+.review .review-bottom-info-container .date-container {
+  display: flex;
+  align-items: end;
+}
+
+.review .review-bottom-info-container .like-dislike-container {
+  display: flex;
+  min-width: 70px;
+  height: 34px;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.review .review-bottom-info-container .like-dislike-container span{
+  color: #0e76a8;
 }
 
 .review .like-container {
@@ -66,6 +95,17 @@
 .review .dislike-container {
   display: flex;
   flex-direction: row;
+}
+
+.review .like-container > a {
+  display: flex;
+  padding-top: 5px;
+  margin-left: 5px;
+}
+
+.review .dislike-container > a {
+
+  margin: 0 5px
 }
 
 @media (max-width: 730px) {
@@ -121,7 +161,7 @@ ngb-rating {
 }
 
 .teacher-rating .rating-active::before {
-  content: "★★★★★";
+  content: '★★★★★';
   position: absolute;
   width: 100%;
   height: 100%;
@@ -131,7 +171,7 @@ ngb-rating {
 }
 
 .teacher-rating .rating-body::before {
-  content: "★★★★★";
+  content: '★★★★★';
   display: block;
   color: #b3b3b3;
 }
@@ -156,4 +196,3 @@ ngb-rating {
   font-size: 75%;
   padding-bottom: 2px;
 }
-
