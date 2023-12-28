@@ -148,8 +148,8 @@ FROM review r
       FROM dislikes
       GROUP BY review_id) d ON r.id = d.review_id
          JOIN users u ON r.user_id = u.id
-         JOIN university uni ON u.university_id = uni.id;
-
+         JOIN university uni ON u.university_id = uni.id
+ORDER BY like_count;
 
 CREATE VIEW top_teachers_with_most_popular_review_text AS
 WITH RankedReviews AS (SELECT rw.*,
