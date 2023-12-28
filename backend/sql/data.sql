@@ -270,15 +270,15 @@ VALUES ('OLYMPUS Szkoła Wyższa im. Romualda Kudlińskiego (61)'),
 INSERT INTO users (nickname, university_id, field_of_study)
 VALUES ('admin_user', 1, 'Computer Science'),
        ('user1', 1, 'Physics'),
-       ('user2', 1, 'Biology'),
-       ('user3', 1, 'Mathematics'),
-       ('user4', 1, 'Chemistry'),
-       ('user5', 1, 'History'),
-       ('user6', 1, 'Economics'),
-       ('user7', 1, 'Psychology'),
-       ('user8', 1, 'English'),
-       ('user9', 1, 'Engineering'),
-       ('user10', 1, 'Political Science');
+       ('user2', 14, 'Biology'),
+       ('user3', 39, 'Mathematics'),
+       ('user4', 85, 'Chemistry'),
+       ('user5', 64, 'History'),
+       ('user6', 19, 'Economics'),
+       ('user7', 57, 'Psychology'),
+       ('user8', 3, 'English'),
+       ('user9', 99, 'Engineering'),
+       ('user10', 46, 'Political Science');
 
 -- Insert data into the roles table
 INSERT INTO roles (name)

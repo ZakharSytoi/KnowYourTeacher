@@ -1,5 +1,5 @@
 CREATE
-    EXTENSION IF NOT EXISTS "uuid-ossp";
+EXTENSION IF NOT EXISTS "uuid-ossp";
 
 
 DROP TABLE IF EXISTS
@@ -102,9 +102,9 @@ CREATE TABLE dislikes
 
 
 CREATE
-    OR
-    REPLACE
-    FUNCTION update_average_teacher_score()
+OR
+REPLACE
+FUNCTION update_average_teacher_score()
     RETURNS TRIGGER AS
 $$
 BEGIN
@@ -124,7 +124,7 @@ CREATE TRIGGER update_average_score_trigger
     AFTER INSERT
     ON review
     FOR EACH ROW
-EXECUTE FUNCTION update_average_teacher_score();
+    EXECUTE FUNCTION update_average_teacher_score();
 
 CREATE VIEW review_with_likes_dislikes_count AS
 SELECT r.id                       AS review_id,
@@ -134,6 +134,8 @@ SELECT r.id                       AS review_id,
        r.user_id                  AS user_id,
        r.review_text              AS review_text,
        r.created_date             AS created_date,
+       u.nickname                 AS nickname,
+       uni.name                   AS university_name,
        COALESCE(like_count, 0)    AS like_count,
        COALESCE(dislike_count, 0) AS dislike_count
 FROM review r
@@ -144,7 +146,9 @@ FROM review r
          LEFT JOIN
      (SELECT review_id, COUNT(user_id) AS dislike_count
       FROM dislikes
-      GROUP BY review_id) d ON r.id = d.review_id;
+      GROUP BY review_id) d ON r.id = d.review_id
+         JOIN users u ON r.user_id = u.id
+         JOIN university uni ON u.university_id = uni.id;
 
 
 CREATE VIEW top_teachers_with_most_popular_review_text AS
