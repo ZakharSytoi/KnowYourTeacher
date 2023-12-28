@@ -34,4 +34,8 @@ public class ReviewView {
     private Long likeCount;
     @Column(name = "dislike_count")
     private Long dislikeCount;
+    @Column(name = "nickname")
+    private String nickname;
+    @Column(name = "university_name")
+    private String universityName;
 }
