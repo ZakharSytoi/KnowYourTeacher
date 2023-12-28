@@ -196,3 +196,8 @@ ngb-rating {
   font-size: 75%;
   padding-bottom: 2px;
 }
+@media (max-width: 478px) {
+  .teacher-rating .rating {
+    font-size: 15px;
+  }
+}
