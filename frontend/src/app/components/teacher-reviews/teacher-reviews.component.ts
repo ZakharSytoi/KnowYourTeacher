@@ -5,13 +5,10 @@ import {ReviewDto} from "../../models/ReviewDto";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {ReviewService} from "../../services/review.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {AsyncPipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {AsyncPipe, DatePipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {ErrorComponent} from "../error/error.component";
-import {DatePipe} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
-import * as http from "http";
-import {BuiltinTypeName} from '@angular/compiler';
-import {error} from 'console';
+import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'app-teacher-reviews',
@@ -24,7 +21,8 @@ import {error} from 'console';
         ErrorComponent,
         NgClass,
         DatePipe,
-        RouterLink
+        RouterLink,
+        NgbRating
     ],
     templateUrl: './teacher-reviews.component.html',
     styleUrl: './teacher-reviews.component.scss'
@@ -54,7 +52,7 @@ export class TeacherReviewsComponent implements OnInit {
                     return ({reviewsState: 'LOADED', reviewsPage: response})
                 }),
                 startWith({reviewsState: 'LOADING'}),
-                catchError((error: HttpErrorResponse) => of({reviewsState: 'LOADED', error: error}))
+                catchError((error: HttpErrorResponse) => of({reviewsState: 'ERROR', error: error}))
             )
         } else this.reviewsState$ = of({reviewsState: 'ERROR'})
     }
@@ -88,29 +86,29 @@ export class TeacherReviewsComponent implements OnInit {
         })
         console.log(url)
         if (likeOrDislike) {
-            if(this.likesDislikes[i].isLiked){
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes-1;
+            if (this.likesDislikes[i].isLiked) {
+                this.likesDislikes[i].likes = this.likesDislikes[i].likes - 1;
                 this.likesDislikes[i].isLiked = false;
-            }else if(this.likesDislikes[i].isDisliked){
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes-1;
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes+1;
+            } else if (this.likesDislikes[i].isDisliked) {
+                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes - 1;
+                this.likesDislikes[i].likes = this.likesDislikes[i].likes + 1;
                 this.likesDislikes[i].isLiked = true;
                 this.likesDislikes[i].isDisliked = false;
-            }else {
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes+1;
+            } else {
+                this.likesDislikes[i].likes = this.likesDislikes[i].likes + 1;
                 this.likesDislikes[i].isLiked = true;
             }
         } else {
-            if(this.likesDislikes[i].isDisliked){
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes-1;
+            if (this.likesDislikes[i].isDisliked) {
+                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes - 1;
                 this.likesDislikes[i].isDisliked = false;
-            }else if(this.likesDislikes[i].isLiked){
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes-1;
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes+1;
+            } else if (this.likesDislikes[i].isLiked) {
+                this.likesDislikes[i].likes = this.likesDislikes[i].likes - 1;
+                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes + 1;
                 this.likesDislikes[i].isLiked = false;
                 this.likesDislikes[i].isDisliked = true;
-            }else {
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes+1;
+            } else {
+                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes + 1;
                 this.likesDislikes[i].isDisliked = true;
             }
         }
