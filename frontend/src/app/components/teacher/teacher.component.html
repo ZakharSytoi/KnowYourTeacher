@@ -1,82 +1,197 @@
 <main class="content-container _container">
     <div class="content-block">
-        <ng-container
-            *ngIf="teacherCardState$ | async as state"
-            [ngSwitch]="state.teacherCardState">
-            <ng-container *ngSwitchCase="'LOADED'"
-                ><div class="teacher-card">
+        <ng-container *ngIf="teacherCardState$ | async as state" [ngSwitch]="state.teacherCardState">
+            <ng-container *ngSwitchCase="'LOADED'">
+                <div class="teacher-card">
                     <div class="teacher-card-content-container">
                         <div class="card-content">
                             <div class="card-content-top">
-                                <div class="teacher-photo">
-                                    <img
-                                        src="{{state.teacherCardData?.teacherPictureUri}}"
-                                        alt="teacherPhoto" />
+                                <div class="teacher-photo-container">
+                                    <div class="teacher-photo">
+                                        <img src="{{ state.teacherCardData?.teacherPictureUri }}" alt="teacherPhoto" />
+                                    </div>
                                 </div>
+
                                 <div class="card-content-right">
                                     <div class="teacher-info-container">
                                         <span class="teacher-name">
-                                            {{state.teacherCardData?.name}} {{state.teacherCardData?.surname}}
+                                            {{ state.teacherCardData?.name }}
+                                            {{ state.teacherCardData?.surname }}
                                         </span>
                                         <div class="card-vertical-line"></div>
                                         <span class="teacher-university">
-                                            {{state.teacherCardData?.universityName}}
+                                            {{ state.teacherCardData?.universityName }}
                                         </span>
                                         <div class="teacher-rating">
                                             <div class="rating">
                                                 <div class="rating-body">
-                                                    <div
-                                                        class="rating-active"></div>
+                                                    <div class="rating-active"></div>
                                                     <div class="rating-items">
-                                                        <input
-                                                            type="radio"
-                                                            class="rating-item"
-                                                            value="1"
-                                                            name="rating" />
-                                                        <input
-                                                            type="radio"
-                                                            class="rating-item"
-                                                            value="2"
-                                                            name="rating" />
-                                                        <input
-                                                            type="radio"
-                                                            class="rating-item"
-                                                            value="3"
-                                                            name="rating" />
-                                                        <input
-                                                            type="radio"
-                                                            class="rating-item"
-                                                            value="4"
-                                                            name="rating" />
-                                                        <input
-                                                            type="radio"
-                                                            class="rating-item"
-                                                            value="5"
-                                                            name="rating" />
+                                                        <input type="radio" class="rating-item" value="1" name="rating" />
+                                                        <input type="radio" class="rating-item" value="2" name="rating" />
+                                                        <input type="radio" class="rating-item" value="3" name="rating" />
+                                                        <input type="radio" class="rating-item" value="4" name="rating" />
+                                                        <input type="radio" class="rating-item" value="5" name="rating" />
                                                     </div>
                                                 </div>
                                                 <div class="rating-value">
-                                                    {{state.teacherCardData?.avgScore}}
+                                                    {{ state.teacherCardData?.avgScore }}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-horizontal-line"></div>
                                     <div class="user-review-container">
                                         @if (isLoggedIn()) {
-                                            <div class="review-input-container">
-                                                here is some input
-                                            </div>
-                                        } @else {
-                                            <span class="signInAlertText"
-                                                >You need to be signed in to
-                                                leave reviews.
-                                            </span>
-                                            <a
-                                                class="sign-in-link"
-                                                routerLink="/login"
-                                                >Sign in</a
+                                            <ng-container
+                                                *ngIf="inputPanelState$ | async as inputPanelState"
+                                                [ngSwitch]="inputPanelState.currentInputPanelState"
                                             >
+                                                <ng-container *ngSwitchCase="'LOADED'">
+                                                    <p style="margin: 0 0 10px 10px">Your review:</p>
+                                                    <div class="review-container">
+                                                        <div class="review-top">
+                                                            <div class="review-info-container">
+                                                                <span class="subject-name">{{ inputPanelState.reviewData!.subjectName }}</span>
+                                                                <div class="rating-container">
+                                                                    <ngb-rating
+                                                                        [max]="5"
+                                                                        [(rate)]="inputPanelState.reviewData!.score"
+                                                                        [readonly]="true"
+                                                                    ></ngb-rating>
+                                                                    <span>{{ inputPanelState.reviewData!.score }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="action-links-container" style="display: flex; flex-direction: row">
+                                                                <a (click)="handleEditButtonClick()" class="edit-link" style="margin-right: 7px;">
+                                                                    <i class="fa-solid fa-pencil"></i>
+                                                                </a>
+                                                                <a (click)="handleDeleteButtonClick()" class="delete-link">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="line-container" style="width: 100%; display: flex; justify-content: center; margin: 4px">
+                                                            <div class="card-horizontal-line"></div>
+                                                        </div>
+                                                        <div class="review-text-container">
+                                                            <p class="review-text" style="font-size: 14px">
+                                                                {{ inputPanelState.reviewData!.reviewText }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'EMPTY'">
+                                                    <div class="review-container">
+                                                        <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+                                                            <div class="form-top-container">
+                                                                <input
+                                                                    class="subject-input"
+                                                                    [ngClass]="{
+                                                                        inputError: getSubjectErrorStatus()
+                                                                    }"
+                                                                    type="text"
+                                                                    formControlName="subject"
+                                                                    placeholder="subject"
+                                                                    required
+                                                                />
+                                                                <div class="rating-container">
+                                                                    <ngb-rating [max]="5" formControlName="score" [(rate)]="selected"></ngb-rating>
+                                                                    <span>{{ selected }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-bottom-container">
+                                                                <label for="exampleFormControlTextarea1" class="form-label" style="opacity: 70%">
+                                                                    Your review:
+                                                                </label>
+                                                                <textarea
+                                                                    class="form-control"
+                                                                    [ngClass]="{
+                                                                        inputError: getReviewTextErrorStatus()
+                                                                    }"
+                                                                    formControlName="reviewText"
+                                                                    id="exampleFormControlTextarea1"
+                                                                    rows="3"
+                                                                    style="box-shadow: none; border: 2px solid #bfedfb"
+                                                                ></textarea>
+                                                            </div>
+                                                            <div class="button-container">
+                                                                @if (getReviewTextErrorStatus() || getSubjectErrorStatus()) {
+                                                                    <p class="fulfillmentError">
+                                                                        Please fulfill all fields correctly
+                                                                        <br />
+                                                                        nd set reating :)
+                                                                    </p>
+                                                                }
+                                                                <button
+                                                                    [disabled]="!reviewForm.valid"
+                                                                    type="submit"
+                                                                    class="submit-button"
+                                                                >
+                                                                    Post review
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'EDIT'">
+                                                    <div class="review-container">
+                                                        <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+                                                            <div class="form-top-container">
+                                                                <input
+                                                                    class="subject-input"
+                                                                    [ngClass]="{
+                                                                        inputError: getSubjectErrorStatus()
+                                                                    }"
+                                                                    type="text"
+                                                                    formControlName="subject"
+                                                                    placeholder="subject"
+                                                                    required
+                                                                />
+                                                                <div class="rating-container">
+                                                                    <ngb-rating [max]="5" formControlName="score" [(rate)]="selected"></ngb-rating>
+                                                                    <span>{{ selected }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-bottom-container">
+                                                                <label for="exampleFormControlTextarea1" class="form-label" style="opacity: 70%">
+                                                                    Your review:
+                                                                </label>
+                                                                <textarea
+                                                                    class="form-control"
+                                                                    [ngClass]="{
+                                                                        inputError: getReviewTextErrorStatus()
+                                                                    }"
+                                                                    formControlName="reviewText"
+                                                                    id="exampleFormControlTextarea1"
+                                                                    rows="3"
+                                                                    style="box-shadow: none; border: 2px solid #bfedfb"
+                                                                ></textarea>
+                                                            </div>
+                                                            <div class="button-container">
+                                                                @if (getReviewTextErrorStatus() || getSubjectErrorStatus()) {
+                                                                    <p class="fulfillmentError">
+                                                                        Please fulfill all fields correctly
+                                                                        <br />
+                                                                        nd set reating :)
+                                                                    </p>
+                                                                }
+                                                                <button
+                                                                    [disabled]="!reviewForm.valid"
+                                                                    type="submit"
+                                                                    class="submit-button"
+                                                                    onClick="window.location.reload()"
+                                                                >
+                                                                    Post review
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'ERROR'">ERROR</ng-container>
+                                            </ng-container>
+                                        } @else {
+                                            <span class="signInAlertText">You need to be signed in to leave reviews.</span>
+                                            <a class="sign-in-link" routerLink="/login">Sign in</a>
                                         }
                                     </div>
                                 </div>
@@ -89,12 +204,12 @@
                 </div>
             </ng-container>
             <ng-container *ngSwitchCase="'LOADING'">
-                <div class="spinner-border" role="status" style="margin-top: 25%; color: #01A5D9FF"  >
+                <div class="spinner-border" role="status" style="margin-top: 25%; color: #01a5d9ff">
                     <span class="sr-only">Loading...</span>
                 </div>
             </ng-container>
             <ng-container *ngSwitchCase="'ERROR'">
-            <app-error></app-error>
+                <app-error></app-error>
             </ng-container>
         </ng-container>
     </div>
