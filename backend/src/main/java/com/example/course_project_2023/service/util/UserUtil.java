@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserSecurityUtil {
+public class UserUtil {
     private final SecurityUserRepository userRepository;
     public Long getUserIdFromContext(){
         Long userId;
