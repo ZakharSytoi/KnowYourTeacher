@@ -22,6 +22,9 @@ public class Review {
     private Teacher teacher;
     @Column(name = "subject_name")
     private String subjectName;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @Column(name = "review_text")
     private String reviewText;
     @Column(name = "created_date")
