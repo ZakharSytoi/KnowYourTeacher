@@ -82,21 +82,23 @@ CREATE TABLE review
     subject_name VARCHAR(255)                    NOT NULL,
     user_id      INTEGER REFERENCES users (id)   NOT NULL,
     review_text  TEXT                            NOT NULL,
-    created_date TIMESTAMP                       NOT NULL
+    created_date TIMESTAMP                       NOT NULL,
+    UNIQUE (teacher_id, user_id)
+
 );
 
 
 CREATE TABLE likes
 (
-    review_id INTEGER REFERENCES review (id),
-    user_id   INTEGER REFERENCES users (id),
+    review_id INTEGER REFERENCES review (id) ON DELETE CASCADE,
+    user_id   INTEGER REFERENCES users (id) ON DELETE CASCADE,
     PRIMARY KEY (review_id, user_id)
 );
 
 CREATE TABLE dislikes
 (
-    review_id INTEGER REFERENCES review (id),
-    user_id   INTEGER REFERENCES users (id),
+    review_id INTEGER REFERENCES review (id) ON DELETE CASCADE,
+    user_id   INTEGER REFERENCES users (id) ON DELETE CASCADE,
     PRIMARY KEY (review_id, user_id)
 );
 
@@ -149,7 +151,7 @@ FROM review r
       GROUP BY review_id) d ON r.id = d.review_id
          JOIN users u ON r.user_id = u.id
          JOIN university uni ON u.university_id = uni.id
-ORDER BY like_count;
+ORDER BY like_count DESC;
 
 CREATE VIEW top_teachers_with_most_popular_review_text AS
 WITH RankedReviews AS (SELECT rw.*,
