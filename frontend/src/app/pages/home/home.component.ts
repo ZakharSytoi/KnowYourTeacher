@@ -1,5 +1,4 @@
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Component} from '@angular/core';
 
 import {HeaderComponent} from "../../components/header/header.component";
 import {SearchComponent} from "../../components/search/search.component";

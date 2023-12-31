@@ -60,7 +60,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8077", "http://localhost:80", "http://3.70.177.167"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -77,6 +77,9 @@ public class SecurityConfig {
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_Admin_post").hasAuthority(ADMIN_SPECIFIC_PERMISSION.toString());
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_User_get").hasAuthority(USER_SPECIFIC_PERMISSION.toString());
                     auth.requestMatchers("/knowyourteacher-api/v1/v1/security_checks/authorized_as_User_post").hasAuthority(USER_SPECIFIC_PERMISSION.toString());
+                    auth.requestMatchers("/knowyourteacher-api/v1/reviews/{id:\\d+}/like").authenticated();
+                    auth.requestMatchers("/knowyourteacher-api/v1/reviews/{id:\\d+}/dislike").authenticated();
+                    auth.requestMatchers("/knowyourteacher-api/v1/teachers/{id:\\d+}/review").authenticated();
                     auth.anyRequest().permitAll();
 
                 })

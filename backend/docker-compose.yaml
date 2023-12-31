@@ -11,6 +11,8 @@ services:
       - "./sql/schema.sql:/docker-entrypoint-initdb.d/1.sql"
       - "./sql/data.sql:/docker-entrypoint-initdb.d/2.sql"
       - "./sql/defaultPictures:/docker-entrypoint-initdb.d/pics"
+
+  
   know_your_teacher_app:
     image: zakharsytoi/know_your_teacher_app:1.2
     ports:

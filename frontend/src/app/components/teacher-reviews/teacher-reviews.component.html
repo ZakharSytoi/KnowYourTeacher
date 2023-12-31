@@ -1,0 +1,197 @@
+<ng-container
+    *ngIf="reviewsState$ | async as state"
+    [ngSwitch]="state.reviewsState">
+    <ng-container *ngSwitchCase="'LOADED'">
+        <div class="review-container">
+            @for (
+                review of state.reviewsPage?.content;
+                track review.id;
+                let i = $index
+            ) {
+                <div class="review">
+                    <div class="review-top">
+                        <div class="reviewer-info">
+                            <div class="nickname-container">
+                                <span>{{ review.nickname }}</span>
+                            </div>
+                            <div class="card-vertical-line"></div>
+                            <div class="university-name-container">
+                                <span>{{ review.universityName }}</span>
+                            </div>
+                            <div class="card-vertical-line"></div>
+                            <div class="subject-name-container">
+                                <span>{{ review.subjectName }}</span>
+                            </div>
+                        </div>
+                        <div class="rating-in-review">
+                            <div class="teacher-rating">
+                                <div class="rating">
+                                    <div class="rating-body">
+                                        <div class="rating-active"></div>
+                                        <div class="rating-items">
+                                            <input
+                                                type="radio"
+                                                class="rating-item"
+                                                value="1"
+                                                name="rating" />
+                                            <input
+                                                type="radio"
+                                                class="rating-item"
+                                                value="2"
+                                                name="rating" />
+                                            <input
+                                                type="radio"
+                                                class="rating-item"
+                                                value="3"
+                                                name="rating" />
+                                            <input
+                                                type="radio"
+                                                class="rating-item"
+                                                value="4"
+                                                name="rating" />
+                                            <input
+                                                type="radio"
+                                                class="rating-item"
+                                                value="5"
+                                                name="rating" />
+                                        </div>
+                                    </div>
+                                    <div class="rating-value">
+                                        {{ review.score }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-horizontal-line"></div>
+                    <div class="review-bottom">
+                        <span>{{ review.reviewText }}</span>
+                    </div>
+                    <div class="review-bottom-info-container">
+                        <div class="date-container">
+                            <span style="font-size: 14px; opacity: 60%">{{
+                                review.createdDate | date: 'yyyy-MM-dd'
+                            }}</span>
+                        </div>
+                        <div class="like-dislike-container">
+                            @if (authService.isLoggedIn()) {
+                                <div class="like-container">
+                                    <span>{{ likesDislikes[i].likes }}</span>
+                                    <a
+                                        (click)="
+                                            handleLikeOrDislike(
+                                                review.likeLink,
+                                                i,
+                                                true
+                                            )
+                                        "
+                                        style="cursor: pointer">
+                                        @if (likesDislikes[i].isLiked) {
+                                            <i
+                                                class="fa-solid fa-thumbs-up fa-xl"
+                                                style="color: #398dca"></i>
+                                        } @else {
+                                            <i
+                                                class="fa-regular fa-thumbs-up fa-xl"
+                                                style="color: #398dca"></i>
+                                        }
+                                    </a>
+                                </div>
+                                <div class="dislike-container">
+                                    <a
+                                        (click)="
+                                            handleLikeOrDislike(
+                                                review.dislikeLink,
+                                                i,
+                                                false
+                                            )
+                                        "
+                                        style="cursor: pointer">
+                                        @if (likesDislikes[i].isDisliked) {
+                                            <i
+                                                class="fa-solid fa-thumbs-down fa-xl"
+                                                style="color: #398dca"></i>
+                                        } @else {
+                                            <i
+                                                class="fa-regular fa-thumbs-down fa-xl"
+                                                style="color: #398dca"></i>
+                                        }
+                                        <span>{{
+                                            likesDislikes[i].dislikes
+                                        }}</span>
+                                    </a>
+                                </div>
+                            } @else {
+                                <div class="like-container">
+                                    <span>{{ review.likeCount }}</span>
+                                    <a routerLink="/login">
+                                        <i
+                                            class="fa-regular fa-thumbs-up fa-xl"
+                                            style="color: #398dca"></i>
+                                    </a>
+                                </div>
+                                <div class="dislike-container">
+                                    <a routerLink="/login">
+                                        <i
+                                            class="fa-regular fa-thumbs-down fa-xl"
+                                            style="color: #398dca"></i>
+                                    </a>
+                                    <span>{{ review.dislikeCount }}</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <nav
+            aria-label="Page navigation"
+            style="margin-top: 20px; display: flex; justify-content: center">
+            <ul class="pagination">
+                <li
+                    class="page-item"
+                    [ngClass]="{ disabled: state.reviewsPage?.number === 0 }">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @for (
+                    page of [].constructor(state.reviewsPage?.totalPages);
+                    track page;
+                    let i = $index
+                ) {
+                    <li class="page-item">
+                        <a
+                            class="page-link"
+                            (click)="goToPage(i)"
+                            style="cursor: pointer"
+                            >{{ i + 1 }}</a
+                        >
+                    </li>
+                }
+                <li
+                    class="page-item"
+                    [ngClass]="{
+                        disabled:
+                            state.reviewsPage?.number ===
+                            state.reviewsPage?.totalPages! - 1
+                    }">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </ng-container>
+    <ng-container *ngSwitchCase="'LOADING'">
+        <div
+            class="spinner-border"
+            role="status"
+            style="margin-top: 25%; color: #01a5d9ff">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'ERROR'">
+        <app-error></app-error>
+    </ng-container>
+</ng-container>

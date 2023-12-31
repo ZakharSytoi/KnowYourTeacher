@@ -1,19 +1,19 @@
-import {Component} from "@angular/core";
-import {ShortHeaderComponent} from "../../components/short-header/short-header.component";
-import {NgStyle, NgClass, NgFor} from "@angular/common";
-import {RouterModule} from "@angular/router";
-import {Router} from "@angular/router";
+import { Component } from "@angular/core";
+import { ShortHeaderComponent } from "../../components/short-header/short-header.component";
+import { NgStyle, NgClass, NgFor } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { Router } from "@angular/router";
 import {
     FormGroup,
     FormControl,
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import {UserRegistrationRequestDto} from "../../models/UserRegistrationRequestDto";
-import {AuthService} from "../../services/auth.service";
-import {UniversityDto} from "../../models/UniversityDto";
-import {UniversityService} from "../../services/university.service";
-import {HttpErrorResponse} from "@angular/common/http";
+import { UserRegistrationRequestDto } from "../../models/UserRegistrationRequestDto";
+import { AuthService } from "../../services/auth.service";
+import { UniversityDto } from "../../models/UniversityDto";
+import { UniversityService } from "../../services/university.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: "app-register",
@@ -42,15 +42,12 @@ export class RegisterComponent {
         private universityService: UniversityService,
         private router: Router
     ) {
-
-
         this.universityList = [];
         universityService.getUniversitiesList().subscribe({
-            next: (universitiesList) => {
+            next: universitiesList => {
                 this.universityList = universitiesList;
             },
         });
-
 
         this.userData = new FormGroup({
             email: new FormControl("", [
@@ -98,7 +95,7 @@ export class RegisterComponent {
                 )
                 .subscribe({
                     next: () => this.router.navigate(["/login"]),
-                    error: (err) => {
+                    error: err => {
                         this.handleUnsuccessfulLogin(err);
                     },
                 });
@@ -114,17 +111,17 @@ export class RegisterComponent {
             this.existingEmailError = true;
             this.existingNicknameError = false;
             this.unknownRegistrationError = false;
-            console.log('email error')
+            console.log("email error");
         } else if (errorMessage.includes(" nickname ")) {
             this.existingNicknameError = true;
             this.existingEmailError = false;
             this.unknownRegistrationError = false;
-            console.log('nickname error')
+            console.log("nickname error");
         } else if (!this.existingEmailError && !this.existingNicknameError) {
             this.unknownRegistrationError = true;
             this.existingEmailError = false;
             this.existingNicknameError = false;
-            console.log('unknown error')
+            console.log("unknown error");
         }
     }
 

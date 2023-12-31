@@ -1,4 +1,5 @@
 export interface TeacherPreviewDto {
+    id: string;
     teacherName: string;
     teacherSurname: string;
     universityName: string;

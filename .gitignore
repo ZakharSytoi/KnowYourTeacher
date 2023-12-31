@@ -90,3 +90,8 @@ testem.log
 .DS_Store
 Thumbs.db
 >>>>>>> frontend/master
+frontend/.angular/cache/
+backend/src/main/resources/KYT_Keystore.p12
+frontend/dist/
+frontend/dist/
+/frontend/node_modules/

@@ -11,7 +11,10 @@
                 <div class="card-content">
                     <div class="card-content-top">
                         <span class="teacher-name">
-                            {{teacher.teacherName + ' ' + teacher.teacherSurname}}
+                            <a routerLink="/teacher/{{teacher.id}}">
+                                {{teacher.teacherName + ' ' + teacher.teacherSurname}}
+                            </a>
+
                         </span>
                         <div class="card-vertical-line"></div>
                         <span class="teacher-university">
