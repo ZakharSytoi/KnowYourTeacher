@@ -1,22 +1,26 @@
 <div class="search-from-container _container">
-    <form action="" class="search-form">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
         <div class="form-block">
             <div class="input-box __nameBox">
                 <input
                         type="text"
+                        formControlName="teacherName"
                         placeholder="Teacher name"
                         required
                 />
             </div>
             <div class="input-box __subjectBox">
-                <input type="text" placeholder="Subject" required />
+                <input type="text"
+                       formControlName="subject"
+                       placeholder="Subject"
+                       required />
             </div>
             <div class="input-box __uniBox">
-                <select class="form-select">
-                    <option selected>University</option>
-                    <option value="1">University 1</option>
-                    <option value="2">University 1</option>
-                    <option value="3">University 1</option>
+                <select formControlName="university" class="form-select">
+                    <option>University</option>
+                    <option *ngFor="let university of universityList" [value]="university.id">
+                        {{ university.name }}
+                    </option>
                 </select>
             </div>
             <button type="submit" class="find-Btn">Find!</button>
