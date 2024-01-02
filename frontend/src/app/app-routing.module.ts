@@ -4,12 +4,13 @@ import {HomeComponent} from "./pages/home/home.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {TeacherPageComponent} from "./pages/teacher-page/teacher-page.component";
+import {SearchComponent} from "./pages/search/search.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home'
+    title: 'KnowYourTeacher'
   },
   {
     path: 'login',
@@ -24,7 +25,12 @@ const routes: Routes = [
   {
     path: 'teacher/:id',
     component: TeacherPageComponent,
-    title: 'Teacher'
+    title: 'KnowYourTeacher'
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
+    title: 'KnowYourTeacher'
   },
   {
     path: '**',
