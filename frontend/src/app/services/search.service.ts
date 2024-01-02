@@ -13,7 +13,13 @@ export class SearchService {
 
   constructor(private readonly http: HttpClient) { }
 
-  search$ = (searchRequest: SearchRequestDto, pageNumber: number = 0, pageSize: number = 5): Observable<Page<TeacherPreviewDto>> =>
-      this.http.get<Page<TeacherPreviewDto>>(`${environment.BASE_API_URL}teachers/search?pageNumber=${pageNumber}&pageSize=${pageSize}`, searchRequest);
+  search$ = (searchRequest: SearchRequestDto, pageNumber: number = 0, pageSize: number = 10): Observable<Page<TeacherPreviewDto>> =>
+      this.http.get<Page<TeacherPreviewDto>>(`${environment.BASE_API_URL}teachers/search
+      ?pageNumber=${pageNumber}
+      &pageSize=${pageSize}}
+      &teacherName=${searchRequest.teacherName}
+      &teacherSurname=${searchRequest.teacherSurname}
+      &subject=${searchRequest.subject}
+      &universityId=${searchRequest.universityId}`);
 
 }
