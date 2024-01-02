@@ -1,5 +1,6 @@
 export interface SearchRequestDto{
-    teacherName: string,
-    subjectName: string,
-    universityId: number
+    teacherName?: string,
+    teacherSurname?: string,
+    subject?: string,
+    universityId?: number
 }
