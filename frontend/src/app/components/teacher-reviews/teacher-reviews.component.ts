@@ -5,7 +5,7 @@ import {ReviewDto} from "../../models/ReviewDto";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {ReviewService} from "../../services/review.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {AsyncPipe, DatePipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {AsyncPipe, DatePipe, NgClass, NgIf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {ErrorComponent} from "../error/error.component";
 import {AuthService} from '../../services/auth.service';
 import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
@@ -20,6 +20,7 @@ import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
         NgSwitchCase,
         ErrorComponent,
         NgClass,
+        NgStyle,
         DatePipe,
         RouterLink,
         NgbRating
