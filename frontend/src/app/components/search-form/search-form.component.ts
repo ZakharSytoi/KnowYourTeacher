@@ -7,16 +7,16 @@ import {Router} from "@angular/router";
 import {NgFor} from '@angular/common';
 
 @Component({
-    selector: 'app-search',
+    selector: 'app-search-form',
     standalone: true,
-    templateUrl: './search.component.html',
+    templateUrl: './search-form.component.html',
     imports: [
         ReactiveFormsModule,
         NgFor
     ],
     styleUrl: './search.component.scss'
 })
-export class SearchComponent {
+export class SearchFormComponent {
     searchForm: FormGroup
     universityList: UniversityDto[];
 
