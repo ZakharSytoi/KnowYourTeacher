@@ -26,18 +26,18 @@ public class CustomReviewViewRepositoryImpl implements CustomReviewViewRepositor
         Root<ReviewView> root = query.from(ReviewView.class);
 
         LinkedList<Predicate> predicates = new LinkedList<>();
-        if (params.containsKey("subject")) {
+        if (params.containsKey("subject") && !params.get("subject").equals("")) {
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("subjectName")), "%" + params.get("subject").toLowerCase() + "%"));
         }
-        if(params.containsKey("teacherName")){
+        if(params.containsKey("teacherName")&& !params.get("teacherName").equals("")){
             Join<ReviewView, Teacher> teacherJoin = root.join("teacher");
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(teacherJoin.get("name")), "%" + params.get("teacherName").toLowerCase() + "%"));
         }
-        if(params.containsKey("teacherSurname")){
+        if(params.containsKey("teacherSurname")&& !params.get("teacherSurname").equals("")){
             Join<ReviewView, Teacher> teacherJoin = root.join("teacher");
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(teacherJoin.get("surname")), "%" + params.get("teacherSurname").toLowerCase() + "%"));
         }
-        if(params.containsKey("universityId")){
+        if(params.containsKey("universityId")&& !params.get("universityId").equals("")){
             Join<ReviewView, Teacher> teacherJoin = root.join("teacher");
             Join<Teacher, University> universityJoin = teacherJoin.join("university");
             predicates.add(criteriaBuilder.equal(universityJoin.get("id"), params.get("universityId")));

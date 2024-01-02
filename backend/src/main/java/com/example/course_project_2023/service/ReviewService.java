@@ -6,6 +6,7 @@ import com.example.course_project_2023.repository.daos.TeacherRepository;
 import com.example.course_project_2023.repository.daos.UserRepository;
 import com.example.course_project_2023.repository.model.Review;
 import com.example.course_project_2023.service.dto.ReviewDto;
+import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import com.example.course_project_2023.service.dto.ShortReviewDto;
 import com.example.course_project_2023.service.exception.ReviewNotFoundException;
 import com.example.course_project_2023.service.exception.TeacherNotFoundException;
@@ -88,9 +89,9 @@ public class ReviewService {
         reviewRepository.deleteByTeacherIdAndUserId(teacherId, userSecurityUtil.getUserIdFromContext());
     }
 
-    public Page<ReviewDto> findBySearchParams(int pageNumber, int pageSize, Map<String, String> searchParams) {
+    public Page<SearchedReviewDto> findBySearchParams(int pageNumber, int pageSize, Map<String, String> searchParams) {
         Long userId = userSecurityUtil.getUserIdFromContext();
         return reviewViewRepository.findByParams(searchParams, PageRequest.of(pageNumber, pageSize))
-                .map((ent) -> reviewViewMapper.reviewDtoFromReviewView(ent, userId));
+                .map((ent) -> reviewViewMapper.searchedReviewDtoFromReviewView(ent, userId));
     }
 }

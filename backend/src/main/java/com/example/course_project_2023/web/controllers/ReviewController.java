@@ -1,7 +1,7 @@
 package com.example.course_project_2023.web.controllers;
 
 import com.example.course_project_2023.service.ReviewService;
-import com.example.course_project_2023.service.dto.ReviewDto;
+import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping()
-    public ResponseEntity<Page<ReviewDto>> getTeacherReviews(
+    public ResponseEntity<Page<SearchedReviewDto>> getTeacherReviews(
             @RequestParam(required = false, defaultValue = "0") int pageNumber,
             @RequestParam(required = false, defaultValue = "10") int pageSize,
             @RequestParam Map<String, String> searchParams) {
