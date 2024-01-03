@@ -85,32 +85,33 @@ export class TeacherReviewsComponent implements OnInit {
         this.http.post(url, '').subscribe({
             error: error => console.log(error)
         })
-        console.log(url)
+        const item = this.likesDislikes[i];
+
         if (likeOrDislike) {
-            if (this.likesDislikes[i].isLiked) {
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes - 1;
-                this.likesDislikes[i].isLiked = false;
-            } else if (this.likesDislikes[i].isDisliked) {
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes - 1;
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes + 1;
-                this.likesDislikes[i].isLiked = true;
-                this.likesDislikes[i].isDisliked = false;
+            if (item.isLiked) {
+                item.likes--;
+                item.isLiked = false;
             } else {
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes + 1;
-                this.likesDislikes[i].isLiked = true;
+                item.likes++;
+                item.isLiked = true;
+
+                if (item.isDisliked) {
+                    item.dislikes--;
+                    item.isDisliked = false;
+                }
             }
         } else {
-            if (this.likesDislikes[i].isDisliked) {
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes - 1;
-                this.likesDislikes[i].isDisliked = false;
-            } else if (this.likesDislikes[i].isLiked) {
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes - 1;
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes + 1;
-                this.likesDislikes[i].isLiked = false;
-                this.likesDislikes[i].isDisliked = true;
+            if (item.isDisliked) {
+                item.dislikes--;
+                item.isDisliked = false;
             } else {
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes + 1;
-                this.likesDislikes[i].isDisliked = true;
+                item.dislikes++;
+                item.isDisliked = true;
+
+                if (item.isLiked) {
+                    item.likes--;
+                    item.isLiked = false;
+                }
             }
         }
     }
