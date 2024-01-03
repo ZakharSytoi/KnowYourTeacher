@@ -14,7 +14,7 @@ import {NgFor} from '@angular/common';
         ReactiveFormsModule,
         NgFor
     ],
-    styleUrl: './search.component.scss'
+    styleUrl: './search-form.component.scss'
 })
 export class SearchFormComponent {
     searchForm: FormGroup
@@ -59,7 +59,7 @@ export class SearchFormComponent {
                             teacherSurname: this.searchForm.controls["teacherSurname"].value,
                             subject: this.searchForm.controls["subject"].value,
                             universityId: this.searchForm.controls["universityId"].value
-                                === "universityId" ? "" : this.searchForm.controls["universityId"].value
+                                === "University" ? '' : this.searchForm.controls["universityId"].value
                         }
                 });
         } else {
