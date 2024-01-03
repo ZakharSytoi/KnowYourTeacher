@@ -40,7 +40,7 @@ public class CustomReviewViewRepositoryImpl implements CustomReviewViewRepositor
         if(params.containsKey("universityId")&& !params.get("universityId").equals("")){
             Join<ReviewView, Teacher> teacherJoin = root.join("teacher");
             Join<Teacher, University> universityJoin = teacherJoin.join("university");
-            predicates.add(criteriaBuilder.equal(universityJoin.get("id"), params.get("universityId")));
+            predicates.add(criteriaBuilder.equal(universityJoin.get("id"), Long.parseLong(params.get("universityId"))));
         }
 
         query.select(root).where(predicates.toArray(new Predicate[0]));

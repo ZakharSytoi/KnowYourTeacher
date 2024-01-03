@@ -56,18 +56,39 @@ export class SearchComponent implements OnInit {
         return searchRequest;
     }
     ngOnInit(): void {
-        this.search$ = this.searchService.search$(this.getSearchRequestFromCurrentRoot()).pipe(
-            map((response: Page<SearchedReviewDto>) => {
-                this.likesDislikes = response.content.map(review => ({
-                    likes: review.likeCount,
-                    dislikes: review.dislikeCount,
-                    isLiked: review.isLiked,
-                    isDisliked: review.isDisliked
-                }));
-                return ({searchState: 'LOADED', reviewsPage: response})}),
-            startWith({searchState: 'LOADING'}),
-            catchError(error=> of({searchState: 'ERROR', error: error}))
-        )
+        this.route.queryParams.subscribe({
+            next: params=>{
+                this.search$ = this.searchService.search$({
+                    teacherName: params['teacherName'],
+                    teacherSurname: params['teacherSurname'],
+                    subject: params['subject'],
+                    universityId: params['universityId']
+                }).pipe(
+                    map((response: Page<SearchedReviewDto>) => {
+                        this.likesDislikes = response.content.map(review => ({
+                            likes: review.likeCount,
+                            dislikes: review.dislikeCount,
+                            isLiked: review.isLiked,
+                            isDisliked: review.isDisliked
+                        }));
+                        return ({searchState: 'LOADED', reviewsPage: response})
+                    }),
+                    startWith({searchState: 'LOADING'}),
+                    catchError(error => of({searchState: 'ERROR', error: error})))
+            }
+        })
+        // this.search$ = this.searchService.search$(this.getSearchRequestFromCurrentRoot()).pipe(
+        //     map((response: Page<SearchedReviewDto>) => {
+        //         this.likesDislikes = response.content.map(review => ({
+        //             likes: review.likeCount,
+        //             dislikes: review.dislikeCount,
+        //             isLiked: review.isLiked,
+        //             isDisliked: review.isDisliked
+        //         }));
+        //         return ({searchState: 'LOADED', reviewsPage: response})}),
+        //     startWith({searchState: 'LOADING'}),
+        //     catchError(error=> of({searchState: 'ERROR', error: error}))
+        // )
 
     }
     goToPage(pageNumber: number): void {

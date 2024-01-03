@@ -6,6 +6,12 @@
             <ng-container *ngSwitchCase="'LOADED'">
                 <div class="review-container">
                     @for (review of state.reviewsPage?.content; track review.id; let i = $index) {
+                        <div class="teacher-info-container">
+                            <div class="link-container">
+                                <a routerLink="/teacher/{{ review.teacherId }}">{{ review.teacherName }} {{ review.teacherSurname }}</a>
+                                <div class="card-horizontal-line"></div>
+                            </div>
+                        </div>
                         <div class="review">
                             <div class="review-top">
                                 <div class="reviewer-info">
