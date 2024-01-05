@@ -17,15 +17,14 @@
 
 //---------Search Results header-------------
 
-.content-block .search-result-header-container{
+.content-block .search-result-header-container {
     display: flex;
     width: 85%;
     justify-content: start;
 }
 
-.content-block .search-result-header{
+.content-block .search-result-header {
     color: #398dca;
-
 }
 
 //-----------------------------------------------
@@ -37,7 +36,37 @@
     padding: 0 15px 15px 15px;
 }
 
+//------------empty search----------------
 
+.review-container .no-search-results-container {
+    display: flex;
+    flex-direction: column;
+    margin: 3%;
+}
+.review-container .no-search-results-container > span{
+    color: #398dca;
+    font-size: 17px;
+}
+.review-container .no-search-results-container > span >a{
+    color: #398dca;
+    font-weight: 700;
+}
+.review-container .no-search-results-container > span >a:hover{
+    text-decoration: underline;
+}
+.review-container .no-search-results-container .header {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+.review-container .no-search-results-container {
+    display: flex;
+    flex-direction: column;
+}
+.review-container .no-search-results-container {
+    display: flex;
+    flex-direction: column;
+}
+//-----------------------------------------------
 .review-container .review {
     display: flex;
     flex-direction: column;
@@ -66,25 +95,25 @@
     overflow: hidden;
 }
 
-.teacher-info-container .link-container >a{
-  color: #398dca;
-  font-size: 18px;
-  overflow: hidden;
-  text-wrap: nowrap;
-  font-weight: bold;
+.teacher-info-container .link-container > a {
+    color: #398dca;
+    font-size: 18px;
+    overflow: hidden;
+    text-wrap: nowrap;
+    font-weight: bold;
 }
-.teacher-info-container .link-container >a:hover{
-  text-decoration: underline;
+.teacher-info-container .link-container > a:hover {
+    text-decoration: underline;
 }
 
 .teacher-info-container .card-horizontal-line {
-  margin-top: 5px;
-  height: 0.5px;
-  width: 90%;
-  border-style: solid;
-  border-color: #00b7ef3f;
-  border-width: 0.5px;
-  border-radius: 100%;
+    margin-top: 5px;
+    height: 0.5px;
+    width: 90%;
+    border-style: solid;
+    border-color: #00b7ef3f;
+    border-width: 0.5px;
+    border-radius: 100%;
 }
 
 //-------review top-------
