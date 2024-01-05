@@ -4,6 +4,9 @@
     <div class="content-block">
         <ng-container *ngIf="search$ | async as state" [ngSwitch]="state.searchState">
             <ng-container *ngSwitchCase="'LOADED'">
+                <div class="search-result-header-container">
+                    <span class="search-result-header" [innerHTML]="constructSearchResultsText()"></span>
+                </div>
                 <div class="review-container">
                     @for (review of state.reviewsPage?.content; track review.id; let i = $index) {
                         <div class="teacher-info-container">
@@ -94,44 +97,48 @@
                                 </div>
                             </div>
                         </div>
+                    } @empty {
+                        EMPTY
                     }
                 </div>
-                <nav aria-label="Page navigation" style="margin-top: 20px; display: flex; justify-content: center">
-                    <ul class="pagination">
-                        <li class="page-item" [ngClass]="{ disabled: state.reviewsPage?.number === 0 }">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        @for (page of [].constructor(state.reviewsPage?.totalPages); track page; let i = $index) {
+                @if (state.reviewsPage!.numberOfElements > 0) {
+                    <nav aria-label="Page navigation" style="margin-top: 20px; display: flex; justify-content: center">
+                        <ul class="pagination">
+                            <li class="page-item" [ngClass]="{ disabled: state.reviewsPage?.number === 0 }">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            @for (page of [].constructor(state.reviewsPage?.totalPages); track page; let i = $index) {
+                                <li
+                                    class="page-item"
+                                    [ngClass]="{
+                                        disabled: state.reviewsPage?.number === i
+                                    }"
+                                >
+                                    <a
+                                        class="page-link"
+                                        (click)="goToPage(i)"
+                                        style="cursor: pointer"
+                                        [ngStyle]="{ 'background-color': state.reviewsPage?.number === i ? '#5ad8ff' : '' }"
+                                    >
+                                        {{ i + 1 }}
+                                    </a>
+                                </li>
+                            }
                             <li
                                 class="page-item"
                                 [ngClass]="{
-                                    disabled: state.reviewsPage?.number === i
+                                    disabled: state.reviewsPage?.number === state.reviewsPage?.totalPages! - 1
                                 }"
                             >
-                                <a
-                                    class="page-link"
-                                    (click)="goToPage(i)"
-                                    style="cursor: pointer"
-                                    [ngStyle]="{ 'background-color': state.reviewsPage?.number === i ? '#ebfafe' : '' }"
-                                >
-                                    {{ i + 1 }}
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
-                        }
-                        <li
-                            class="page-item"
-                            [ngClass]="{
-                                disabled: state.reviewsPage?.number === state.reviewsPage?.totalPages! - 1
-                            }"
-                        >
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
+                }
             </ng-container>
             <ng-container *ngSwitchCase="'LOADING'">
                 <div class="spinner-border" role="status" style="margin-top: 25%; color: #01a5d9ff">
