@@ -1,48 +1,55 @@
-# Course_Project_2023
+# KnowYourTeacher
 
-The introduction summarizes the purpose and function of the project, and should be concise (a brief paragraph or two).
-This introduction may be the same as the first paragraph on the project page.
+KnowYourTeacher is a web application where students can share reviews on their teachers, providing valuable insights to help future students understand what to expect.
 
-## Table of contents (optional)
+[![Java Version](https://img.shields.io/badge/Java-17-blue)](#)
+[![Spring Boot Version](https://img.shields.io/badge/Spring%20Boot-3.2.0-brightgreen)](#)
+[![Spring Security Version](https://img.shields.io/badge/Spring%20Security-6.2.0-orange)](#)
+[![Docker Compose](https://img.shields.io/badge/Docker%20Compose-supported-blue)](#)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-supported-blue)](#)
+[![Lombok](https://img.shields.io/badge/Lombok-1.18.20-blueviolet)](#)
+[![JJWT-API Version](https://img.shields.io/badge/JJWT--API-0.12.3-green)](#)
+[![MapStruct Version](https://img.shields.io/badge/MapStruct-1.5.5-red)](#)
 
-- Requirements
-- Recommended modules
-- Installation
-- Configuration
-- Troubleshooting
-- FAQ
-- Maintainers
+---
 
-## Requirements (required)
+# Usage:
+Visit the <a href="https://3.70.177.167:82/knowyourteacher-api/v1/teachers/topten"> API Endpoint </a> and accept the untrusted self-signed certificate.
 
-This module requires the following modules:
+Go to the <a href="http://3.70.177.167">Web Application</a>.
 
-- [Bad judgement](https://www.drupal.org/project/bad_judgement)
+---
 
-OR
+### Features
 
-This module requires no modules outside of Drupal core.
+- **Teacher Reviews:** Students can share and read reviews about their teachers, providing insights into teaching styles, helpfulness, and overall experience.
+  
+- **Top Ten Teachers:** A curated list of the top-rated teachers based on user reviews, helping students find the most respected and effective educators.
 
-## Recommended modules (optional)
+- **Secure Authentication:** Utilizes Spring Security for secure user authentication, ensuring that user data is protected and accessible only to authorized individuals.
 
-## Installation (required, unless a separate INSTALL.md is provided)
+- **API Integration:** Leverages Docker Compose to provide a seamless integration between the web application and the backend API, ensuring a robust and scalable system.
 
-Install as you would normally install a contributed Drupal module. For further information,
-see [Installing Drupal Modules](https://www.drupal.org/docs/extending-drupal/installing-drupal-modules).
+---
 
-## Configuration (required)
+### Roadmap
 
-1. Enable the module at Administration > Extend.
-1. Profit.
+#### Version 0.9.1 (Current Release)
+- Basic web application functionality.
+- Top Ten Teachers list.
+- Improved search and filtering options for teacher reviews.
+- **Teacher Cards Creation:** Users can create cards for teachers.
+- **Like and Dislike Reviews:** Users can express their opinion on reviews by liking or disliking them.
+- **Popular Reviews Priority:** Reviews are sorted to prioritize popular ones, enhancing the visibility of valuable insights.
 
-## Troubleshooting (optional)
+#### Version 0.9.2 (Upcoming Release)
+- Enhanced user profiles with additional information.
 
-## FAQ (optional)
 
-**Q: How do I write a module README?**
+---
 
-**A:** Follow this template. It's fun and easy!
+### Author
 
-## Maintainers (optional)
+This project was developed by Zakhar Sytoi.
 
-- Dries Buytaert - [dries](https://www.drupal.org/u/dries)
+[![License](https://img.shields.io/badge/License-Creative_Commons_Licenses-blue.svg)](LICENSE)
