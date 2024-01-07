@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "picture")
 @Data
 public class Picture {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @Column(name = "name")
     private String name;
     @Column(name = "type")
