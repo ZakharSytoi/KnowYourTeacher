@@ -12,9 +12,13 @@
                         @if (imagePreview) {
                             <img class="responsive-img h200" style="border-radius: 10px" [src]="imagePreview" *ngIf="imagePreview" alt="" />
                         } @else {
-                            <div class="img-placeholder-container" style="position: relative;">
+                            <div class="img-placeholder-container" style="position: relative">
                                 <img class="img-placeholder" src="assets/manIcon.svg" alt="" />
-                                <span style="color: #adadad; position: absolute; bottom: 35px; left: 38px; text-wrap: nowrap; font-size: 19px; font-weight: 700;">Teacher photo</span>
+                                <span
+                                    style="color: #adadad; position: absolute; bottom: 35px; left: 38px; text-wrap: nowrap; font-size: 19px; font-weight: 700"
+                                >
+                                    Teacher photo
+                                </span>
                             </div>
                         }
                     </div>
@@ -58,8 +62,52 @@
                 @if (getNameErrorStatus() || getSurnameErrorStatus()) {
                     <span style="color: #ef0000bd">Please fulfill all fields correctly and upload photo</span>
                 }
-                <button class="submitBtn" [disabled]="teacherData.invalid || getUniversityErrorStatus()" type="submit">Submit</button>
             </div>
         </form>
+        <div class="user-review-container" style="width: 100%; display: flex; justify-content: center">
+            <div class="review-container">
+                <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+                    <div class="form-top-container">
+                        <input
+                            class="subject-input"
+                            [ngClass]="{
+                                inputError: getSubjectErrorStatus()
+                            }"
+                            type="text"
+                            formControlName="subject"
+                            placeholder="subject"
+                            required
+                        />
+                        <div class="rating-container">
+                            <ngb-rating [max]="5" formControlName="score" [(rate)]="selected"></ngb-rating>
+                            <span>{{ selected }}</span>
+                        </div>
+                    </div>
+                    <div class="form-bottom-container">
+                        <label for="exampleFormControlTextarea1" class="form-label" style="opacity: 70%">Your review:</label>
+                        <textarea
+                            class="form-control"
+                            [ngClass]="{
+                                inputError: getReviewTextErrorStatus()
+                            }"
+                            formControlName="reviewText"
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                            style="box-shadow: none; border: 2px solid #bfedfb"
+                        ></textarea>
+                    </div>
+                    <div class="button-container">
+                        @if (getReviewTextErrorStatus() || getSubjectErrorStatus()) {
+                            <p class="fulfillmentError">
+                                Please fulfill all fields correctly
+                                <br />
+                                nd set reating :)
+                            </p>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button [disabled]="teacherData.invalid||reviewForm.invalid || getUniversityErrorStatus()" type="submit"  (click)="onSubmit()" class="submitBtn">Submit</button>
     </div>
 </main>
