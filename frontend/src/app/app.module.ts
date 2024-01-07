@@ -8,6 +8,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpAuthorizationInterceptorService} from "./services/http-authorization-interceptor.service";
 import {FooterComponent} from "./components/footer/footer.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ImageCropperModule} from "ngx-image-cropper";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     HttpClientModule,
     FooterComponent,
     NgbModule,
+    ImageCropperModule,
   ],
   providers: [provideClientHydration(),
     {
