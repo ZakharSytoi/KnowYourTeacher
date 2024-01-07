@@ -27,8 +27,11 @@ export class TeacherService {
 
     create$ = (teacherCreateRequestDto: TeacherCreateRequestDto, image: File): Observable<any> => {
         const fd = new FormData()
+        fd.append('name', teacherCreateRequestDto.name);
+        fd.append('surname', teacherCreateRequestDto.surname);
+        fd.append('universityId', teacherCreateRequestDto.universityId);
         fd.append('image', image, image.name)
-        return this.http.post(`${environment.BASE_API_URL}teachers/create`, fd)
+        return this.http.post<any>(`${environment.BASE_API_URL}teachers/create`, fd, { observe: 'response' })
     }
 
 
