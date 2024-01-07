@@ -5,35 +5,47 @@
             <span class="top-title">Teacher card creation</span>
         </div>
         <div class="card-horizontal-line"></div>
-        <form class="form" (ngSubmit)="onSubmit()">
+        <form class="form" [formGroup]="teacherData" (ngSubmit)="onSubmit()">
             <div class="form-content-container">
                 <div class="picture-upload-contatiner">
                     <div class="img-preview">
                         @if (imagePreview) {
-                            <img class="responsive-img h200" style="border-radius: 10px;" [src]="imagePreview" *ngIf="imagePreview" alt="" />
+                            <img class="responsive-img h200" style="border-radius: 10px" [src]="imagePreview" *ngIf="imagePreview" alt="" />
                         } @else {
-                            <div class="img-placeholder-container">
+                            <div class="img-placeholder-container" style="position: relative;">
                                 <img class="img-placeholder" src="assets/manIcon.svg" alt="" />
+                                <span style="color: #adadad; position: absolute; bottom: 35px; left: 38px; text-wrap: nowrap; font-size: 19px; font-weight: 700;">Teacher photo</span>
                             </div>
                         }
                     </div>
                     <input type="file" #input (change)="onFileUpload($event)" style="display: none" />
                     <div class="upload-button-container">
-<!--                        <i class="upload-img fa-solid fa-upload fa-lg" style="color: #ffffff"></i>-->
+                        <!--                        <i class="upload-img fa-solid fa-upload fa-lg" style="color: #ffffff"></i>-->
                         <button type="button" class="upload-button" (click)="triggerUpload()">
                             <i class="upload-img fa-solid fa-upload fa-lg" style="color: #ffffff"></i>
-                            Upload photo</button>
+                            Upload photo
+                        </button>
                     </div>
                 </div>
                 <div class="teacher-info-input-container">
-                    <div class="input-box">
-                        <input type="text" placeholder="Teacher name" required />
+                    <div
+                        class="input-box"
+                        [ngClass]="{
+                            error: getNameErrorStatus()
+                        }"
+                    >
+                        <input type="text" formControlName="name" placeholder="Teacher name" required />
+                    </div>
+                    <div
+                        class="input-box"
+                        [ngClass]="{
+                            error: getSurnameErrorStatus()
+                        }"
+                    >
+                        <input type="text" formControlName="surname" placeholder="Teacher surname" required />
                     </div>
                     <div class="input-box">
-                        <input type="text" placeholder="Teacher surname" required />
-                    </div>
-                    <div class="input-box">
-                        <select formControlName="university" class="form-select">
+                        <select formControlName="universityId" class="form-select">
                             <option>University</option>
                             <option *ngFor="let university of universityList" [value]="university.id">
                                 {{ university.name }}
@@ -42,7 +54,12 @@
                     </div>
                 </div>
             </div>
-            <button class="submitBtn" type="submit">Submit</button>
+            <div class="submitBtn-container">
+                @if (getNameErrorStatus() || getSurnameErrorStatus()) {
+                    <span style="color: #ef0000bd">Please fulfill all fields correctly and upload photo</span>
+                }
+                <button class="submitBtn" [disabled]="teacherData.invalid || getUniversityErrorStatus()" type="submit">Submit</button>
+            </div>
         </form>
     </div>
 </main>

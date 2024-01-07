@@ -15,8 +15,14 @@
     align-items: center;
 }
 
+.submitBtn-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .submitBtn {
-    margin-top: 30px;
+    
     background-color: #00b6ef;
     color: white;
     font-size: 18px;
@@ -179,4 +185,14 @@ input::placeholder {
   .form .input-box {
     width: 100%;
   }
+}
+//------------------ERROR HANDLING------------
+.form .error::after {
+  border-bottom: 2px solid #ef0000bd;
+}
+
+.form .submitBtn:disabled {
+  background-color: #baefff;
+  cursor: auto;
+  // visibility: hidden;
 }
