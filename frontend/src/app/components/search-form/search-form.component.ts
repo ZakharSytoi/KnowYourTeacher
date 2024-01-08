@@ -63,7 +63,6 @@ export class SearchFormComponent {
                         }
                 });
         } else {
-            console.log(this.searchForm.errors)
         }
     }
 

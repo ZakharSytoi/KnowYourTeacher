@@ -4,13 +4,22 @@ import {HeaderComponent} from "../../components/header/header.component";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {UniversityService} from "../../services/university.service";
 import {UniversityDto} from "../../models/UniversityDto";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    ReactiveFormsModule,
+    ValidationErrors,
+    ValidatorFn,
+    Validators
+} from "@angular/forms";
 import {TeacherService} from "../../services/teacher.service";
 import {response} from "express";
 import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
 import {ReviewService} from "../../services/review.service";
 import {HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {within} from "@popperjs/core/lib/utils/within";
 
 
 @Component({
@@ -22,13 +31,13 @@ import {Router} from "@angular/router";
 })
 export class TeacherCreationComponent {
     @ViewChild("input") inputRef!: ElementRef;
-    @ViewChild("input") submitRef!: ElementRef;
     teacherData: FormGroup;
     reviewForm: FormGroup;
     selected = 0;
     image!: File;
     imagePreview!: any;
     universityList: UniversityDto[];
+    imageValidation: { isImage: boolean, isSizeOk: boolean } = {isImage: false, isSizeOk: true};
 
     constructor(
         private universityService: UniversityService,
@@ -57,21 +66,65 @@ export class TeacherCreationComponent {
         });
     }
 
+    fileIsImage(type: string): boolean {
+
+        console.log(type)
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        return allowedTypes.includes(type);
+    }
+
+    validateImageSize(width: number, height: any, minWidth: number, maxWidth: number, minHeight: number, maxHeight: number): boolean {
+        console.log(`width: ${width}, height:${height}`)
+        return width >= minWidth && width <= maxWidth && height >= minHeight && height <= maxHeight && width / height >= 0.9 && width / height <= 1.1;
+    }
+
+    /*    if (width >= minWidth && width <= maxWidth && height >= minHeight && height <= maxHeight) {
+        resolve(null); // Image is valid
+    } else {
+        resolve({
+            invalidDimensions: {
+                currentWidth: width,
+                currentHeight: height,
+                expectedWidth: [minWidth, maxWidth],
+                expectedHeight: [minHeight, maxHeight],
+
+            }
+        });
+    }*/
     onFileUpload(event: any) {
         const file = event.target.files[0];
+        const src = event.target.result;
         this.image = file;
 
         const reader = new FileReader();
         reader.onload = () => {
-            this.imagePreview = reader.result;
+            const isImg = this.fileIsImage(file.type)
+            let isSizeOk = false
+
+            if (isImg) {
+                const img = new Image();
+                img.src = reader.result as string;
+                img.onload = () => {
+                    const height = img.naturalHeight;
+                    const width = img.naturalWidth;
+                    isSizeOk = this.validateImageSize(width, height, 100, 1000, 100, 1000);
+                    this.imageValidation = {
+                        isImage: isImg,
+                        isSizeOk: isSizeOk
+                    }
+                    if (isSizeOk && isImg) {
+                        this.imagePreview = reader.result;
+                    }else this.imagePreview = null
+                };
+            }
         };
         reader.readAsDataURL(file);
 
-        this.teacherData.patchValue({photo: file});
+        //this.teacherData.patchValue({photo: file});
     }
 
     onSubmit() {
-        if (this.teacherData.valid && this.reviewForm.valid) {
+        if (this.teacherData.valid && this.reviewForm.valid && this.imageValidation.isImage && this.imageValidation.isSizeOk) {
             this.teacherService
                 .create$(
                     {
@@ -140,4 +193,6 @@ export class TeacherCreationComponent {
                 this.reviewForm.controls["reviewText"].dirty)
         );
     }
+
+
 }

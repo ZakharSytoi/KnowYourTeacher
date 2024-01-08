@@ -22,13 +22,21 @@
                             </div>
                         }
                     </div>
-                    <input type="file" #input (change)="onFileUpload($event)" style="display: none" />
+                    <input type="file" #input formControlName="photo" (change)="onFileUpload($event)" style="display: none" />
                     <div class="upload-button-container">
                         <!--                        <i class="upload-img fa-solid fa-upload fa-lg" style="color: #ffffff"></i>-->
                         <button type="button" class="upload-button" (click)="triggerUpload()">
                             <i class="upload-img fa-solid fa-upload fa-lg" style="color: #ffffff"></i>
                             Upload photo
                         </button>
+                    </div>
+                    <div class="image-error-message" style="display: flex;">
+                        @if (!imageValidation.isImage) {
+                            <span style="color: #ef0000bd;"> Please upload image</span>
+                        }
+                        @if (!imageValidation.isSizeOk) {
+                            <span style="color: #ef0000bd; text-wrap: wrap; width: 200px; text-align: center;"> Please upload image of proper size (100x100 to 1000x1000) with aspect ratio ~ 1:1</span>
+                        }
                     </div>
                 </div>
                 <div class="teacher-info-input-container">
@@ -108,6 +116,8 @@
                 </form>
             </div>
         </div>
-        <button [disabled]="teacherData.invalid||reviewForm.invalid || getUniversityErrorStatus()" type="submit"  (click)="onSubmit()" class="submitBtn">Submit</button>
+        <button [disabled]="teacherData.invalid || reviewForm.invalid || getUniversityErrorStatus()" type="submit" (click)="onSubmit()" class="submitBtn">
+            Submit
+        </button>
     </div>
 </main>
