@@ -9,6 +9,7 @@ import {HttpAuthorizationInterceptorService} from "./services/http-authorization
 import {FooterComponent} from "./components/footer/footer.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {ImageCropperModule} from "ngx-image-cropper";
+import {AuthGuard} from "./auth.guard";
 
 @NgModule({
   declarations: [AppComponent],

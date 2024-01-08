@@ -7,6 +7,7 @@ import {TeacherPageComponent} from "./pages/teacher-page/teacher-page.component"
 import {SearchComponent} from "./pages/search/search.component";
 import {GuidesComponent} from "./pages/guides/guides.component";
 import {TeacherCreationComponent} from "./pages/teacher-creation/teacher-creation.component";
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
     {
         path: 'teacher/create',
         component: TeacherCreationComponent,
-        title: 'KnowYourTeacher'
+        title: 'KnowYourTeacher',
+        canActivate: [AuthGuard]
     },
     {
         path: 'teacher/:id',
