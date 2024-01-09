@@ -14,7 +14,7 @@ KnowYourTeacher is a web application where students can share reviews on their t
 ---
 
 ### Usage:
-Just visit <a href="[http://3.70.177.167](https://knowyourteacher.online/)">knowyourteacher.online</a>!.
+Just visit <a href="https://knowyourteacher.online/">knowyourteacher.online</a>!.
 
 ---
 
