@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {HeaderComponent} from "../../components/header/header.component";
-import {SearchComponent} from "../../components/search/search.component";
+import {SearchFormComponent} from "../../components/search-form/search-form.component";
 import {TopTeachersComponent} from "../../components/topteachers/top-teachers.component";
 
 
@@ -10,7 +10,7 @@ import {TopTeachersComponent} from "../../components/topteachers/top-teachers.co
     standalone: true,
     imports: [
         HeaderComponent,
-        SearchComponent,
+        SearchFormComponent,
         TopTeachersComponent
     ],
     templateUrl: './home.component.html',

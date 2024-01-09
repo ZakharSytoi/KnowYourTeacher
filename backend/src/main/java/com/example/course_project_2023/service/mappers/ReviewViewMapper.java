@@ -1,6 +1,7 @@
 package com.example.course_project_2023.service.mappers;
 
 import com.example.course_project_2023.repository.model.views.ReviewView;
+import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import com.example.course_project_2023.service.util.LikingUtil;
 import com.example.course_project_2023.service.dto.ReviewDto;
 import org.mapstruct.Context;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class ReviewViewMapper {
     @Autowired
     LikingUtil likingUtil;
+
     @Mappings({
             @Mapping(target = "likeLink",
                     expression = """
@@ -30,5 +32,26 @@ public abstract class ReviewViewMapper {
                     expression = "java( likingUtil.isDisliked(userId, reviewView.getId()); )")
     })
     public abstract ReviewDto reviewDtoFromReviewView(ReviewView reviewView, @Context Long userId);
+
+    @Mappings({
+            @Mapping(target = "teacherId", expression = "java( reviewView.getTeacher().getId() )"),
+            @Mapping(target = "teacherName", expression = "java( reviewView.getTeacher().getName() )"),
+            @Mapping(target = "teacherSurname", expression = "java( reviewView.getTeacher().getSurname() )"),
+            @Mapping(target = "likeLink",
+                    expression = """
+                            java( org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath()
+                                            .path("/knowyourteacher-api/v1/reviews/")
+                                            .path(reviewView.getId().toString()).path("/like").toUriString(); )"""),
+            @Mapping(target = "dislikeLink",
+                    expression = """
+                            java( org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath()
+                                            .path("/knowyourteacher-api/v1/reviews/")
+                                            .path(reviewView.getId().toString()).path("/dislike").toUriString(); )"""),
+            @Mapping(target = "isLiked",
+                    expression = "java( likingUtil.isLiked(userId, reviewView.getId()) )"),
+            @Mapping(target = "isDisliked",
+                    expression = "java( likingUtil.isDisliked(userId, reviewView.getId()); )")
+    })
+    public abstract SearchedReviewDto searchedReviewDtoFromReviewView(ReviewView reviewView, @Context Long userId);
 
 }

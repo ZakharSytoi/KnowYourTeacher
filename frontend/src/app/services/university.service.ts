@@ -5,13 +5,18 @@ import {UniversityDto} from "../models/UniversityDto";
 import {environment} from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UniversityService {
 
-  constructor(private readonly http: HttpClient) { }
+    constructor(private readonly http: HttpClient) {
+    }
 
-  public getUniversitiesList(): Observable<UniversityDto[]> {
-    return this.http.get<UniversityDto[]>(environment.BASE_API_URL + 'universities');
-  }
+    public getUniversitiesList(): Observable<UniversityDto[]> {
+        return this.http.get<UniversityDto[]>(environment.BASE_API_URL + 'universities');
+    }
+
+    public getUniversity(id: string): Observable<UniversityDto> {
+        return this.http.get<UniversityDto>(environment.BASE_API_URL + `universities/${id}`);
+    }
 }

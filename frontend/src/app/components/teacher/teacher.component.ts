@@ -12,7 +12,6 @@ import {ErrorComponent} from "../error/error.component";
 import {ShortReviewDto} from "../../models/ShortReviewDto";
 import {ReviewService} from "../../services/review.service";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {error} from "console";
 
 declare function initRatings(): void;
 

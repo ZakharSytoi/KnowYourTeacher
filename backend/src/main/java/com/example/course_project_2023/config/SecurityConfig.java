@@ -59,9 +59,10 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8077", "http://localhost:80", "http://3.70.177.167"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8077", "http://localhost:80", "https://knowyourteacher.online"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.addExposedHeader("Location");
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -80,6 +81,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/knowyourteacher-api/v1/reviews/{id:\\d+}/like").authenticated();
                     auth.requestMatchers("/knowyourteacher-api/v1/reviews/{id:\\d+}/dislike").authenticated();
                     auth.requestMatchers("/knowyourteacher-api/v1/teachers/{id:\\d+}/review").authenticated();
+                    auth.requestMatchers("/knowyourteacher-api/v1/teachers/create").authenticated();
                     auth.anyRequest().permitAll();
 
                 })

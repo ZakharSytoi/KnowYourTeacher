@@ -169,4 +169,4 @@ FROM RankedReviews
          JOIN university u on teacher.university_id = u.id
          JOIN picture p on teacher.picture_id = p.id
 WHERE rank = 1
-ORDER BY teacher.avg_score DESC;
+ORDER BY (teacher.avg_score * (SELECT count(*) FROM review WHERE review.teacher_id = RankedReviews.teacher_id)) DESC;

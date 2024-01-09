@@ -5,7 +5,7 @@ import {ReviewDto} from "../../models/ReviewDto";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {ReviewService} from "../../services/review.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {AsyncPipe, DatePipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {AsyncPipe, DatePipe, NgClass, NgIf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {ErrorComponent} from "../error/error.component";
 import {AuthService} from '../../services/auth.service';
 import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
@@ -20,6 +20,7 @@ import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
         NgSwitchCase,
         ErrorComponent,
         NgClass,
+        NgStyle,
         DatePipe,
         RouterLink,
         NgbRating
@@ -84,32 +85,33 @@ export class TeacherReviewsComponent implements OnInit {
         this.http.post(url, '').subscribe({
             error: error => console.log(error)
         })
-        console.log(url)
+        const item = this.likesDislikes[i];
+
         if (likeOrDislike) {
-            if (this.likesDislikes[i].isLiked) {
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes - 1;
-                this.likesDislikes[i].isLiked = false;
-            } else if (this.likesDislikes[i].isDisliked) {
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes - 1;
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes + 1;
-                this.likesDislikes[i].isLiked = true;
-                this.likesDislikes[i].isDisliked = false;
+            if (item.isLiked) {
+                item.likes--;
+                item.isLiked = false;
             } else {
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes + 1;
-                this.likesDislikes[i].isLiked = true;
+                item.likes++;
+                item.isLiked = true;
+
+                if (item.isDisliked) {
+                    item.dislikes--;
+                    item.isDisliked = false;
+                }
             }
         } else {
-            if (this.likesDislikes[i].isDisliked) {
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes - 1;
-                this.likesDislikes[i].isDisliked = false;
-            } else if (this.likesDislikes[i].isLiked) {
-                this.likesDislikes[i].likes = this.likesDislikes[i].likes - 1;
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes + 1;
-                this.likesDislikes[i].isLiked = false;
-                this.likesDislikes[i].isDisliked = true;
+            if (item.isDisliked) {
+                item.dislikes--;
+                item.isDisliked = false;
             } else {
-                this.likesDislikes[i].dislikes = this.likesDislikes[i].dislikes + 1;
-                this.likesDislikes[i].isDisliked = true;
+                item.dislikes++;
+                item.isDisliked = true;
+
+                if (item.isLiked) {
+                    item.likes--;
+                    item.isLiked = false;
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ import com.example.course_project_2023.repository.daos.TeacherRepository;
 import com.example.course_project_2023.repository.daos.UserRepository;
 import com.example.course_project_2023.repository.model.Review;
 import com.example.course_project_2023.service.dto.ReviewDto;
+import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import com.example.course_project_2023.service.dto.ShortReviewDto;
 import com.example.course_project_2023.service.exception.ReviewNotFoundException;
 import com.example.course_project_2023.service.exception.TeacherNotFoundException;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -85,5 +87,11 @@ public class ReviewService {
     @Transactional
     public void deleteUserReviewByTeacherId(Long teacherId) {
         reviewRepository.deleteByTeacherIdAndUserId(teacherId, userSecurityUtil.getUserIdFromContext());
+    }
+
+    public Page<SearchedReviewDto> findBySearchParams(int pageNumber, int pageSize, Map<String, String> searchParams) {
+        Long userId = userSecurityUtil.getUserIdFromContext();
+        return reviewViewRepository.findByParams(searchParams, PageRequest.of(pageNumber, pageSize))
+                .map((ent) -> reviewViewMapper.searchedReviewDtoFromReviewView(ent, userId));
     }
 }

@@ -1,0 +1,301 @@
+/* ---------CONTENT------------------------------------------------------------- */
+
+.content-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.content-block {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.submitBtn-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.submitBtn {
+    margin-top: 15px;
+    background-color: #00b6ef;
+    color: white;
+    font-size: 18px;
+    padding: 8px 100px;
+}
+.submitBtn:disabled {
+    background-color: #baefff;
+    cursor: auto;
+    // visibility: hidden;
+}
+
+//---------------TOP TITLE----------------------------
+
+.content-block .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+.content-block .card-horizontal-line {
+    height: 0.5px;
+    width: 90%;
+    border-style: solid;
+    border-color: #00b7ef3f;
+    border-width: 0.5px;
+    border-radius: 100%;
+}
+.content-block .top-title-container {
+    display: flex;
+    width: 80%;
+    margin: 20px 0 10px 0;
+}
+
+.content-block .top-title-container .top-title {
+    font-size: 30px;
+    color: #398dca;
+}
+
+//-------------FORM----------------------
+
+.content-block .form {
+    width: 100%;
+    margin: 15px 0;
+}
+.content-block .form .form-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+}
+
+//---------------UPLOAD CONTAINER-----------------
+
+.form-content-container .picture-upload-contatiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-content-container .picture-upload-contatiner .img-preview {
+    width: 180px;
+    height: 200px;
+}
+
+.picture-upload-contatiner .img-placeholder-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+.img-placeholder-container .img-placeholder {
+}
+
+.picture-upload-contatiner .upload-button-container {
+}
+
+.upload-button-container .upload-img {
+    pointer-events: none;
+}
+
+.picture-upload-contatiner .upload-button {
+    margin: 10px 0;
+    background-color: #00b6ef;
+    color: white;
+    font-size: 18px;
+    padding: 8px 25px;
+}
+
+//----------------TEACHER INFO CONTAINER------------
+
+.form .teacher-info-input-container {
+    margin-right: 30px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.teacher-info-input-container .iput-box {
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+    border-radius: 10px;
+    outline: none;
+    padding-left: 3%;
+}
+input::placeholder {
+    color: #8abfe2;
+    font-size: 18px;
+}
+
+.form .form-select {
+    border: none;
+    outline: none;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    color: rgb(120 188 233 / 86%);
+    font-size: 18px;
+    padding-left: 3%;
+    box-shadow: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2301a5d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form .input-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ebfafe;
+    text-align: center;
+    width: 100%;
+    height: 38px;
+    margin-top: 5%;
+}
+.form .input-box::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 6px;
+    right: 6px;
+    bottom: -1px;
+    border-bottom: 2px solid #00b7ef9c;
+    pointer-events: none;
+}
+
+@media (max-width: 730px) {
+    .content-block .form .form-content-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form .teacher-info-input-container {
+        margin-right: 0;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .form .input-box {
+        width: 100%;
+    }
+}
+
+// ----------------- REVIEW CONTAINER -----------------
+
+.review-container {
+    width: 70%;
+    border-style: solid;
+    border-color: #b5eeff;
+    border-width: 2px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.review-container .form-top-container .subject-input {
+    width: 50%;
+    height: 30px;
+    border: 2px solid #bfedfb;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 3%;
+    align-items: center;
+}
+//----------------- error class for ngClass---------------
+.review-container .inputError {
+    border: 2px solid #f38282 !important;
+}
+//--------------------------------------------
+.review-container .rating-container {
+    display: flex;
+    align-items: center;
+}
+.review-container .rating-container > span {
+    font-size: 23px;
+    padding-top: 3px;
+    margin-left: 5px;
+}
+
+.review-container .button-container {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    margin-top: 15px;
+}
+
+.review-container .button-container .fulfillmentError {
+    margin-right: auto;
+    color: #f38282;
+}
+
+.submit-button {
+    height: 40px;
+    width: 160px;
+    font-size: 24px;
+    background-color: #00b6ef;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    padding: 0 15px;
+    display: none;
+}
+
+.submit-button:disabled {
+    background-color: #baefff;
+    cursor: auto;
+    // visibility: hidden;
+}
+@media (max-width: 479px) {
+    .review-container .form-top-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .review-container .form-top-container .subject-input {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+.user-review-container {
+    margin: 10px 0;
+}
+
+.user-review-container .signInAlertText {
+    font-size: 19px;
+    color: #398dca;
+}
+
+.user-review-container .sign-in-link {
+    font-size: 19px;
+    color: #398dca;
+    font-weight: 600;
+}
+
+.user-review-container .sign-in-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+//--------------- NGB RATING ----------------------------------------
+ngb-rating {
+    color: rgb(255, 196, 0);
+    font-size: 30px;
+}
+
+//------------------ERROR HANDLING------------
+.form .error::after {
+    border-bottom: 2px solid #ef0000bd;
+}
+

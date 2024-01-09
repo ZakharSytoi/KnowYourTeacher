@@ -14,7 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -54,9 +57,20 @@ public class TeacherController {
     public ResponseEntity<ShortReviewDto> getUserReviewByTeacherId(@PathVariable Long teacherId) {
         return ResponseEntity.ok().body(reviewService.getUserReviewByTeacherId(teacherId));
     }
+    @PostMapping("/create")
+    public ResponseEntity<?> createTeacher(
+            @RequestParam("name") String name,
+            @RequestParam("surname") String surname,
+            @RequestParam("universityId") Long universityId,
+            @RequestParam("image") MultipartFile photo
+    ) throws IOException {
+        URI uri = teacherService.createTeacher(name, surname, universityId, photo);
+        System.out.println(uri);
+        return ResponseEntity.created(uri).build();
+    }
 
     @PostMapping("/{teacherId:\\d+}/review")
-    public ResponseEntity<ShortReviewDto> postUserReviewByTeacherId(@PathVariable Long teacherId,
+    public ResponseEntity<?> postUserReviewByTeacherId(@PathVariable Long teacherId,
                                                                     @RequestBody ShortReviewDto reviewDto) {
         return ResponseEntity.created(reviewService.createUserReviewByTeacherId(teacherId, reviewDto)).build();
     }

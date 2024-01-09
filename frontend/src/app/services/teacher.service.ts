@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {TeacherPreviewDto} from "../models/TeacherPreviewDto";
 import {TeacherCardDto} from "../models/TeacherCardDto";
 import {environment} from "../../environments/environment";
+import {TeacherCreateRequestDto} from "../models/TeacherCreateRequestDto";
 
 @Injectable({
     providedIn: 'root'
@@ -23,5 +24,15 @@ export class TeacherService {
 
     teacher$ = (id: string): Observable<TeacherCardDto> =>
         this.http.get<TeacherCardDto>(`${environment.BASE_API_URL}teachers/${id}`)
+
+    create$ = (teacherCreateRequestDto: TeacherCreateRequestDto, image: File): Observable<any> => {
+        const fd = new FormData()
+        fd.append('name', teacherCreateRequestDto.name);
+        fd.append('surname', teacherCreateRequestDto.surname);
+        fd.append('universityId', teacherCreateRequestDto.universityId);
+        fd.append('image', image, image.name)
+        return this.http.post<any>(`${environment.BASE_API_URL}teachers/create`, fd, { observe: 'response' })
+    }
+
 
 }

@@ -1,7 +1,8 @@
 package com.example.course_project_2023.repository.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,7 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "teacher")
 @EntityListeners(AuditingEntityListener.class)
 public class Teacher {

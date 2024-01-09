@@ -1,0 +1,25 @@
+<div class="search-from-container _container">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+        <div class="form-block">
+            <div class="input-box">
+                <input type="text" formControlName="teacherName" placeholder="Teacher name"/>
+            </div>
+            <div class="input-box">
+                <input type="text" formControlName="teacherSurname" placeholder="Teacher surname"/>
+            </div>
+            <div class="input-box">
+                <input type="text" formControlName="subject" placeholder="Subject" />
+            </div>
+            <div class="input-box">
+                <select formControlName="universityId" class="form-select">
+                    <option>University</option>
+                    <option *ngFor="let university of universityList" [value]="university.id">
+                        {{ university.name }}
+                    </option>
+                </select>
+            </div>
+            <button type="submit" class="find-Btn">Find!</button>
+        </div>
+    </form>
+    <div class="main-horizontal-line"></div>
+</div>
