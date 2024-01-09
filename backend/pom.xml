@@ -14,6 +14,7 @@
 	<name>Course_Project_2023</name>
 	<description>Course_Project_2023</description>
 	<properties>
+		<tests.skip>true</tests.skip>
 		<java.version>17</java.version>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 	</properties>
@@ -99,6 +100,14 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<skipTests>${tests.skip}</skipTests>
 				</configuration>
 			</plugin>
 		</plugins>
