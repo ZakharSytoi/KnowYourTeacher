@@ -14,9 +14,7 @@ KnowYourTeacher is a web application where students can share reviews on their t
 ---
 
 ### Usage:
-Visit the <a href="https://3.70.177.167:82/knowyourteacher-api/v1/teachers/topten"> API Endpoint </a> and accept the untrusted self-signed certificate.
-
-Go to the <a href="http://3.70.177.167">Web Application</a>.
+Just visit <a href="[http://3.70.177.167](https://knowyourteacher.online/)">knowyourteacher.online</a>!.
 
 ---
 
