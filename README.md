@@ -40,8 +40,29 @@ Just visit <a href="https://knowyourteacher.online/">knowyourteacher.online</a>!
 - **Like and Dislike Reviews:** Users can express their opinion on reviews by liking or disliking them.
 - **Popular Reviews Priority:** Reviews are sorted to prioritize popular ones, enhancing the visibility of valuable insights.
 
-#### Version 0.9.2 (Upcoming Release)
-- Enhanced user profiles with additional information.
+#### Version 0.9.2 )
+- Fulfill information pages
+ 
+#### Version 0.9.3 ) 
+- Vlaidation on the backend side
+
+#### Version 0.9.4 
+- User profiles with additional information.
+
+#### Version 0.9.5 
+- Modal windows before some actions
+
+#### Version 0.9.6 
+- Restrict number of teacher cards user can create
+
+#### Version 0.9.7 
+- Email validation.
+
+#### Version 0.9.8 
+- Admin mode
+  
+#### Version 0.9.9 
+- Ban functionality
 
 
 ---
