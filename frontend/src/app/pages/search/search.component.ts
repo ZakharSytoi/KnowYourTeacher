@@ -150,7 +150,6 @@ export class SearchComponent implements OnInit {
                 range: this.range(0, totalPages),
                 currentPage: currentPage
             }
-            console.log(this.currentRange);
         } else {
             let right = 0;
             let left = 0;
