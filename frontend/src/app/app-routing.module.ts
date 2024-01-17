@@ -8,6 +8,9 @@ import {SearchComponent} from "./pages/search/search.component";
 import {GuidesComponent} from "./pages/guides/guides.component";
 import {TeacherCreationComponent} from "./pages/teacher-creation/teacher-creation.component";
 import {AuthGuard} from "./auth.guard";
+import {AboutUsComponent} from "./pages/about-us/about-us.component";
+import {ContactsComponent} from "./pages/contacts/contacts.component";
+import {QandaComponent} from "./pages/qanda/qanda.component";
 
 const routes: Routes = [
     {
@@ -44,7 +47,22 @@ const routes: Routes = [
     {
         path: 'guides',
         component: GuidesComponent,
-        title: 'KnowYourTeacher'
+        title: 'Guides'
+    },
+    {
+        path: 'about-us',
+        component: AboutUsComponent,
+        title: 'About Us'
+    },
+    {
+        path: 'contact',
+        component: ContactsComponent,
+        title: 'Contact'
+    },
+    {
+        path: 'qa',
+        component: QandaComponent,
+        title: 'Q&A'
     },
     {
         path: '**',
