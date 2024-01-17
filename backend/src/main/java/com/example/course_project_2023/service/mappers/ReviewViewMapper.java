@@ -1,9 +1,9 @@
 package com.example.course_project_2023.service.mappers;
 
 import com.example.course_project_2023.repository.model.views.ReviewView;
+import com.example.course_project_2023.service.dto.ReviewDto;
 import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import com.example.course_project_2023.service.util.LikingUtil;
-import com.example.course_project_2023.service.dto.ReviewDto;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Mapper(componentModel = "spring")
 public abstract class ReviewViewMapper {
     @Autowired
-    LikingUtil likingUtil;
+    protected LikingUtil likingUtil;
 
     @Mappings({
             @Mapping(target = "likeLink",
