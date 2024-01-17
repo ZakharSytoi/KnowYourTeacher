@@ -3,7 +3,7 @@ import {HeaderComponent} from "../../components/header/header.component";
 import {SearchFormComponent} from "../../components/search-form/search-form.component";
 import {SearchService} from "../../services/search.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {catchError, lastValueFrom, map, Observable, of, startWith} from "rxjs";
+import {catchError, map, Observable, of, startWith} from "rxjs";
 import {Page} from "../../models/Page";
 import {SearchedReviewDto} from "../../models/SearchedReviewDto";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
@@ -11,9 +11,7 @@ import {SearchRequestDto} from "../../models/SearchRequestDto";
 import {AsyncPipe, DatePipe, NgClass, NgIf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {AuthService} from "../../services/auth.service";
 import {ErrorComponent} from "../../components/error/error.component";
-import * as timers from "timers";
 import {UniversityService} from "../../services/university.service";
-import {left} from "@popperjs/core";
 
 declare function initRatings(): void;
 
@@ -145,7 +143,6 @@ export class SearchComponent implements OnInit {
         Array.from({length: (stop - start)}, (_, i) => start + i);
 
     setCurrentRange(totalPages: number, currentPage: number) {
-
         if (totalPages <= 10) {
             this.currentRange = {
                 pagesToTheLeft: false,
@@ -179,30 +176,6 @@ export class SearchComponent implements OnInit {
                 range: this.range(left, right),
                 currentPage: currentPage
             }
-
-            /*if (currentPage <= 5) {
-                this.currentRange = {
-                    pagesToTheLeft: false,
-                    pagesToTheRight: true,
-                    range: this.range(0, currentPage + 5),
-                    currentPage: currentPage
-                }
-                console.log(this.currentRange);
-            } else {
-                let right = currentPage + 5
-                let left = currentPage - 5;
-                if (right >= totalPages) {
-                    left = currentPage - right + totalPages - 5;
-                    right = totalPages
-                }
-                this.currentRange = {
-                    pagesToTheLeft: true,
-                    pagesToTheRight: right !== totalPages,
-                    range: this.range(0, totalPages),
-                    currentPage: currentPage
-                }
-                console.log(this.currentRange);
-            }*/
         }
     }
 
