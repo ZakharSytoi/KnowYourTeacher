@@ -23,11 +23,6 @@
   font-size: 28px;
 
 }
-
-.__right {
-  text-align: right
-}
-
 .horizontal-line {
   height: 0.5px;
   width: 90%;
@@ -37,6 +32,12 @@
   border-radius: 100%;
   margin: 7px 0
 }
+
+.__right {
+  text-align: right
+}
+
+
 
 .block-container {
   display: flex;
