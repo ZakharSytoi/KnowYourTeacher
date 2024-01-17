@@ -34,15 +34,12 @@ export class SearchFormComponent {
 
         this.searchForm = new FormGroup({
             teacherName: new FormControl("", [
-                Validators.minLength(3),
                 Validators.maxLength(100),
             ]),
             teacherSurname: new FormControl("", [
-                Validators.minLength(3),
                 Validators.maxLength(100),
             ]),
             subject: new FormControl("", [
-                Validators.minLength(3),
                 Validators.maxLength(50),
             ]),
             universityId: new FormControl("University"),
@@ -67,11 +64,6 @@ export class SearchFormComponent {
     }
 
     getUniversityErrorStatus(): boolean {
-        if (
-            this.searchForm.controls["university"].value === "University"
-        ) {
-            return true;
-        }
-        return false;
+        return this.searchForm.controls["university"].value === "University";
     }
 }
