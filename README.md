@@ -14,9 +14,7 @@ KnowYourTeacher is a web application where students can share reviews on their t
 ---
 
 ### Usage:
-Visit the <a href="https://3.70.177.167:82/knowyourteacher-api/v1/teachers/topten"> API Endpoint </a> and accept the untrusted self-signed certificate.
-
-Go to the <a href="http://3.70.177.167">Web Application</a>.
+Just visit <a href="https://knowyourteacher.online/">knowyourteacher.online</a>!.
 
 ---
 
@@ -43,7 +41,28 @@ Go to the <a href="http://3.70.177.167">Web Application</a>.
 - **Popular Reviews Priority:** Reviews are sorted to prioritize popular ones, enhancing the visibility of valuable insights.
 
 #### Version 0.9.2 (Upcoming Release)
-- Enhanced user profiles with additional information.
+- Fulfill information pages
+ 
+#### Version 0.9.3 
+- Vlaidation on the backend side
+
+#### Version 0.9.4 
+- User profiles with additional information.
+
+#### Version 0.9.5 
+- Modal windows before some actions
+
+#### Version 0.9.6 
+- Restrict number of teacher cards user can create
+
+#### Version 0.9.7 
+- Email validation.
+
+#### Version 0.9.8 
+- Admin mode
+  
+#### Version 0.9.9 
+- Ban functionality
 
 
 ---
