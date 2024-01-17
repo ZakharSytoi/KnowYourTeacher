@@ -13,6 +13,7 @@ import {AuthService} from "../../services/auth.service";
 import {ErrorComponent} from "../../components/error/error.component";
 import * as timers from "timers";
 import {UniversityService} from "../../services/university.service";
+import {left} from "@popperjs/core";
 
 declare function initRatings(): void;
 
@@ -38,6 +39,7 @@ declare function initRatings(): void;
 export class SearchComponent implements OnInit {
 
     search$!: Observable<{ searchState: string, reviewsPage?: Page<SearchedReviewDto>, error?: HttpErrorResponse }>
+    currentRange!: { pagesToTheLeft: boolean, pagesToTheRight: boolean, range: number[], currentPage: number }
     likesDislikes!: { likes: number, dislikes: number, isLiked: boolean, isDisliked: boolean }[]
     currentSearchRequest!: SearchRequestDto;
     currentUniversityName!: string;
@@ -89,7 +91,7 @@ export class SearchComponent implements OnInit {
                     universityId: params['universityId']
                 }
                 if (params['universityId'] !== '') {
-                    this.universityService.getUniversity(params['universityId']).subscribe({next: uni=> this.currentUniversityName = uni.name})
+                    this.universityService.getUniversity(params['universityId']).subscribe({next: uni => this.currentUniversityName = uni.name})
                 }
                 this.search$ = this.searchService.search$(this.currentSearchRequest).pipe(
                     map((response: Page<SearchedReviewDto>) => {
@@ -99,6 +101,7 @@ export class SearchComponent implements OnInit {
                             isLiked: review.isLiked,
                             isDisliked: review.isDisliked
                         }));
+                        this.setCurrentRange(response.totalPages, response.number)
                         return ({searchState: 'LOADED', reviewsPage: response})
                     }),
                     startWith({searchState: 'LOADING'}),
@@ -130,11 +133,77 @@ export class SearchComponent implements OnInit {
                     isLiked: review.isLiked,
                     isDisliked: review.isDisliked
                 }));
+                this.setCurrentRange(response.totalPages, response.number)
                 return ({searchState: 'LOADED', reviewsPage: response})
             }),
             startWith({searchState: 'LOADING'}),
             catchError(error => of({searchState: 'ERROR', error: error}))
         )
+    }
+
+    range = (start: number, stop: number) =>
+        Array.from({length: (stop - start)}, (_, i) => start + i);
+
+    setCurrentRange(totalPages: number, currentPage: number) {
+
+        if (totalPages <= 10) {
+            this.currentRange = {
+                pagesToTheLeft: false,
+                pagesToTheRight: false,
+                range: this.range(0, totalPages),
+                currentPage: currentPage
+            }
+            console.log(this.currentRange);
+        } else {
+            let right = 0;
+            let left = 0;
+            let pagesToTheLeft = true;
+            let pagesToTheRight = true;
+            if (totalPages >= 10) {
+                right = currentPage + 5
+                left = currentPage - 4;
+                console.log('left: ' + left + ' right: ' + right)
+                if (left <= 0) {
+                    right = currentPage + 5 - left;
+                    left = 0;
+                    pagesToTheLeft = false;
+                } else if (right >= totalPages) {
+                    left = currentPage - right + totalPages - 4;
+                    right = totalPages
+                    pagesToTheRight = false;
+                }
+            }
+            this.currentRange = {
+                pagesToTheLeft: pagesToTheLeft,
+                pagesToTheRight: pagesToTheRight,
+                range: this.range(left, right),
+                currentPage: currentPage
+            }
+
+            /*if (currentPage <= 5) {
+                this.currentRange = {
+                    pagesToTheLeft: false,
+                    pagesToTheRight: true,
+                    range: this.range(0, currentPage + 5),
+                    currentPage: currentPage
+                }
+                console.log(this.currentRange);
+            } else {
+                let right = currentPage + 5
+                let left = currentPage - 5;
+                if (right >= totalPages) {
+                    left = currentPage - right + totalPages - 5;
+                    right = totalPages
+                }
+                this.currentRange = {
+                    pagesToTheLeft: true,
+                    pagesToTheRight: right !== totalPages,
+                    range: this.range(0, totalPages),
+                    currentPage: currentPage
+                }
+                console.log(this.currentRange);
+            }*/
+        }
     }
 
     goNextOrGoPrev(direction: boolean, actualPageNumber: number) {
