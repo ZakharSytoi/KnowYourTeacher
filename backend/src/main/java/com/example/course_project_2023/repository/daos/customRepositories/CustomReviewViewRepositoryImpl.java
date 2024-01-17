@@ -45,6 +45,8 @@ public class CustomReviewViewRepositoryImpl implements CustomReviewViewRepositor
 
         query.select(root).where(predicates.toArray(new Predicate[0]));
         List<ReviewView> resultList = entityManager.createQuery(query).getResultList();
-        return new PageImpl<>(resultList, pageRequest, resultList.size());
+        int start = (int) pageRequest.getOffset();
+        int end = Math.min((start + pageRequest.getPageSize()), resultList.size());
+        return new PageImpl<>(resultList.subList(start, end), pageRequest, resultList.size());
     }
 }
