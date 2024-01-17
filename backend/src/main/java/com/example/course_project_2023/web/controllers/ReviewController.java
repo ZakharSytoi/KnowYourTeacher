@@ -16,7 +16,7 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping()
-    public ResponseEntity<Page<SearchedReviewDto>> getTeacherReviews(
+    public ResponseEntity<Page<SearchedReviewDto>> findReviewsByParams(
             @RequestParam(required = false, defaultValue = "0") int pageNumber,
             @RequestParam(required = false, defaultValue = "10") int pageSize,
             @RequestParam Map<String, String> searchParams) {
