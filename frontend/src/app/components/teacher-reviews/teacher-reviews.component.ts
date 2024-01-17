@@ -31,6 +31,7 @@ import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
 export class TeacherReviewsComponent implements OnInit {
     reviewsState$!: Observable<{ reviewsState: string, reviewsPage?: Page<ReviewDto>, error?: HttpErrorResponse }>
     likesDislikes!: { likes: number, dislikes: number, isLiked: boolean, isDisliked: boolean }[]
+    currentRange!: { pagesToTheLeft: boolean, pagesToTheRight: boolean, range: number[], currentPage: number }
 
     constructor(private readonly reviewsService: ReviewService,
                 private readonly route: ActivatedRoute,
@@ -50,6 +51,7 @@ export class TeacherReviewsComponent implements OnInit {
                         isLiked: review.isLiked,
                         isDisliked: review.isDisliked
                     }));
+                    this.setCurrentRange(response.totalPages, response.number)
                     return ({reviewsState: 'LOADED', reviewsPage: response})
                 }),
                 startWith({reviewsState: 'LOADING'}),
@@ -69,6 +71,7 @@ export class TeacherReviewsComponent implements OnInit {
                         isLiked: review.isLiked,
                         isDisliked: review.isDisliked
                     }));
+                    this.setCurrentRange(response.totalPages, response.number)
                     return ({reviewsState: 'LOADED', reviewsPage: response})
                 }),
                 startWith({reviewsState: 'LOADING'}),
@@ -79,6 +82,46 @@ export class TeacherReviewsComponent implements OnInit {
 
     goNextOrGoPrev(direction: boolean, actualPageNumber: number) {
         if (direction) this.goToPage(actualPageNumber + 1)
+    }
+
+    range = (start: number, stop: number) =>
+        Array.from({length: (stop - start)}, (_, i) => start + i);
+
+    setCurrentRange(totalPages: number, currentPage: number) {
+        if (totalPages <= 10) {
+            this.currentRange = {
+                pagesToTheLeft: false,
+                pagesToTheRight: false,
+                range: this.range(0, totalPages),
+                currentPage: currentPage
+            }
+            console.log(this.currentRange);
+        } else {
+            let right = 0;
+            let left = 0;
+            let pagesToTheLeft = true;
+            let pagesToTheRight = true;
+            if (totalPages >= 10) {
+                right = currentPage + 5
+                left = currentPage - 4;
+                console.log('left: ' + left + ' right: ' + right)
+                if (left <= 0) {
+                    right = currentPage + 5 - left;
+                    left = 0;
+                    pagesToTheLeft = false;
+                } else if (right >= totalPages) {
+                    left = currentPage - right + totalPages - 4;
+                    right = totalPages
+                    pagesToTheRight = false;
+                }
+            }
+            this.currentRange = {
+                pagesToTheLeft: pagesToTheLeft,
+                pagesToTheRight: pagesToTheRight,
+                range: this.range(left, right),
+                currentPage: currentPage
+            }
+        }
     }
 
     handleLikeOrDislike(url: string, i: number, likeOrDislike: boolean) {

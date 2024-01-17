@@ -88,25 +88,32 @@
         </div>
         <nav aria-label="Page navigation" style="margin-top: 20px; display: flex; justify-content: center">
             <ul class="pagination">
+                @if (currentRange.pagesToTheLeft) {
+                    <li class="page-item" [ngClass]="{ disabled: state.reviewsPage?.number === 0 }">
+                        <a class="page-link" (click)="goToPage(0)" onmouseover="this.style.cursor='pointer'" aria-label="Previous">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+                }
                 <li class="page-item" [ngClass]="{ disabled: state.reviewsPage?.number === 0 }">
                     <a class="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                @for (page of [].constructor(state.reviewsPage?.totalPages); track page; let i = $index) {
+                @for (item of currentRange.range; track item) {
                     <li
                         class="page-item"
                         [ngClass]="{
-                            disabled: state.reviewsPage?.number === i
+                            disabled: state.reviewsPage?.number === item
                         }"
                     >
                         <a
                             class="page-link"
-                            (click)="goToPage(i)"
+                            (click)="goToPage(item)"
                             style="cursor: pointer"
-                            [ngStyle]="{ 'background-color': state.reviewsPage?.number === i ? '#ebfafe' : '' }"
+                            [ngStyle]="{ 'background-color': state.reviewsPage?.number === item ? '#ebfafe' : '' }"
                         >
-                            {{ i + 1 }}
+                            {{ item + 1 }}
                         </a>
                     </li>
                 }
@@ -120,6 +127,13 @@
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
+                @if (currentRange.pagesToTheRight) {
+                    <li class="page-item">
+                        <a class="page-link" (click)="goToPage(state.reviewsPage!.totalPages-1)" onmouseover="this.style.cursor='pointer'" aria-label="Previous">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                }
             </ul>
         </nav>
     </ng-container>
