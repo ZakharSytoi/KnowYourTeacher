@@ -7,10 +7,8 @@ import com.example.course_project_2023.service.dto.ReviewDto;
 import com.example.course_project_2023.service.dto.ShortReviewDto;
 import com.example.course_project_2023.service.dto.TeacherCardDto;
 import com.example.course_project_2023.service.dto.TeacherPreviewDto;
-import com.example.course_project_2023.service.exception.ReviewNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -81,8 +79,5 @@ public class TeacherController {
         return ResponseEntity.noContent().build();
     }
 
-    @ExceptionHandler(ReviewNotFoundException.class)
-    ResponseEntity<?> handleReviewNotFoundException(ReviewNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
+
 }

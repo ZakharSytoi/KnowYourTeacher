@@ -2,10 +2,9 @@ package com.example.course_project_2023.service;
 
 import com.example.course_project_2023.repository.daos.UniversityRepository;
 import com.example.course_project_2023.service.dto.UniversityDto;
-import com.example.course_project_2023.service.exception.UniversityNotFoundException;
+import com.example.course_project_2023.service.exception.notFound.UniversityNotFoundException;
 import com.example.course_project_2023.service.mappers.UniversityMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
