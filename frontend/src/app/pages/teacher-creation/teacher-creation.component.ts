@@ -4,22 +4,12 @@ import {HeaderComponent} from "../../components/header/header.component";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {UniversityService} from "../../services/university.service";
 import {UniversityDto} from "../../models/UniversityDto";
-import {
-    AbstractControl,
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    ValidationErrors,
-    ValidatorFn,
-    Validators
-} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TeacherService} from "../../services/teacher.service";
-import {response} from "express";
 import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
 import {ReviewService} from "../../services/review.service";
 import {HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {within} from "@popperjs/core/lib/utils/within";
 
 
 @Component({
@@ -61,7 +51,7 @@ export class TeacherCreationComponent {
 
         this.reviewForm = new FormGroup({
             subject: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-            reviewText: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(325)]),
+            reviewText: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]),
             score: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
         });
     }

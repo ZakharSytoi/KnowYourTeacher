@@ -45,7 +45,7 @@ export class TeacherComponent implements OnInit {
     ) {
         this.reviewForm = new FormGroup({
             subject: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-            reviewText: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(325)]),
+            reviewText: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]),
             score: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
         });
     }
