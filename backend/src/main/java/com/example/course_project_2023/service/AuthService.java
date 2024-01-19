@@ -5,7 +5,7 @@ import com.example.course_project_2023.repository.daos.UserRepository;
 import com.example.course_project_2023.repository.model.SecurityUser;
 import com.example.course_project_2023.repository.model.User;
 import com.example.course_project_2023.service.dto.UserLoginDtoRequest;
-import com.example.course_project_2023.service.dto.UserRegistrationDtoRequest;
+import com.example.course_project_2023.service.dto.UserRegisterDtoRequest;
 import com.example.course_project_2023.service.exception.UserWithEmailAlreadyExistsException;
 import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
 import com.example.course_project_2023.service.security.UserDetailServiceImpl;
@@ -44,7 +44,7 @@ public class AuthService {
         return jwtUtil.generateToken(userDetails);
     }
     @Transactional
-    public void registerUser(UserRegistrationDtoRequest request) throws UserWithEmailAlreadyExistsException, UserWithNicknameAlreadyExistsException {
+    public void registerUser(UserRegisterDtoRequest request) throws UserWithEmailAlreadyExistsException, UserWithNicknameAlreadyExistsException {
         if(securityUserService.findByEmail(request.email()).isPresent()){
             throw new UserWithEmailAlreadyExistsException(String.format("User with email %s already exists.", request.email()));
         }

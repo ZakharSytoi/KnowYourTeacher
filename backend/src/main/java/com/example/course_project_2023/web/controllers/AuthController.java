@@ -3,7 +3,7 @@ package com.example.course_project_2023.web.controllers;
 import com.example.course_project_2023.service.AuthService;
 import com.example.course_project_2023.service.dto.JwtResponse;
 import com.example.course_project_2023.service.dto.UserLoginDtoRequest;
-import com.example.course_project_2023.service.dto.UserRegistrationDtoRequest;
+import com.example.course_project_2023.service.dto.UserRegisterDtoRequest;
 import com.example.course_project_2023.service.exception.UserWithEmailAlreadyExistsException;
 import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserRegistrationDtoRequest userDtoRequest) throws UserWithEmailAlreadyExistsException, UserWithNicknameAlreadyExistsException {
+    public ResponseEntity<?> register(@RequestBody UserRegisterDtoRequest userDtoRequest) throws UserWithEmailAlreadyExistsException, UserWithNicknameAlreadyExistsException {
         authService.registerUser(userDtoRequest);
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
     }
