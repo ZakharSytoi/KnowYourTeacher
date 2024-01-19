@@ -4,7 +4,7 @@ import com.example.course_project_2023.repository.daos.UniversityRepository;
 import com.example.course_project_2023.repository.daos.UserRepository;
 import com.example.course_project_2023.repository.model.SecurityUser;
 import com.example.course_project_2023.repository.model.User;
-import com.example.course_project_2023.service.dto.LoginUserDtoRequest;
+import com.example.course_project_2023.service.dto.UserLoginDtoRequest;
 import com.example.course_project_2023.service.dto.UserRegistrationDtoRequest;
 import com.example.course_project_2023.service.exception.UserWithEmailAlreadyExistsException;
 import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
@@ -32,15 +32,15 @@ public class AuthService {
     private final UserRepository userRepository;
     private final UniversityRepository universityRepository;
     private final UserService userService;
-    public String authenticateUser(LoginUserDtoRequest loginUserDtoRequest){
+    public String authenticateUser(UserLoginDtoRequest userLoginDtoRequest){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginUserDtoRequest.getUsername(),
-                        loginUserDtoRequest.getPassword()
+                        userLoginDtoRequest.getUsername(),
+                        userLoginDtoRequest.getPassword()
                 )
         );
         UserDetails userDetails = userDetailService.loadUserByUsername(
-                loginUserDtoRequest.getUsername());
+                userLoginDtoRequest.getUsername());
         return jwtUtil.generateToken(userDetails);
     }
     @Transactional

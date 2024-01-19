@@ -2,7 +2,7 @@ package com.example.course_project_2023.web.controllers;
 
 import com.example.course_project_2023.service.AuthService;
 import com.example.course_project_2023.service.dto.JwtResponse;
-import com.example.course_project_2023.service.dto.LoginUserDtoRequest;
+import com.example.course_project_2023.service.dto.UserLoginDtoRequest;
 import com.example.course_project_2023.service.dto.UserRegistrationDtoRequest;
 import com.example.course_project_2023.service.exception.UserWithEmailAlreadyExistsException;
 import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
@@ -18,7 +18,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginUserDtoRequest loginUserDto) {
+    public ResponseEntity<?> login(@RequestBody UserLoginDtoRequest loginUserDto) {
         return ResponseEntity.ok(new JwtResponse(authService.authenticateUser(loginUserDto)));
     }
 
