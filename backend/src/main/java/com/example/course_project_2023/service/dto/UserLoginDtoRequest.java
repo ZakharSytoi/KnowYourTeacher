@@ -7,12 +7,11 @@ import org.hibernate.validator.constraints.Length;
 
 @Data
 public class UserLoginDtoRequest {
-    @NotNull
-    @Email
+    @NotNull(message = "email can not be null")
+    @Email(message = "email value must be a valid email address")
     @Length(max = 30)
     private String username;
-    @NotNull
-    @Email
-    @Length(max = 30)
+    @NotNull(message = "password can not be null")
+    @Length(max = 30, message =  "password length must not exceed 30 characters")
     private String password;
 }
