@@ -7,10 +7,17 @@ import com.example.course_project_2023.service.dto.ReviewDto;
 import com.example.course_project_2023.service.dto.ShortReviewDto;
 import com.example.course_project_2023.service.dto.TeacherCardDto;
 import com.example.course_project_2023.service.dto.TeacherPreviewDto;
+import com.example.course_project_2023.service.vlidation.ImageResolution;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +27,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/knowyourteacher-api/v1/teachers")
 public class TeacherController {
     private final TeacherWithMostPopularReviewService teacherWithMostPopularReviewService;
@@ -55,11 +63,18 @@ public class TeacherController {
     public ResponseEntity<ShortReviewDto> getUserReviewByTeacherId(@PathVariable Long teacherId) {
         return ResponseEntity.ok().body(reviewService.getUserReviewByTeacherId(teacherId));
     }
+
     @PostMapping("/create")
     public ResponseEntity<?> createTeacher(
+            @Length(min = 2, max = 50, message = "name length must be between 2 and 50 characters")
             @RequestParam("name") String name,
+            @Length(min = 2, max = 50, message = "surname length must be between 2 and 50 characters")
             @RequestParam("surname") String surname,
+            @Min(value = 0, message = "universityId value must be greater then or equal 0")
+            @Max(value = 10000, message = "universityId value must not exceed 10000")
             @RequestParam("universityId") Long universityId,
+            @Valid
+            @ImageResolution(minWidth = 100, minHeight = 100, maxWidth = 1000, maxHeight = 1000)
             @RequestParam("image") MultipartFile photo
     ) throws IOException {
         URI uri = teacherService.createTeacher(name, surname, universityId, photo);
@@ -69,7 +84,7 @@ public class TeacherController {
 
     @PostMapping("/{teacherId:\\d+}/review")
     public ResponseEntity<?> postUserReviewByTeacherId(@PathVariable Long teacherId,
-                                                                    @RequestBody ShortReviewDto reviewDto) {
+                                                       @RequestBody ShortReviewDto reviewDto) {
         return ResponseEntity.created(reviewService.createUserReviewByTeacherId(teacherId, reviewDto)).build();
     }
 
