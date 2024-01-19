@@ -1,20 +1,12 @@
-import { Component } from "@angular/core";
-import { ShortHeaderComponent } from "../../components/short-header/short-header.component";
-import { NgStyle, NgClass } from "@angular/common";
-import { RouterModule } from "@angular/router";
-import { Router } from "@angular/router";
-import {
-    FormGroup,
-    FormControl,
-    ReactiveFormsModule,
-    Validators,
-} from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
-import { UserLoginRequestDto } from "../../models/UserLoginRequestDto";
-import { JwtResponseDto } from "../../models/JwtResponseDto";
-import { catchError } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
-import { error } from "console";
+import {Component} from "@angular/core";
+import {ShortHeaderComponent} from "../../components/short-header/short-header.component";
+import {NgClass, NgStyle} from "@angular/common";
+import {Router, RouterModule} from "@angular/router";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators,} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
+import {UserLoginRequestDto} from "../../models/UserLoginRequestDto";
+import {JwtResponseDto} from "../../models/JwtResponseDto";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: "app-login",
