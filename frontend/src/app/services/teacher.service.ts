@@ -30,7 +30,7 @@ export class TeacherService {
         fd.append('name', teacherCreateRequestDto.name);
         fd.append('surname', teacherCreateRequestDto.surname);
         fd.append('universityId', teacherCreateRequestDto.universityId);
-        fd.append('image', image, image.name)
+        fd.append('image', new Blob([image], { type: image.type }), image.name)
         return this.http.post<any>(`${environment.BASE_API_URL}teachers/create`, fd, { observe: 'response' })
     }
 
