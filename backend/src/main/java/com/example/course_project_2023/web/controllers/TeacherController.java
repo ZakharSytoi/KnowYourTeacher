@@ -11,7 +11,6 @@ import com.example.course_project_2023.service.vlidation.ImageResolution;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Page;
@@ -84,7 +83,7 @@ public class TeacherController {
 
     @PostMapping("/{teacherId:\\d+}/review")
     public ResponseEntity<?> postUserReviewByTeacherId(@PathVariable Long teacherId,
-                                                       @RequestBody ShortReviewDto reviewDto) {
+                                                       @RequestBody @Valid ShortReviewDto reviewDto) {
         return ResponseEntity.created(reviewService.createUserReviewByTeacherId(teacherId, reviewDto)).build();
     }
 
