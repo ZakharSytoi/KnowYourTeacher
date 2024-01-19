@@ -53,12 +53,12 @@ export class RegisterComponent {
             email: new FormControl("", [
                 Validators.required,
                 Validators.email,
-                Validators.maxLength(30),
+                Validators.maxLength(60),
             ]),
             nickname: new FormControl("", [
                 Validators.required,
                 Validators.minLength(6),
-                Validators.maxLength(20),
+                Validators.maxLength(30),
             ]),
             university: new FormControl("Choose University", [
                 Validators.required,
@@ -76,7 +76,7 @@ export class RegisterComponent {
             repeatedPassword: new FormControl("", [
                 Validators.required,
                 Validators.minLength(8),
-                Validators.maxLength(30),
+                Validators.maxLength(30)
             ]),
         });
     }
