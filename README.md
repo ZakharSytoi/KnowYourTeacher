@@ -40,7 +40,7 @@ Just visit <a href="https://knowyourteacher.online/">knowyourteacher.online</a>!
 - **Like and Dislike Reviews:** Users can express their opinion on reviews by liking or disliking them.
 - **Popular Reviews Priority:** Reviews are sorted to prioritize popular ones, enhancing the visibility of valuable insights.
 
-✅ #### Version 0.9.2 (Upcoming Release)
+✅ #### Version 0.9.2
 - Fulfill information pages
  
 ✅ #### Version 0.9.3 
@@ -49,7 +49,7 @@ Just visit <a href="https://knowyourteacher.online/">knowyourteacher.online</a>!
 ✅ #### Version 0.9.3.5 
 - Mainpage redisign 
 
-#### Version 0.9.4 
+#### Version 0.9.4 (Upcoming Release)
 - User profiles with additional information.
 
 #### Version 0.9.5 
