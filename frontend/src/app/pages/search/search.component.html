@@ -1,5 +1,7 @@
 <app-header></app-header>
 <app-search-form></app-search-form>
+<div class="main-horizontal-line"></div>
+
 <main class="content-container _container">
     <div class="content-block">
         <ng-container *ngIf="search$ | async as state" [ngSwitch]="state.searchState">

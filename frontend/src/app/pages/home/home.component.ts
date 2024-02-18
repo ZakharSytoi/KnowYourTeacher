@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {HeaderComponent} from "../../components/header/header.component";
 import {SearchFormComponent} from "../../components/search-form/search-form.component";
 import {TopTeachersComponent} from "../../components/topteachers/top-teachers.component";
+import {WelcomeComponent} from "../../components/welcome/welcome.component";
 
 
 @Component({
@@ -11,7 +12,8 @@ import {TopTeachersComponent} from "../../components/topteachers/top-teachers.co
     imports: [
         HeaderComponent,
         SearchFormComponent,
-        TopTeachersComponent
+        TopTeachersComponent,
+        WelcomeComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'

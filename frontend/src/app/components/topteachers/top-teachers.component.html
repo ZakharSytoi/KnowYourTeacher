@@ -1,11 +1,14 @@
 <div class="content-container _container">
     <div class="content-block">
+        <div style="display: flex; width: 100%; padding: 15px" class="top-teachers-header-container">
+            <span class="top-ten-header-text">Our Top 10 most popular teachers:</span>
+        </div>
         <div *ngFor="let teacher of topTeachersList" class="teacher-card">
             <div class="teacher-card-content-container">
                 <div class="teacher-photo">
                     <img
-                        src="{{teacher.teacherPictureUri}}"
-                        alt="teacherPhoto"
+                            src="{{teacher.teacherPictureUri}}"
+                            alt="teacherPhoto"
                     />
                 </div>
                 <div class="card-content">
@@ -24,38 +27,38 @@
                             <div class="rating">
                                 <div class="rating-body">
                                     <div
-                                        class="rating-active"
+                                            class="rating-active"
                                     ></div>
                                     <div class="rating-items">
                                         <input
-                                            type="radio"
-                                            class="rating-item"
-                                            value="1"
-                                            name="rating"
+                                                type="radio"
+                                                class="rating-item"
+                                                value="1"
+                                                name="rating"
                                         />
                                         <input
-                                            type="radio"
-                                            class="rating-item"
-                                            value="2"
-                                            name="rating"
+                                                type="radio"
+                                                class="rating-item"
+                                                value="2"
+                                                name="rating"
                                         />
                                         <input
-                                            type="radio"
-                                            class="rating-item"
-                                            value="3"
-                                            name="rating"
+                                                type="radio"
+                                                class="rating-item"
+                                                value="3"
+                                                name="rating"
                                         />
                                         <input
-                                            type="radio"
-                                            class="rating-item"
-                                            value="4"
-                                            name="rating"
+                                                type="radio"
+                                                class="rating-item"
+                                                value="4"
+                                                name="rating"
                                         />
                                         <input
-                                            type="radio"
-                                            class="rating-item"
-                                            value="5"
-                                            name="rating"
+                                                type="radio"
+                                                class="rating-item"
+                                                value="5"
+                                                name="rating"
                                         />
                                     </div>
                                 </div>
@@ -68,7 +71,7 @@
                     <div class="card-horizontal-line"></div>
                     <div class="card-content-bottom">
                         <span class="defaultText"
-                            >Most popular review:</span
+                        >Most popular review:</span
                         >
                         <div class="review-container">
                             <p class="review-text">

@@ -11,6 +11,16 @@
     flex-direction: column;
     align-items: center;
 }
+.top-ten-header-text {
+    font-size: 40px;
+    color: #398dca;
+}
+
+@media (max-width: 479px) {
+    .top-ten-header-text {
+        font-size: 26px;
+    }
+}
 /* ---------TEACHER-CARD------------------------------------------------------------- */
 
 .teacher-card {
