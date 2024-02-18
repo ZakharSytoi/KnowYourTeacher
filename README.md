@@ -45,6 +45,9 @@ Just visit <a href="https://knowyourteacher.online/">knowyourteacher.online</a>!
  
 ✅ #### Version 0.9.3 
 - Vlaidation on the backend side
+  
+✅ #### Version 0.9.3.5 
+- Mainpage redisign 
 
 #### Version 0.9.4 
 - User profiles with additional information.
