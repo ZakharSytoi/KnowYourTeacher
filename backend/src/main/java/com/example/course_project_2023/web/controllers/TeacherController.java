@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -61,6 +62,14 @@ public class TeacherController {
     @GetMapping("/{teacherId:\\d+}/review")
     public ResponseEntity<ShortReviewDto> getUserReviewByTeacherId(@PathVariable Long teacherId) {
         return ResponseEntity.ok().body(reviewService.getUserReviewByTeacherId(teacherId));
+    }
+
+    @GetMapping()
+    public ResponseEntity<Page<TeacherPreviewDto>> findTeachersByParams(
+            @RequestParam(required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(required = false, defaultValue = "10") int pageSize,
+            @RequestParam Map<String, String> searchParams) {
+        return ResponseEntity.ok().body(teacherWithMostPopularReviewService.findBySearchParams(pageNumber, pageSize, searchParams));
     }
 
     @PostMapping("/create")
