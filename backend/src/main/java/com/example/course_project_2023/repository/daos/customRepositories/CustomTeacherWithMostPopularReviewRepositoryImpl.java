@@ -21,12 +21,6 @@ public class CustomTeacherWithMostPopularReviewRepositoryImpl implements CustomT
 
     private TeacherWithMostPopularReviewRepository teacherWithMostPopularReviewRepository;
 
-    /*
-    @Autowired
-    public CustomTeacherWithMostPopularReviewRepositoryImpl(TeacherWithMostPopularReviewRepository teacherWithMostPopularReviewRepository) {
-        this.teacherWithMostPopularReviewRepository = teacherWithMostPopularReviewRepository;
-    }*/
-
     @Autowired
     void setTeacherWithMostPopularReviewRepository(@Lazy TeacherWithMostPopularReviewRepository teacherWithMostPopularReviewRepository) {
         this.teacherWithMostPopularReviewRepository = teacherWithMostPopularReviewRepository;
