@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface CustomTeacherRepository {
     List<Teacher> findByParams(Map<String, String> params);
-
+    List<Long> findByParamsReturnIds(Map<String, String> params);
 }
