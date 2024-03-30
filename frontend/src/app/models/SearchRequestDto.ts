@@ -19,10 +19,6 @@ export class SearchRequestDto {
         this._subject = value;
     }
 
-    get searchType(): string {
-        return <string>this._searchType;
-    }
-
     set searchType(value: string) {
         this._searchType = value;
     }
@@ -33,6 +29,10 @@ export class SearchRequestDto {
 
     get teacherName(): string {
         return <string>this._teacherName;
+    }
+
+    get searchType(): string {
+        return <string>this._searchType;
     }
 
     get teacherSurname(): string {
