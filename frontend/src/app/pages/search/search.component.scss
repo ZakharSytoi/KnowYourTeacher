@@ -305,6 +305,8 @@ ngb-rating {
 
 
 .main-horizontal-line {
+    display: flex;
+    width: 100%;
     border-style: solid;
     border-color: #00b7ef3f;
     border-width: 0.5px;
