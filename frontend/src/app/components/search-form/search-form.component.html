@@ -1,25 +1,39 @@
 <div class="search-from-container _container">
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
-        <div class="form-block">
-            <div class="input-box">
-                <input type="text" formControlName="teacherName" placeholder="Teacher name"/>
+        <div class="flex flex-column justify-center gap-3">
+            <div class="form-block">
+                <div class="input-box">
+                    <input type="text" formControlName="teacherName" placeholder="Teacher name"/>
+                </div>
+                <div class="input-box">
+                    <input type="text" formControlName="teacherSurname" placeholder="Teacher surname"/>
+                </div>
+                <div class="input-box">
+                    <input type="text" formControlName="subject" placeholder="Subject"/>
+                </div>
+                <div class="input-box">
+                    <select formControlName="universityId" class="form-select">
+                        <option>University</option>
+                        <option *ngFor="let university of universityList" [value]="university.id">
+                            {{ university.name }}
+                        </option>
+                    </select>
+                </div>
+                <button type="submit" class="find-Btn">Find!</button>
             </div>
-            <div class="input-box">
-                <input type="text" formControlName="teacherSurname" placeholder="Teacher surname"/>
+            <div class="flex w-full justify-center relative">
+                <span [@slideInOutLeft]="!searchForm.controls['searchType'].value ? 'in' : 'out'"
+                      class="absolute mr-64 bottom-0 text-lg font-medium text-dark-blue font-average_sans ">Search among teachers</span>
+
+                <label class="inline-flex items-center cursor-pointer">
+                    <input formControlName="searchType" type="checkbox" value="" class="sr-only peer">
+                    <div class="relative w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-button_blue peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-dark-blue"></div>
+                </label>
+
+                <span [@slideInOutRight]="searchForm.controls['searchType'].value ? 'in' : 'out'"
+                      class="absolute ml-60 bottom-0 text-lg font-medium text-dark-blue font-average_sans ">Search among reviews</span>
             </div>
-            <div class="input-box">
-                <input type="text" formControlName="subject" placeholder="Subject" />
-            </div>
-            <div class="input-box">
-                <select formControlName="universityId" class="form-select">
-                    <option>University</option>
-                    <option *ngFor="let university of universityList" [value]="university.id">
-                        {{ university.name }}
-                    </option>
-                </select>
-            </div>
-            <button type="submit" class="find-Btn">Find!</button>
         </div>
     </form>
-<!--    <div class="main-horizontal-line"></div>-->
+    <!--    <div class="main-horizontal-line"></div>-->
 </div>
