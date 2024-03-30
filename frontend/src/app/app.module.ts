@@ -9,19 +9,25 @@ import {HttpAuthorizationInterceptorService} from "./services/http-authorization
 import {FooterComponent} from "./components/footer/footer.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {ImageCropperModule} from "ngx-image-cropper";
-import {AuthGuard} from "./auth.guard";
+import {HeaderComponent} from "./components/header/header.component";
+import {SearchFormComponent} from "./components/search-form/search-form.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FooterComponent,
-    NgbModule,
-    ImageCropperModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FooterComponent,
+        NgbModule,
+        ImageCropperModule,
+        HeaderComponent,
+        SearchFormComponent,
+        BrowserAnimationsModule
+
+    ],
   providers: [provideClientHydration(),
     {
       provide: HTTP_INTERCEPTORS,
