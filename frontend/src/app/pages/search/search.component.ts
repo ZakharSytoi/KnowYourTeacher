@@ -12,6 +12,7 @@ import {AsyncPipe, DatePipe, NgClass, NgIf, NgStyle, NgSwitch, NgSwitchCase} fro
 import {AuthService} from "../../services/auth.service";
 import {ErrorComponent} from "../../components/error/error.component";
 import {UniversityService} from "../../services/university.service";
+import {TeacherSearchComponent} from "../../components/teacher-search/teacher-search.component";
 
 declare function initRatings(): void;
 
@@ -29,7 +30,8 @@ declare function initRatings(): void;
         NgSwitchCase,
         AsyncPipe,
         ErrorComponent,
-        RouterLink
+        RouterLink,
+        TeacherSearchComponent
     ],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss'
@@ -43,7 +45,7 @@ export class SearchComponent implements OnInit {
     currentUniversityName!: string;
 
     constructor(private readonly searchService: SearchService,
-                private readonly route: ActivatedRoute,
+                protected readonly route: ActivatedRoute,
                 private readonly universityService: UniversityService,
                 readonly authService: AuthService,
                 private readonly http: HttpClient) {
@@ -78,7 +80,17 @@ export class SearchComponent implements OnInit {
         }
         return result.concat(':');
     }
-
+    params$:Observable<SearchRequestDto> = this.route.queryParams.pipe(
+        map(params=> {
+            return {
+                teacherName: params['teacherName'],
+                teacherSurname: params['teacherSurname'],
+                subject: params['subject'],
+                universityId: params['universityId'],
+                searchType: params['searchType']
+            }
+        })
+    );
     ngOnInit(): void {
         this.route.queryParams.subscribe({
             next: params => {
