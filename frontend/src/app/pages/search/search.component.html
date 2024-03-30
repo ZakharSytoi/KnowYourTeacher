@@ -1,19 +1,18 @@
 <app-header></app-header>
 <ng-container *ngIf="params$ | async as params">
     <app-search-form [defaultFormValues]="params"></app-search-form>
-    {{params.teacherName}}
 </ng-container>
 
 <main class="content-container _container flex flex-column">
     <div class="main-horizontal-line"></div>
     <div class="content-block">
+        <div class="search-result-header-container">
+            <span class="search-result-header" [innerHTML]="constructSearchResultsText()"></span>
+        </div>
         <ng-container *ngIf="route.queryParams | async as params">
             @if (params['searchType'] === 'review') {
                 <ng-container *ngIf="search$ | async as state" [ngSwitch]="state.searchState">
                     <ng-container *ngSwitchCase="'LOADED'">
-                        <div class="search-result-header-container">
-                            <span class="search-result-header" [innerHTML]="constructSearchResultsText()"></span>
-                        </div>
                         <div class="review-container">
                             @for (review of state.reviewsPage?.content; track review.id; let i = $index) {
                                 <div class="teacher-info-container">
