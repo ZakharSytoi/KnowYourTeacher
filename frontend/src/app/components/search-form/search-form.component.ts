@@ -23,7 +23,7 @@ import {SearchRequestDto} from "../../models/SearchRequestDto";
                 opacity: 1
             })),
             state('out', style({
-                transform: 'translateX(-100%)',
+                transform: 'translateX(+100%)',
                 opacity: 0
             })),
             transition('in => out', [animate('500ms ease-out')]),
@@ -35,7 +35,7 @@ import {SearchRequestDto} from "../../models/SearchRequestDto";
                 opacity: 1
             })),
             state('out', style({
-                transform: 'translateX(+100%)',
+                transform: 'translateX(-100%)',
                 opacity: 0
             })),
             transition('in => out', [animate('500ms ease-out')]),
