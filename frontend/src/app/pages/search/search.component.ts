@@ -86,7 +86,8 @@ export class SearchComponent implements OnInit {
                     teacherName: params['teacherName'],
                     teacherSurname: params['teacherSurname'],
                     subject: params['subject'],
-                    universityId: params['universityId']
+                    universityId: params['universityId'],
+                    searchType: params['searchType']
                 }
                 if (params['universityId'] !== '') {
                     this.universityService.getUniversity(params['universityId']).subscribe({next: uni => this.currentUniversityName = uni.name})

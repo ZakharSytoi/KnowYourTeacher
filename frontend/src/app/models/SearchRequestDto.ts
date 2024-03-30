@@ -1,8 +1,10 @@
-export class SearchRequestDto{
+export class SearchRequestDto {
+
     private _teacherName?: string;
     private _teacherSurname?: string;
     private _subject?: string;
     private _universityId?: string;
+    private _searchType?: string;
 
 
     set teacherName(value: string) {
@@ -15,6 +17,14 @@ export class SearchRequestDto{
 
     set subject(value: string) {
         this._subject = value;
+    }
+
+    get searchType(): string {
+        return <string>this._searchType;
+    }
+
+    set searchType(value: string) {
+        this._searchType = value;
     }
 
     set universityId(value: string) {

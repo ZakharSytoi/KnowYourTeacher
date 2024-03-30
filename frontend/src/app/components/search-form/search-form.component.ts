@@ -5,6 +5,7 @@ import {AuthService} from "../../services/auth.service";
 import {UniversityService} from "../../services/university.service";
 import {Router} from "@angular/router";
 import {NgFor} from '@angular/common';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
     selector: 'app-search-form',
@@ -14,16 +15,42 @@ import {NgFor} from '@angular/common';
         ReactiveFormsModule,
         NgFor
     ],
+    animations: [
+        trigger('slideInOutLeft', [
+            state('in', style({
+                transform: 'translateX(0)',
+                opacity: 1
+            })),
+            state('out', style({
+                transform: 'translateX(-100%)',
+                opacity: 0
+            })),
+            transition('in => out', [animate('500ms ease-out')]),
+            transition('out => in', [animate('500ms ease-in')])
+        ]),
+        trigger('slideInOutRight', [
+            state('in', style({
+                transform: 'translateX(0)',
+                opacity: 1
+            })),
+            state('out', style({
+                transform: 'translateX(+100%)',
+                opacity: 0
+            })),
+            transition('in => out', [animate('500ms ease-out')]),
+            transition('out => in', [animate('500ms ease-in')])
+        ])
+    ],
     styleUrl: './search-form.component.scss'
 })
 export class SearchFormComponent {
     searchForm: FormGroup
     universityList: UniversityDto[];
-
+    animationState: boolean
     constructor(
         private authService: AuthService,
         private universityService: UniversityService,
-        private router: Router
+        private router: Router,
     ) {
         this.universityList = [];
         universityService.getUniversitiesList().subscribe({
@@ -43,7 +70,9 @@ export class SearchFormComponent {
                 Validators.maxLength(50),
             ]),
             universityId: new FormControl("University"),
+            searchType: new FormControl()
         });
+       this.animationState = false
     }
 
     onSubmit() {
@@ -56,7 +85,8 @@ export class SearchFormComponent {
                             teacherSurname: this.searchForm.controls["teacherSurname"].value,
                             subject: this.searchForm.controls["subject"].value,
                             universityId: this.searchForm.controls["universityId"].value
-                                === "University" ? '' : this.searchForm.controls["universityId"].value
+                                === "University" ? '' : this.searchForm.controls["universityId"].value,
+                            searchType: this.searchForm.controls["searchType"].value === false? 'teacher' : 'review'
                         }
                 });
         } else {
