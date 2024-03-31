@@ -198,7 +198,16 @@
                     </ng-container>
                 </ng-container>
             } @else {
-                <app-teacher-search />
+                <app-teacher-search
+                    [params]="{
+                        teacherName: params['teacherName'],
+                        teacherSurname: params['teacherSurname'],
+                        subject: params['subject'],
+                        universityId: params['universityId'],
+                        searchType: params['searchType']
+                    }"
+                    class="w-full"
+                />
             }
         </ng-container>
     </div>
