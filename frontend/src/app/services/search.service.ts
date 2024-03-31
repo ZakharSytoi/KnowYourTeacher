@@ -14,7 +14,7 @@ export class SearchService {
     constructor(private readonly http: HttpClient) {
     }
 
-    search$ = (searchRequest: SearchRequestDto, pageNumber: number = 0, pageSize: number = 10): Observable<Page<SearchedReviewDto>> => {
+    searchReviews$ = (searchRequest: SearchRequestDto, pageNumber: number = 0, pageSize: number = 10): Observable<Page<SearchedReviewDto>> => {
         let requestParams: string = ''
         if (searchRequest.teacherName) requestParams = requestParams + '&teacherName=' + searchRequest.teacherName.trim();
         if (searchRequest.teacherSurname) requestParams = requestParams + '&teacherSurname=' + searchRequest.teacherSurname.trim();

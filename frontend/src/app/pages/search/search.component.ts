@@ -104,7 +104,7 @@ export class SearchComponent implements OnInit {
                 if (params['universityId'] !== '') {
                     this.universityService.getUniversity(params['universityId']).subscribe({next: uni => this.currentUniversityName = uni.name})
                 }
-                this.search$ = this.searchService.search$(this.currentSearchRequest).pipe(
+                this.search$ = this.searchService.searchReviews$(this.currentSearchRequest).pipe(
                     map((response: Page<SearchedReviewDto>) => {
                         this.likesDislikes = response.content.map(review => ({
                             likes: review.likeCount,
@@ -136,7 +136,7 @@ export class SearchComponent implements OnInit {
     }
 
     goToPage(pageNumber: number): void {
-        this.search$ = this.searchService.search$(this.currentSearchRequest, pageNumber).pipe(
+        this.search$ = this.searchService.searchReviews$(this.currentSearchRequest, pageNumber).pipe(
             map((response: Page<SearchedReviewDto>) => {
                 this.likesDislikes = response.content.map(review => ({
                     likes: review.likeCount,
@@ -171,7 +171,6 @@ export class SearchComponent implements OnInit {
             if (totalPages >= 10) {
                 right = currentPage + 5
                 left = currentPage - 4;
-                console.log('left: ' + left + ' right: ' + right)
                 if (left <= 0) {
                     right = currentPage + 5 - left;
                     left = 0;
