@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {AsyncPipe, NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {catchError, map, Observable, of, startWith, Subscription} from "rxjs";
 import {Page} from "../../models/Page";
@@ -22,7 +22,9 @@ import {ErrorComponent} from "../error/error.component";
         NgSwitch,
         NgIf,
         NgSwitchCase,
-        ErrorComponent
+        ErrorComponent,
+        NgClass,
+        NgStyle
     ],
     styleUrl: './teacher-search.component.scss'
 })
