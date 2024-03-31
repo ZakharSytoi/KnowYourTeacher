@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Page} from "../models/Page";
 import {environment} from "../../environments/environment";
 import {SearchedReviewDto} from "../models/SearchedReviewDto";
+import {TeacherPreviewDto} from "../models/TeacherPreviewDto";
 
 @Injectable({
     providedIn: 'root'
@@ -26,5 +27,10 @@ export class SearchService {
     searchReviews$ = (searchRequest: SearchRequestDto, pageNumber: number = 0, pageSize: number = 10): Observable<Page<SearchedReviewDto>> => {
         const requestParams: string = SearchService.constructSearchParams(searchRequest);
         return this.http.get<Page<SearchedReviewDto>>(`${environment.BASE_API_URL}reviews?pageNumber=${pageNumber}&pageSize=${pageSize}${requestParams}`)
+    }
+
+    searchTeachers$ = (searchRequest: SearchRequestDto, pageNumber: number = 0, pageSize: number = 10): Observable<Page<TeacherPreviewDto>> => {
+        const requestParams: string = SearchService.constructSearchParams(searchRequest);
+        return this.http.get<Page<TeacherPreviewDto>>(`${environment.BASE_API_URL}teachers?pageNumber=${pageNumber}&pageSize=${pageSize}${requestParams}`)
     }
 }
