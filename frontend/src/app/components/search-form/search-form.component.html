@@ -23,7 +23,7 @@
             </div>
             <div class="flex w-full justify-center relative">
                 <span [@slideInOutLeft]="!searchForm.controls['searchType'].value ? 'in' : 'out'"
-                      class="absolute mr-64 bottom-0 text-lg font-medium text-dark-blue font-average_sans ">Search among teachers</span>
+                      class="absolute mr-48 -top-1.5 w-28 text-sm sm:mr-64 sm:text-lg sm:bottom-0 sm:w-44 sm:top-0 text-dark-blue font-average_sans text-right">Search among teachers</span>
 
                 <label class="inline-flex z-10 items-center cursor-pointer">
                     <input formControlName="searchType" type="checkbox" value="" class="sr-only peer">
@@ -31,7 +31,7 @@
                 </label>
 
                 <span [@slideInOutRight]="searchForm.controls['searchType'].value ? 'in' : 'out'"
-                      class="absolute ml-60 bottom-0 text-lg font-medium text-dark-blue font-average_sans ">Search among reviews</span>
+                      class="absolute ml-48 -top-1.5 w-28 text-sm sm:ml-64 sm:text-lg sm:bottom-0 sm:w-44 sm:top-0 text-dark-blue font-average_sans ">Search among reviews</span>
             </div>
         </div>
     </form>
