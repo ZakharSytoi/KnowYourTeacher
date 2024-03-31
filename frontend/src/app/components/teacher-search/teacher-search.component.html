@@ -1,4 +1,4 @@
-<div class="w-full flex justify-center">
+<div class="w-full flex flex-column items-center">
     <ng-container *ngIf="search$ | async as state" [ngSwitch]="state.searchState">
         <ng-container *ngSwitchCase="'LOADED'">
             @for (teacher of state.teachersPage?.content; track teacher.id; let i = $index) {
