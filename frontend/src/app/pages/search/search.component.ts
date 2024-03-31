@@ -72,7 +72,7 @@ export class SearchComponent implements OnInit {
         } else result = result.concat((`<b>${this.currentSearchRequest.teacherName}</b> <b>${this.currentSearchRequest.teacherSurname}</b>`).trim());
         if (this.currentSearchRequest.subject === '') {
             result = result.concat(' who teaches <b>something</b>')
-        } else result = result.concat(`who teaches <b>${this.currentSearchRequest.subject}</b>`)
+        } else result = result.concat(` who teaches <b>${this.currentSearchRequest.subject}</b>`)
         if (this.currentSearchRequest.universityId === '') {
             result = result.concat(' in <b>some university</b>')
         } else {
@@ -80,8 +80,9 @@ export class SearchComponent implements OnInit {
         }
         return result.concat(':');
     }
-    params$:Observable<SearchRequestDto> = this.route.queryParams.pipe(
-        map(params=> {
+
+    params$: Observable<SearchRequestDto> = this.route.queryParams.pipe(
+        map(params => {
             return {
                 teacherName: params['teacherName'],
                 teacherSurname: params['teacherSurname'],
@@ -91,6 +92,7 @@ export class SearchComponent implements OnInit {
             }
         })
     );
+
     ngOnInit(): void {
         this.route.queryParams.subscribe({
             next: params => {
