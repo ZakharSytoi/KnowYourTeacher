@@ -10,6 +10,7 @@ import {UniversityService} from "../../services/university.service";
 import {AuthService} from "../../services/auth.service";
 import {SearchRequestDto} from "../../models/SearchRequestDto";
 import {ErrorComponent} from "../error/error.component";
+import {TeacherPreviewComponent} from "../teacher-preview/teacher-preview.component";
 
 @Component({
     selector: 'app-teacher-search',
@@ -24,7 +25,8 @@ import {ErrorComponent} from "../error/error.component";
         NgSwitchCase,
         ErrorComponent,
         NgClass,
-        NgStyle
+        NgStyle,
+        TeacherPreviewComponent
     ],
     styleUrl: './teacher-search.component.scss'
 })
