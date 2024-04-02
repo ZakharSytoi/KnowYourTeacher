@@ -14,12 +14,8 @@ export class TeacherService {
     constructor(private readonly http: HttpClient) {
     }
 
-    public getTopTeachersList(): Observable<TeacherPreviewDto[]> {
+    topTeachers$ = (): Observable<TeacherPreviewDto[]> => {
         return this.http.get<TeacherPreviewDto[]>(`${environment.BASE_API_URL}teachers/topten`);
-    }
-
-    public getTeacherById(id: string): Observable<TeacherCardDto> {
-        return this.http.get<TeacherCardDto>(`${environment.BASE_API_URL}teachers/${id}`)
     }
 
     teacher$ = (id: string): Observable<TeacherCardDto> =>
@@ -30,8 +26,8 @@ export class TeacherService {
         fd.append('name', teacherCreateRequestDto.name);
         fd.append('surname', teacherCreateRequestDto.surname);
         fd.append('universityId', teacherCreateRequestDto.universityId);
-        fd.append('image', new Blob([image], { type: image.type }), image.name)
-        return this.http.post<any>(`${environment.BASE_API_URL}teachers/create`, fd, { observe: 'response' })
+        fd.append('image', new Blob([image], {type: image.type}), image.name)
+        return this.http.post<any>(`${environment.BASE_API_URL}teachers/create`, fd, {observe: 'response'})
     }
 
 
