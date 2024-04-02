@@ -3,84 +3,35 @@
         <div style="display: flex; width: 100%; padding: 15px" class="top-teachers-header-container">
             <span class="top-ten-header-text">Our Top 10 most popular teachers:</span>
         </div>
-        <div *ngFor="let teacher of topTeachersList" class="teacher-card">
-            <div class="teacher-card-content-container">
-                <div class="teacher-photo">
-                    <img
-                            src="{{teacher.teacherPictureUri}}"
-                            alt="teacherPhoto"
-                    />
-                </div>
-                <div class="card-content">
-                    <div class="card-content-top">
-                        <span class="teacher-name">
-                            <a routerLink="/teacher/{{teacher.id}}">
-                                {{teacher.teacherName + ' ' + teacher.teacherSurname}}
-                            </a>
-
+        <ng-container *ngIf="topTeachers$ | async as state" [ngSwitch]="state.state">
+            <ng-container *ngSwitchCase="'LOADED'">
+                @for (teacher of state.teachers; track teacher.id; let i = $index) {
+                    <app-teacher-preview [teacher]="teacher" />
+                } @empty {
+                    <div class="no-search-results-container w-[81%]">
+                        <span class="header">Oops... Nothing found :(</span>
+                        <span>
+                            But you can create new teacher card by yourself! Read our small
+                            <a routerLink="/guides">guide</a>
+                            on how to that rigth.
                         </span>
-                        <div class="card-vertical-line"></div>
-                        <span class="teacher-university">
-                            {{teacher.universityName}}
+                        <span>
+                            Or move directly to the
+                            <a routerLink="/teacher/create">creation page</a>
+                            !
                         </span>
-                        <div class="teacher-rating">
-                            <div class="rating">
-                                <div class="rating-body">
-                                    <div
-                                            class="rating-active"
-                                    ></div>
-                                    <div class="rating-items">
-                                        <input
-                                                type="radio"
-                                                class="rating-item"
-                                                value="1"
-                                                name="rating"
-                                        />
-                                        <input
-                                                type="radio"
-                                                class="rating-item"
-                                                value="2"
-                                                name="rating"
-                                        />
-                                        <input
-                                                type="radio"
-                                                class="rating-item"
-                                                value="3"
-                                                name="rating"
-                                        />
-                                        <input
-                                                type="radio"
-                                                class="rating-item"
-                                                value="4"
-                                                name="rating"
-                                        />
-                                        <input
-                                                type="radio"
-                                                class="rating-item"
-                                                value="5"
-                                                name="rating"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="rating-value">
-                                    {{teacher.avgScore}}
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="card-horizontal-line"></div>
-                    <div class="card-content-bottom">
-                        <span class="defaultText"
-                        >Most popular review:</span
-                        >
-                        <div class="review-container">
-                            <p class="review-text">
-                                {{teacher.mostPopularReviewText}}
-                            </p>
-                        </div>
-                    </div>
+                    <span class=""></span>
+                }
+            </ng-container>
+            <ng-container *ngSwitchCase="'LOADING'">
+                <div class="spinner-border" role="status" style="margin-top: 25%; color: #01a5d9ff">
+                    <span class="sr-only">Loading...</span>
                 </div>
-            </div>
-        </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'ERROR'">
+                <app-error></app-error>
+            </ng-container>
+        </ng-container>
     </div>
 </div>
