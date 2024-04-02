@@ -13,6 +13,7 @@ import {AuthService} from "../../services/auth.service";
 import {ErrorComponent} from "../../components/error/error.component";
 import {UniversityService} from "../../services/university.service";
 import {TeacherSearchComponent} from "../../components/teacher-search/teacher-search.component";
+import {PaginationComponent} from "../../components/pagination/pagination.component";
 
 declare function initRatings(): void;
 
@@ -31,7 +32,8 @@ declare function initRatings(): void;
         AsyncPipe,
         ErrorComponent,
         RouterLink,
-        TeacherSearchComponent
+        TeacherSearchComponent,
+        PaginationComponent
     ],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss'
@@ -39,7 +41,6 @@ declare function initRatings(): void;
 export class SearchComponent implements OnInit {
 
     search$!: Observable<{ searchState: string, reviewsPage?: Page<SearchedReviewDto>, error?: HttpErrorResponse }>
-    currentRange!: { pagesToTheLeft: boolean, pagesToTheRight: boolean, range: number[], currentPage: number }
     likesDislikes!: { likes: number, dislikes: number, isLiked: boolean, isDisliked: boolean }[]
     currentSearchRequest!: SearchRequestDto;
     currentUniversityName!: string;
@@ -51,19 +52,6 @@ export class SearchComponent implements OnInit {
                 private readonly http: HttpClient) {
 
     }
-
-    /*    getSearchRequestFromCurrentRoot():SearchRequestDto{
-            let searchRequest = new SearchRequestDto()
-            this.route.queryParams.subscribe({
-                next: params=>{
-                    searchRequest.teacherName = params['teacherName']
-                    searchRequest.teacherSurname = params['teacherSurname']
-                    searchRequest.subject = params['subject']
-                    searchRequest.universityId = params['universityId']
-                }
-            })
-            return searchRequest;
-        }*/
 
     constructSearchResultsText(): string {
         let result: string = 'Results on ';
@@ -106,38 +94,12 @@ export class SearchComponent implements OnInit {
                 if (params['universityId'] !== '') {
                     this.universityService.getUniversity(params['universityId']).subscribe({next: uni => this.currentUniversityName = uni.name})
                 }
-                this.search$ = this.searchService.searchReviews$(this.currentSearchRequest).pipe(
-                    map((response: Page<SearchedReviewDto>) => {
-                        this.likesDislikes = response.content.map(review => ({
-                            likes: review.likeCount,
-                            dislikes: review.dislikeCount,
-                            isLiked: review.isLiked,
-                            isDisliked: review.isDisliked
-                        }));
-                        this.setCurrentRange(response.totalPages, response.number)
-                        return ({searchState: 'LOADED', reviewsPage: response})
-                    }),
-                    startWith({searchState: 'LOADING'}),
-                    catchError(error => of({searchState: 'ERROR', error: error})))
+                this.loadPage();
             }
         })
-
-        /*this.search$ = this.searchService.search$(this.getSearchRequestFromCurrentRoot()).pipe(
-            map((response: Page<SearchedReviewDto>) => {
-                this.likesDislikes = response.content.map(review => ({
-                    likes: review.likeCount,
-                    dislikes: review.dislikeCount,
-                    isLiked: review.isLiked,
-                    isDisliked: review.isDisliked
-                }));
-                return ({searchState: 'LOADED', reviewsPage: response})}),
-            startWith({searchState: 'LOADING'}),
-            catchError(error=> of({searchState: 'ERROR', error: error}))
-        )*/
-
     }
 
-    goToPage(pageNumber: number): void {
+    loadPage(pageNumber: number = 0): void {
         this.search$ = this.searchService.searchReviews$(this.currentSearchRequest, pageNumber).pipe(
             map((response: Page<SearchedReviewDto>) => {
                 this.likesDislikes = response.content.map(review => ({
@@ -146,54 +108,11 @@ export class SearchComponent implements OnInit {
                     isLiked: review.isLiked,
                     isDisliked: review.isDisliked
                 }));
-                this.setCurrentRange(response.totalPages, response.number)
                 return ({searchState: 'LOADED', reviewsPage: response})
             }),
             startWith({searchState: 'LOADING'}),
             catchError(error => of({searchState: 'ERROR', error: error}))
         )
-    }
-
-    range = (start: number, stop: number) =>
-        Array.from({length: (stop - start)}, (_, i) => start + i);
-
-    setCurrentRange(totalPages: number, currentPage: number) {
-        if (totalPages <= 10) {
-            this.currentRange = {
-                pagesToTheLeft: false,
-                pagesToTheRight: false,
-                range: this.range(0, totalPages),
-                currentPage: currentPage
-            }
-        } else {
-            let right = 0;
-            let left = 0;
-            let pagesToTheLeft = true;
-            let pagesToTheRight = true;
-            if (totalPages >= 10) {
-                right = currentPage + 5
-                left = currentPage - 4;
-                if (left <= 0) {
-                    right = currentPage + 5 - left;
-                    left = 0;
-                    pagesToTheLeft = false;
-                } else if (right >= totalPages) {
-                    left = currentPage - right + totalPages - 4;
-                    right = totalPages
-                    pagesToTheRight = false;
-                }
-            }
-            this.currentRange = {
-                pagesToTheLeft: pagesToTheLeft,
-                pagesToTheRight: pagesToTheRight,
-                range: this.range(left, right),
-                currentPage: currentPage
-            }
-        }
-    }
-
-    goNextOrGoPrev(direction: boolean, actualPageNumber: number) {
-        if (direction) this.goToPage(actualPageNumber + 1)
     }
 
     handleLikeOrDislike(url: string, i: number, likeOrDislike: boolean) {
