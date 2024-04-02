@@ -1,0 +1,212 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.teacher-card {
+  display: flex;
+  width: 90%;
+  padding: 15px 15px 15px 10px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 10px 0;
+}
+
+.teacher-card-content-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.teacher-photo {
+  min-width: 110px;
+  min-height: 110px;
+  max-width: 130px;
+  max-height: 130px;
+  margin-right: 10px;
+}
+
+.teacher-photo > img {
+  max-width: 100%;
+}
+
+.card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-content-top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+  min-height: 20px;
+}
+
+.card-content-bottom {
+  width: 100%;
+  height: 100%;
+  margin-top: 5px;
+}
+
+.card-content-bottom .defaultText {
+  white-space: nowrap;
+  opacity: 30%;
+  font-size: 14px;
+}
+
+.card-content-bottom .review-container {
+  margin-top: 5px;
+}
+
+.teacher-university {
+  margin: 0 10px;
+}
+
+.teacher-name {
+  margin-right: 10px;
+}
+
+.card-vertical-line {
+  height: 80%;
+  border-style: solid;
+  border-color: #00b7ef3f;
+  border-width: 0.5px;
+  border-radius: 100%;
+}
+
+.card-horizontal-line {
+  height: 0.5px;
+  width: 90%;
+  border-style: solid;
+  border-color: #00b7ef3f;
+  border-width: 0.5px;
+  border-radius: 100%;
+}
+
+.card-content-top > span {
+  color: #398dca;
+}
+
+.card-content-top > span > a {
+  color: #398dca;
+}
+
+.card-content-top > span > a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+@media (max-width: 930px) {
+  .teacher-photo {
+    min-width: 80px;
+    min-height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+  }
+}
+
+@media (max-width: 730px) {
+  .teacher-card-content-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .teacher-photo {
+    min-width: 110px;
+    min-height: 110px;
+    max-width: 130px;
+    max-height: 130px;
+    margin-right: 0;
+  }
+  .card-content-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .teacher-name {
+    margin-top: 5px;
+    text-align: center;
+  }
+  .teacher-university {
+    margin: 5px 10px;
+    text-align: center;
+  }
+
+  .card-vertical-line {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .card-content-top {
+    min-height: auto;
+  }
+  .card-horizontal-line {
+    margin: 5px 0;
+  }
+}
+
+/* ---------STAR-RATING------------------------------------------------------------- */
+
+.teacher-rating .rating {
+  display: flex;
+  align-items: flex-end;
+  font-size: 25px;
+}
+
+.teacher-rating .rating-body {
+  position: relative;
+}
+
+.teacher-rating .rating-active {
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.teacher-rating .rating-active::before {
+  content: "★★★★★";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  color: rgb(255, 196, 0);
+}
+
+.teacher-rating .rating-body::before {
+  content: "★★★★★";
+  display: block;
+  color: #b3b3b3;
+}
+
+.teacher-rating .rating-items {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.teacher-rating .rating-item {
+  height: 100%;
+  flex: 20%;
+  opacity: 0;
+}
+
+.teacher-rating .rating-value {
+  padding-left: 5px;
+  font-size: 75%;
+  padding-bottom: 2px;
+}
