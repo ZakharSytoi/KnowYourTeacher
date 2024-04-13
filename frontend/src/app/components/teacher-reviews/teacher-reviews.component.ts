@@ -9,6 +9,7 @@ import {AsyncPipe, DatePipe, NgClass, NgIf, NgStyle, NgSwitch, NgSwitchCase} fro
 import {ErrorComponent} from "../error/error.component";
 import {AuthService} from '../../services/auth.service';
 import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
+import {PaginationComponent} from "../pagination/pagination.component";
 
 @Component({
     selector: 'app-teacher-reviews',
@@ -23,7 +24,8 @@ import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
         NgStyle,
         DatePipe,
         RouterLink,
-        NgbRating
+        NgbRating,
+        PaginationComponent
     ],
     templateUrl: './teacher-reviews.component.html',
     styleUrl: './teacher-reviews.component.scss'
@@ -40,27 +42,7 @@ export class TeacherReviewsComponent implements OnInit {
     ) {
     }
 
-    ngOnInit(): void {
-        let id = this.route.snapshot.paramMap.get('id')
-        if (id) {
-            this.reviewsState$ = this.reviewsService.reviews$(id).pipe(
-                map((response: Page<ReviewDto>) => {
-                    this.likesDislikes = response.content.map(review => ({
-                        likes: review.likeCount,
-                        dislikes: review.dislikeCount,
-                        isLiked: review.isLiked,
-                        isDisliked: review.isDisliked
-                    }));
-                    this.setCurrentRange(response.totalPages, response.number)
-                    return ({reviewsState: 'LOADED', reviewsPage: response})
-                }),
-                startWith({reviewsState: 'LOADING'}),
-                catchError((error: HttpErrorResponse) => of({reviewsState: 'ERROR', error: error}))
-            )
-        } else this.reviewsState$ = of({reviewsState: 'ERROR'})
-    }
-
-    goToPage(pageNumber: number): void {
+    loadPage(pageNumber: number = 0): void {
         let id = this.route.snapshot.paramMap.get('id')
         if (id) {
             this.reviewsState$ = this.reviewsService.reviews$(id, pageNumber).pipe(
@@ -71,7 +53,6 @@ export class TeacherReviewsComponent implements OnInit {
                         isLiked: review.isLiked,
                         isDisliked: review.isDisliked
                     }));
-                    this.setCurrentRange(response.totalPages, response.number)
                     return ({reviewsState: 'LOADED', reviewsPage: response})
                 }),
                 startWith({reviewsState: 'LOADING'}),
@@ -80,48 +61,8 @@ export class TeacherReviewsComponent implements OnInit {
         } else this.reviewsState$ = of({reviewsState: 'ERROR'})
     }
 
-    goNextOrGoPrev(direction: boolean, actualPageNumber: number) {
-        if (direction) this.goToPage(actualPageNumber + 1)
-    }
-
-    range = (start: number, stop: number) =>
-        Array.from({length: (stop - start)}, (_, i) => start + i);
-
-    setCurrentRange(totalPages: number, currentPage: number) {
-        if (totalPages <= 10) {
-            this.currentRange = {
-                pagesToTheLeft: false,
-                pagesToTheRight: false,
-                range: this.range(0, totalPages),
-                currentPage: currentPage
-            }
-            console.log(this.currentRange);
-        } else {
-            let right = 0;
-            let left = 0;
-            let pagesToTheLeft = true;
-            let pagesToTheRight = true;
-            if (totalPages >= 10) {
-                right = currentPage + 5
-                left = currentPage - 4;
-                console.log('left: ' + left + ' right: ' + right)
-                if (left <= 0) {
-                    right = currentPage + 5 - left;
-                    left = 0;
-                    pagesToTheLeft = false;
-                } else if (right >= totalPages) {
-                    left = currentPage - right + totalPages - 4;
-                    right = totalPages
-                    pagesToTheRight = false;
-                }
-            }
-            this.currentRange = {
-                pagesToTheLeft: pagesToTheLeft,
-                pagesToTheRight: pagesToTheRight,
-                range: this.range(left, right),
-                currentPage: currentPage
-            }
-        }
+    ngOnInit(): void {
+        this.loadPage();
     }
 
     handleLikeOrDislike(url: string, i: number, likeOrDislike: boolean) {
