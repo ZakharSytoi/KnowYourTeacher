@@ -33,6 +33,27 @@ public class LikingUtil {
         likeRepository.save(like);
     }
 
+    public void likeV2(Long userId, Long reviewId) {
+        Like like = new Like();
+        like.setComposeId(new ComposeId(userId, reviewId));
+        likeRepository.save(like);
+    }
+
+    public void unlikeV2(Long userId, Long reviewId) {
+        likeRepository.deleteById(new ComposeId(userId, reviewId));
+    }
+    public void dislikeV2(Long userId, Long reviewId) {
+        Dislike dislike = new Dislike();
+        dislike.setComposeId(new ComposeId(userId, reviewId));
+        dislikeRepository.save(dislike);
+    }
+    public void unDislikeV2(Long userId, Long reviewId) {
+        dislikeRepository.deleteById(new ComposeId(userId, reviewId));
+    }
+
+
+
+
     public void dislike(Long userId, Long reviewId) {
         if(undislike(userId, reviewId)) return;
         unlike(userId, reviewId);
