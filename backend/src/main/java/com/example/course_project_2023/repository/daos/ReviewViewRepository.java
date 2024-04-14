@@ -10,4 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 public interface ReviewViewRepository extends JpaRepository<ReviewView, Long>, CustomReviewViewRepository {
     @Query("SELECT r FROM ReviewView r WHERE r.teacher.id = ?1")
     Page<ReviewView> findReviewsByTeacherId(Long id, Pageable pageable);
+
+    @Query("SELECT r.likeCount FROM ReviewView r WHERE r.id = ?1")
+    Long getLikeCountByReviewId(Long reviewId);
+
+    @Query("SELECT r.dislikeCount FROM ReviewView r WHERE r.id = ?1")
+    Long getDislikeCountByReviewId(Long reviewId);
 }
