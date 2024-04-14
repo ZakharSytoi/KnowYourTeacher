@@ -1,5 +1,6 @@
 package com.example.course_project_2023.web.exceptionHandling;
 
+import com.example.course_project_2023.service.exception.likedislike.LikeDislikeException;
 import com.example.course_project_2023.service.exception.notFound.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -9,12 +10,10 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.net.BindException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,6 +31,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleImageResolutionValidationException(ConstraintViolationException ex, WebRequest request) {
         return buildResponseEntity(HttpStatus.BAD_REQUEST, request, ex, List.of(ex.getMessage()));
+    }
+
+    @ExceptionHandler(LikeDislikeException.class)
+    public ResponseEntity<Object> handleLikeDislikeException(LikeDislikeException ex, WebRequest request) {
+        return buildResponseEntity(HttpStatus.CONFLICT, request, ex, List.of(ex.getMessage()));
     }
 
     @Override
