@@ -5,9 +5,11 @@ import com.example.course_project_2023.repository.daos.ReviewViewRepository;
 import com.example.course_project_2023.repository.daos.TeacherRepository;
 import com.example.course_project_2023.repository.daos.UserRepository;
 import com.example.course_project_2023.repository.model.Review;
-import com.example.course_project_2023.service.dto.ReviewDto;
-import com.example.course_project_2023.service.dto.SearchedReviewDto;
-import com.example.course_project_2023.service.dto.ShortReviewDto;
+import com.example.course_project_2023.service.dto.*;
+import com.example.course_project_2023.service.exception.likedislike.ReviewAlreadyDislikedException;
+import com.example.course_project_2023.service.exception.likedislike.ReviewAlreadyLikedException;
+import com.example.course_project_2023.service.exception.likedislike.ReviewNotYetDislikedException;
+import com.example.course_project_2023.service.exception.likedislike.ReviewNotYetLikedException;
 import com.example.course_project_2023.service.exception.notFound.ReviewNotFoundException;
 import com.example.course_project_2023.service.exception.notFound.TeacherNotFoundException;
 import com.example.course_project_2023.service.mappers.ReviewMapper;
@@ -50,6 +52,46 @@ public class ReviewService {
 
     public void likeReview(Long reviewId) {
         likingUtil.like(userSecurityUtil.getUserIdFromContext(), reviewId);
+    }
+
+    public DislikeOnReviewResponseDto dislikeReviewV2(Long reviewId) {
+        Long userIdFromContext = userSecurityUtil.getUserIdFromContext();
+        if (likingUtil.isDisliked(userIdFromContext, reviewId))
+            throw new ReviewAlreadyDislikedException(reviewId, userIdFromContext);
+        if (likingUtil.isLiked(userIdFromContext, reviewId))
+            throw new ReviewAlreadyLikedException(reviewId, userIdFromContext);
+        likingUtil.dislikeV2(userIdFromContext, reviewId);
+        Long numberOfDislikes = reviewViewRepository.getDislikeCountByReviewId(reviewId);
+        return new DislikeOnReviewResponseDto(numberOfDislikes, true);
+    }
+
+    public DislikeOnReviewResponseDto unDislikeReviewV2(Long reviewId) {
+        Long userIdFromContext = userSecurityUtil.getUserIdFromContext();
+        if (!likingUtil.isDisliked(userIdFromContext, reviewId))
+            throw new ReviewNotYetDislikedException(reviewId, userIdFromContext);
+        likingUtil.unDislikeV2(userIdFromContext, reviewId);
+        Long numberOfDislikes = reviewViewRepository.getDislikeCountByReviewId(reviewId);
+        return new DislikeOnReviewResponseDto(numberOfDislikes, false);
+    }
+
+    public LikeOnReviewResponseDto likeReviewV2(Long reviewId) {
+        Long userIdFromContext = userSecurityUtil.getUserIdFromContext();
+        if (likingUtil.isLiked(userIdFromContext, reviewId))
+            throw new ReviewAlreadyLikedException(reviewId, userIdFromContext);
+        if (likingUtil.isDisliked(userIdFromContext, reviewId))
+            throw new ReviewAlreadyDislikedException(reviewId, userIdFromContext);
+        likingUtil.likeV2(userIdFromContext, reviewId);
+        Long numberOfLikes = reviewViewRepository.getLikeCountByReviewId(reviewId);
+        return new LikeOnReviewResponseDto(numberOfLikes, true);
+    }
+
+    public LikeOnReviewResponseDto unLikeReviewV2(Long reviewId) {
+        Long userIdFromContext = userSecurityUtil.getUserIdFromContext();
+        if (!likingUtil.isLiked(userIdFromContext, reviewId))
+            throw new ReviewNotYetLikedException(reviewId, userIdFromContext);
+        likingUtil.unlikeV2(userIdFromContext, reviewId);
+        Long numberOfLikes = reviewViewRepository.getLikeCountByReviewId(reviewId);
+        return new LikeOnReviewResponseDto(numberOfLikes, false);
     }
 
     public ShortReviewDto getUserReviewByTeacherId(Long teacherId) {
