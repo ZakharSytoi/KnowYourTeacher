@@ -7,9 +7,9 @@ import {ReviewService} from "../../services/review.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {AsyncPipe, DatePipe, NgClass, NgIf, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {ErrorComponent} from "../error/error.component";
-import {AuthService} from '../../services/auth.service';
 import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
 import {PaginationComponent} from "../pagination/pagination.component";
+import {SimpleReviewComponent} from "../simple-review/simple-review.component";
 
 @Component({
     selector: 'app-teacher-reviews',
@@ -25,19 +25,17 @@ import {PaginationComponent} from "../pagination/pagination.component";
         DatePipe,
         RouterLink,
         NgbRating,
-        PaginationComponent
+        PaginationComponent,
+        SimpleReviewComponent
     ],
     templateUrl: './teacher-reviews.component.html',
     styleUrl: './teacher-reviews.component.scss'
 })
 export class TeacherReviewsComponent implements OnInit {
     reviewsState$!: Observable<{ reviewsState: string, reviewsPage?: Page<ReviewDto>, error?: HttpErrorResponse }>
-    likesDislikes!: { likes: number, dislikes: number, isLiked: boolean, isDisliked: boolean }[]
-    currentRange!: { pagesToTheLeft: boolean, pagesToTheRight: boolean, range: number[], currentPage: number }
 
     constructor(private readonly reviewsService: ReviewService,
                 private readonly route: ActivatedRoute,
-                readonly authService: AuthService,
                 readonly http: HttpClient,
     ) {
     }
@@ -47,12 +45,6 @@ export class TeacherReviewsComponent implements OnInit {
         if (id) {
             this.reviewsState$ = this.reviewsService.reviews$(id, pageNumber).pipe(
                 map((response: Page<ReviewDto>) => {
-                    this.likesDislikes = response.content.map(review => ({
-                        likes: review.likeCount,
-                        dislikes: review.dislikeCount,
-                        isLiked: review.isLiked,
-                        isDisliked: review.isDisliked
-                    }));
                     return ({reviewsState: 'LOADED', reviewsPage: response})
                 }),
                 startWith({reviewsState: 'LOADING'}),
@@ -64,40 +56,4 @@ export class TeacherReviewsComponent implements OnInit {
     ngOnInit(): void {
         this.loadPage();
     }
-
-    handleLikeOrDislike(url: string, i: number, likeOrDislike: boolean) {
-        this.http.post(url, '').subscribe({
-            error: error => console.log(error)
-        })
-        const item = this.likesDislikes[i];
-
-        if (likeOrDislike) {
-            if (item.isLiked) {
-                item.likes--;
-                item.isLiked = false;
-            } else {
-                item.likes++;
-                item.isLiked = true;
-
-                if (item.isDisliked) {
-                    item.dislikes--;
-                    item.isDisliked = false;
-                }
-            }
-        } else {
-            if (item.isDisliked) {
-                item.dislikes--;
-                item.isDisliked = false;
-            } else {
-                item.dislikes++;
-                item.isDisliked = true;
-
-                if (item.isLiked) {
-                    item.likes--;
-                    item.isLiked = false;
-                }
-            }
-        }
-    }
-
 }
