@@ -5,10 +5,7 @@ import com.example.course_project_2023.service.dto.DislikeOnReviewResponseDto;
 import com.example.course_project_2023.service.dto.LikeOnReviewResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +19,7 @@ public class LikingController {
         return ResponseEntity.ok().body(reviewService.likeReviewV2(id));
     }
 
-    @PostMapping("/{id:\\d+}/unlike")
+    @DeleteMapping("/{id:\\d+}/unlike")
     public ResponseEntity<LikeOnReviewResponseDto> unLikeReview(@PathVariable Long id) {
         return ResponseEntity.ok().body(reviewService.unLikeReviewV2(id));
     }
@@ -32,7 +29,7 @@ public class LikingController {
         return ResponseEntity.ok().body(reviewService.dislikeReviewV2(id));
     }
 
-    @PostMapping("/{id:\\d+}/undislike")
+    @DeleteMapping("/{id:\\d+}/undislike")
     public ResponseEntity<DislikeOnReviewResponseDto> unDislikeReview(@PathVariable Long id) {
         return ResponseEntity.ok().body(reviewService.unDislikeReviewV2(id));
     }
