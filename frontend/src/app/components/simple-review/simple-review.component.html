@@ -1,0 +1,87 @@
+<div class="review">
+    <div class="review-top">
+        <div class="reviewer-info">
+            <div class="nickname-container">
+                <span>{{ review.nickname }}</span>
+            </div>
+            <div class="card-vertical-line"></div>
+            <div class="university-name-container">
+                <span>{{ review.universityName }}</span>
+            </div>
+            <div class="card-vertical-line"></div>
+            <div class="subject-name-container">
+                <span>{{ review.subjectName }}</span>
+            </div>
+        </div>
+        <div class="rating-in-review">
+            <div class="teacher-rating">
+                <div class="rating">
+                    <div class="rating-body">
+                        <div class="rating-active"></div>
+                        <div class="rating-items">
+                            <input type="radio" class="rating-item" value="1" name="rating"/>
+                            <input type="radio" class="rating-item" value="2" name="rating"/>
+                            <input type="radio" class="rating-item" value="3" name="rating"/>
+                            <input type="radio" class="rating-item" value="4" name="rating"/>
+                            <input type="radio" class="rating-item" value="5" name="rating"/>
+                        </div>
+                    </div>
+                    <div class="rating-value">
+                        {{ review.score }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-horizontal-line"></div>
+    <div class="review-bottom">
+        <span>{{ review.reviewText }}</span>
+    </div>
+    <div class="review-bottom-info-container">
+        <div class="date-container">
+            <span style="font-size: 14px; opacity: 60%">{{ review.createdDate | date: "yyyy-MM-dd" }}</span>
+        </div>
+        <div class="like-dislike-container">
+            @if (authService.isLoggedIn()) {
+                <ng-container *ngIf="state$ | async as state">
+                    <div class="like-container">
+                        <span>{{ state.likeCount }}</span>
+                        <a (click)="state.isLiked? handleUnlike(review.id) : handleLike(review.id)"
+                           style="cursor: pointer">
+                            @if (state.isLiked) {
+                                <i class="fa-solid fa-thumbs-up fa-xl" style="color: #398dca"></i>
+                            } @else {
+                                <i class="fa-regular fa-thumbs-up fa-xl" style="color: #398dca"></i>
+                            }
+                        </a>
+                    </div>
+                    <div class="dislike-container">
+                        <a (click)="state.isDisliked? handleUnDislike(review.id) : handleDislike(review.id)"
+                           style="cursor: pointer">
+                            @if (state.isDisliked) {
+                                <i class="fa-solid fa-thumbs-down fa-xl" style="color: #398dca"></i>
+                            } @else {
+                                <i class="fa-regular fa-thumbs-down fa-xl" style="color: #398dca"></i>
+                            }
+                            <span>{{ state.dislikeCount }}</span>
+                        </a>
+                    </div>
+                </ng-container>
+            } @else {
+                <div class="like-container">
+
+                    <span>{{ (state$ | async)?.likeCount }}</span>
+                    <a routerLink="/login">
+                        <i class="fa-regular fa-thumbs-up fa-xl" style="color: #398dca"></i>
+                    </a>
+                </div>
+                <div class="dislike-container">
+                    <a routerLink="/login">
+                        <i class="fa-regular fa-thumbs-down fa-xl" style="color: #398dca"></i>
+                    </a>
+                    <span>{{ (state$ | async)?.dislikeCount }}</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
