@@ -53,13 +53,7 @@ export class LoginComponent {
                 )
                 .subscribe({
                     next: (jwtDto) => {
-                        if (localStorage.getItem("token") === null) {
-                            localStorage.setItem("token", jwtDto.token);
-                        } else {
-                            localStorage.removeItem("token");
-                            localStorage.setItem("token", jwtDto.token);
-                        }
-                        this.router.navigate(["/"]);
+                        this.handleSuccessfulLogin(jwtDto);
                     },
                     error: (err) => {
                         this.handleUnsuccessfulLogin(err);
@@ -77,7 +71,9 @@ export class LoginComponent {
             localStorage.removeItem("token");
             localStorage.setItem("token", jwtDto.token);
         }
-        this.router.navigate(["/"]);
+        const prevUrl = sessionStorage.getItem('previousUrl');
+        console.log(prevUrl);
+        this.router.navigateByUrl(prevUrl? prevUrl : "/");
     }
 
     handleUnsuccessfulLogin(error: HttpErrorResponse): any {

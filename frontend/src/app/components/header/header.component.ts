@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NgIf} from "@angular/common";
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {JwtUtilsService} from "../../services/jwt-utils.service";
 import { ClickOutsideDirective } from './clickOutside.directive';
 
@@ -15,7 +15,7 @@ export class HeaderComponent {
     jwtUtilService: JwtUtilsService;
 
 
-    constructor(jwtUtilService: JwtUtilsService) {
+    constructor(jwtUtilService: JwtUtilsService, readonly router:Router) {
         this.jwtUtilService = jwtUtilService;
     }
 
@@ -43,5 +43,7 @@ export class HeaderComponent {
     clickedOutside(): void {
         this.isMenuOpened = false;
     }
+
+    saveCurrentUrl = ()=>sessionStorage.setItem('previousUrl', this.router.url);
 
 }

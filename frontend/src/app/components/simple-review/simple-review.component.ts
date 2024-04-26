@@ -5,7 +5,7 @@ import {AuthService} from "../../services/auth.service";
 import {AsyncPipe, DatePipe, NgIf, NgStyle} from "@angular/common";
 import {LikeDislikeService} from "../../services/like-dislike.service";
 import {BehaviorSubject, concatMap, map} from "rxjs";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {LikeOnReviewResponseDto} from "../../models/likedislike/LikeOnReviewResponseDto";
 
 interface ReviewState {
@@ -35,12 +35,14 @@ export class SimpleReviewComponent implements OnInit {
 
 
     constructor(readonly http: HttpClient,
+                readonly router: Router,
                 readonly authService: AuthService,
                 readonly likeDislikeService: LikeDislikeService) {
 
     }
 
     ngOnInit(): void {
+        sessionStorage.setItem('previousUrl', this.router.url);
         this.state$ = new BehaviorSubject<ReviewState>({
             likeCount: this.review.likeCount,
             isLiked: this.review.isLiked,

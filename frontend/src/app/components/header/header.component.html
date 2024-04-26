@@ -83,8 +83,8 @@
                     >Logout</a
                 >
             } @else {
-            <a routerLink="/register" class="registration-link">Register</a>
-            <a routerLink="/login" class="signIn-link">Sign in</a>
+            <a routerLink="/register" class="registration-link" (click)="saveCurrentUrl()">Register</a>
+            <a routerLink="/login" class="signIn-link" (click)="saveCurrentUrl()">Sign in</a>
             }
         </div>
     </div>
