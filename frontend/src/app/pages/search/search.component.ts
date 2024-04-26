@@ -14,6 +14,7 @@ import {ErrorComponent} from "../../components/error/error.component";
 import {UniversityService} from "../../services/university.service";
 import {TeacherSearchComponent} from "../../components/teacher-search/teacher-search.component";
 import {PaginationComponent} from "../../components/pagination/pagination.component";
+import {SimpleReviewComponent} from "../../components/simple-review/simple-review.component";
 
 declare function initRatings(): void;
 
@@ -33,7 +34,8 @@ declare function initRatings(): void;
         ErrorComponent,
         RouterLink,
         TeacherSearchComponent,
-        PaginationComponent
+        PaginationComponent,
+        SimpleReviewComponent
     ],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss'
