@@ -2,12 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ReviewDto} from "../../models/ReviewDto";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../services/auth.service";
-import {AsyncPipe, DatePipe, NgIf} from "@angular/common";
+import {AsyncPipe, DatePipe, NgIf, NgStyle} from "@angular/common";
 import {LikeDislikeService} from "../../services/like-dislike.service";
 import {BehaviorSubject, concatMap, map} from "rxjs";
 import {RouterLink} from "@angular/router";
 import {LikeOnReviewResponseDto} from "../../models/likedislike/LikeOnReviewResponseDto";
-import {DislikeOnReviewResponseDto} from "../../models/likedislike/DislikeOnReviewResponseDto";
 
 interface ReviewState {
     likeCount: number,
@@ -24,12 +23,14 @@ interface ReviewState {
         DatePipe,
         RouterLink,
         AsyncPipe,
-        NgIf
+        NgIf,
+        NgStyle
     ],
     styleUrl: './simple-review.component.scss'
 })
 export class SimpleReviewComponent implements OnInit {
     @Input() review!: ReviewDto;
+    @Input() bgColor: string = "#ebfafe"
     state$!: BehaviorSubject<ReviewState>;
 
 
