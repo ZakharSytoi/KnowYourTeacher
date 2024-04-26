@@ -7,10 +7,11 @@ import {TeacherPageComponent} from "./pages/teacher-page/teacher-page.component"
 import {SearchComponent} from "./pages/search/search.component";
 import {GuidesComponent} from "./pages/guides/guides.component";
 import {TeacherCreationComponent} from "./pages/teacher-creation/teacher-creation.component";
-import {AuthGuard} from "./auth.guard";
 import {AboutUsComponent} from "./pages/about-us/about-us.component";
 import {ContactsComponent} from "./pages/contacts/contacts.component";
 import {QandaComponent} from "./pages/qanda/qanda.component";
+import {UserPageComponent} from "./pages/user-page/user-page.component";
+import {authorizedGuard} from "./guards/authorized.guard";
 
 const routes: Routes = [
     {
@@ -29,10 +30,16 @@ const routes: Routes = [
         title: 'Registration'
     },
     {
+        path: 'profile',
+        component: UserPageComponent,
+        title: 'Profile',
+        canActivate: [authorizedGuard]
+    },
+    {
         path: 'teacher/create',
         component: TeacherCreationComponent,
         title: 'KnowYourTeacher',
-        canActivate: [AuthGuard]
+        canActivate: [authorizedGuard]
     },
     {
         path: 'teacher/:id',
