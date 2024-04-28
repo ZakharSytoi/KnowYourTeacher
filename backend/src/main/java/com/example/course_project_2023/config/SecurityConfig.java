@@ -84,6 +84,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/knowyourteacher-api/v1/reviews/{id:\\d+}/undislike").authenticated();
                     auth.requestMatchers("/knowyourteacher-api/v1/teachers/{id:\\d+}/review").authenticated();
                     auth.requestMatchers("/knowyourteacher-api/v1/teachers/create").authenticated();
+                    auth.requestMatchers("/knowyourteacher-api/v1/user").authenticated();
                     auth.anyRequest().permitAll();
 
                 })
