@@ -22,16 +22,4 @@ public class ReviewController {
             @RequestParam Map<String, String> searchParams) {
         return ResponseEntity.ok().body(reviewService.findBySearchParams(pageNumber, pageSize, searchParams));
     }
-
-    @PostMapping("/{id:\\d+}/like")
-    public ResponseEntity<?> likeReview(@PathVariable Long id) {
-        reviewService.likeReview(id);
-        return ResponseEntity.ok().body("post " + id + " liked");
-    }
-
-    @PostMapping("/{id:\\d+}/dislike")
-    public ResponseEntity<?> dislikeReview(@PathVariable Long id) {
-        reviewService.dislikeReview(id);
-        return ResponseEntity.ok().body("post " + id + " disliked");
-    }
 }
