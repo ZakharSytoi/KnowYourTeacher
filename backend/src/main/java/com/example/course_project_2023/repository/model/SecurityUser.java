@@ -11,7 +11,6 @@ import java.util.Set;
 @Data
 public class SecurityUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     Long id;
     @Column(name = "email")
