@@ -11,6 +11,9 @@ public interface ReviewViewRepository extends JpaRepository<ReviewView, Long>, C
     @Query("SELECT r FROM ReviewView r WHERE r.teacher.id = ?1")
     Page<ReviewView> findReviewsByTeacherId(Long id, Pageable pageable);
 
+    @Query("SELECT rv FROM ReviewView rv JOIN Review r ON rv.id = r.id WHERE r.user.id = ?1")
+    Page<ReviewView> findAllByUserId(Long id, Pageable pageable);
+
     @Query("SELECT r.likeCount FROM ReviewView r WHERE r.id = ?1")
     Long getLikeCountByReviewId(Long reviewId);
 
