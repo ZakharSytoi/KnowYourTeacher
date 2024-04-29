@@ -1,9 +1,11 @@
 package com.example.course_project_2023.web.controllers;
 
 import com.example.course_project_2023.service.UserService;
+import com.example.course_project_2023.service.dto.UserInfoUpdateDtoRequest;
 import com.example.course_project_2023.service.dto.PasswordUpdateDtoRequest;
 import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import com.example.course_project_2023.service.dto.UserResponseDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +30,15 @@ public class UserController {
     }
 
     @PostMapping ("/password")
-    ResponseEntity<String> updatePassword(@RequestBody PasswordUpdateDtoRequest passwordUpdateDtoRequest){
+    ResponseEntity<String> updatePassword(@Valid @RequestBody PasswordUpdateDtoRequest passwordUpdateDtoRequest){
         userService.updateUserPassword(passwordUpdateDtoRequest);
         return ResponseEntity.ok("Password updated successfully");
+    }
+
+    @PutMapping ()
+    ResponseEntity<String> updateUserInfo(@Valid @RequestBody UserInfoUpdateDtoRequest userInfoUpdateDtoRequest){
+        userService.updateUserInfo(userInfoUpdateDtoRequest);
+        return ResponseEntity.ok("User info updated successfully");
     }
 
 
