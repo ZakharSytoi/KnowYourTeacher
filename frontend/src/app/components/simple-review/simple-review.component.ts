@@ -8,6 +8,7 @@ import {BehaviorSubject, concatMap, map} from "rxjs";
 import {Router, RouterLink} from "@angular/router";
 import {LikeOnReviewResponseDto} from "../../models/likedislike/LikeOnReviewResponseDto";
 
+declare function initRatings(): void;
 interface ReviewState {
     likeCount: number,
     isLiked: boolean,
@@ -138,39 +139,7 @@ export class SimpleReviewComponent implements OnInit {
         ).subscribe()
     }
 
-
-    // handleLikeOrDislike(url: string, i: number, likeOrDislike: boolean) {
-    //     this.http.post(url, '').subscribe({
-    //         error: error => console.log(error)
-    //     })
-    //     const item = this.likesDislikes[i];
-    //
-    //     if (likeOrDislike) {
-    //         if (item.isLiked) {
-    //             item.likes--;
-    //             item.isLiked = false;
-    //         } else {
-    //             item.likes++;
-    //             item.isLiked = true;
-    //
-    //             if (item.isDisliked) {
-    //                 item.dislikes--;
-    //                 item.isDisliked = false;
-    //             }
-    //         }
-    //     } else {
-    //         if (item.isDisliked) {
-    //             item.dislikes--;
-    //             item.isDisliked = false;
-    //         } else {
-    //             item.dislikes++;
-    //             item.isDisliked = true;
-    //
-    //             if (item.isLiked) {
-    //                 item.likes--;
-    //                 item.isLiked = false;
-    //             }
-    //         }
-    //     }
-    // }
+    ngAfterViewChecked(): void {
+        initRatings();
+    }
 }

@@ -49,9 +49,7 @@ export class SearchComponent implements OnInit {
 
     constructor(private readonly searchService: SearchService,
                 protected readonly route: ActivatedRoute,
-                private readonly universityService: UniversityService,
-                readonly authService: AuthService,
-                private readonly http: HttpClient) {
+                private readonly universityService: UniversityService) {
 
     }
 
@@ -115,48 +113,5 @@ export class SearchComponent implements OnInit {
             startWith({searchState: 'LOADING'}),
             catchError(error => of({searchState: 'ERROR', error: error}))
         )
-    }
-
-    handleLikeOrDislike(url: string, i: number, likeOrDislike: boolean) {
-        this.http.post(url, '').subscribe({
-            error: error => console.log(error)
-        })
-        const item = this.likesDislikes[i];
-
-        if (likeOrDislike) {
-            if (item.isLiked) {
-                item.likes--;
-                item.isLiked = false;
-            } else {
-                item.likes++;
-                item.isLiked = true;
-
-                if (item.isDisliked) {
-                    item.dislikes--;
-                    item.isDisliked = false;
-                }
-            }
-        } else {
-            if (item.isDisliked) {
-                item.dislikes--;
-                item.isDisliked = false;
-            } else {
-                item.dislikes++;
-                item.isDisliked = true;
-
-                if (item.isLiked) {
-                    item.likes--;
-                    item.isLiked = false;
-                }
-            }
-        }
-    }
-
-    ngAfterViewChecked(): void {
-        initRatings();
-    }
-
-    isLoggedIn(): boolean {
-        return this.authService.isLoggedIn();
     }
 }
