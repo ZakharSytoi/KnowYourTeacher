@@ -79,19 +79,6 @@ export class TeacherComponent implements OnInit {
                 })
             );
         }
-
-        // let id = this.route.snapshot.paramMap.get('id');
-        // if (id) {
-        //     this.teacherId = id;
-        //     this.teacherService.getTeacherById(this.teacherId).subscribe({
-        //         next: (teacherCard) => {
-        //             this.currentTeacherCard = teacherCard;
-        //         }
-        //     });
-        //     // this.teacherService.getTeachersReviewsById(id).subscribe({
-        //     //     next:
-        //     // })
-        // }
     }
 
     handleEditButtonClick(): void {
