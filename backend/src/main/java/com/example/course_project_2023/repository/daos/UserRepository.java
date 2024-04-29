@@ -14,5 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByNickname(String nickname);
 
     @EntityGraph(attributePaths = "university")
-    Optional<User> findById(Long id);
+    Optional<User> findWithUniversityById(Long id);
 }
