@@ -2,8 +2,10 @@ package com.example.course_project_2023.web.controllers;
 
 import com.example.course_project_2023.service.UserService;
 import com.example.course_project_2023.service.dto.PasswordUpdateDtoRequest;
+import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import com.example.course_project_2023.service.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +20,18 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserInfo());
     }
 
+    @GetMapping("/reviews")
+    public ResponseEntity<Page<SearchedReviewDto>> getTeacherReviews(
+            @RequestParam(required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return ResponseEntity.ok().body(userService.findAllUserReviews(pageNumber, pageSize));
+    }
+
     @PostMapping ("/password")
     ResponseEntity<String> updatePassword(@RequestBody PasswordUpdateDtoRequest passwordUpdateDtoRequest){
         userService.updateUserPassword(passwordUpdateDtoRequest);
         return ResponseEntity.ok("Password updated successfully");
     }
+
+
 }
