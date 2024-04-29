@@ -42,8 +42,7 @@ declare function initRatings(): void;
 })
 export class SearchComponent implements OnInit {
 
-    search$!: Observable<{ searchState: string, reviewsPage?: Page<SearchedReviewDto>, error?: HttpErrorResponse }>
-    likesDislikes!: { likes: number, dislikes: number, isLiked: boolean, isDisliked: boolean }[]
+    search$!: Observable<{ searchState: string, reviewsPage?: Page<SearchedReviewDto>, error?: HttpErrorResponse }>;
     currentSearchRequest!: SearchRequestDto;
     currentUniversityName!: string;
 
@@ -104,12 +103,6 @@ export class SearchComponent implements OnInit {
     loadPage(pageNumber: number = 0): void {
         this.search$ = this.searchService.searchReviews$(this.currentSearchRequest, pageNumber).pipe(
             map((response: Page<SearchedReviewDto>) => {
-                this.likesDislikes = response.content.map(review => ({
-                    likes: review.likeCount,
-                    dislikes: review.dislikeCount,
-                    isLiked: review.isLiked,
-                    isDisliked: review.isDisliked
-                }));
                 return ({searchState: 'LOADED', reviewsPage: response})
             }),
             startWith({searchState: 'LOADING'}),
