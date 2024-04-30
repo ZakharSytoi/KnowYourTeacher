@@ -1,0 +1,116 @@
+/* ---------CONTENT------------------------------------------------------------- */
+
+.content-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.content-block {
+  margin-top: 20px;
+  display: flex;
+  height: 100%;
+  width: 80%;
+  flex-direction: column;
+}
+
+.review-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 15px 0;
+}
+// ---------------- header container
+.header-container .page-header{
+  color: #398dca;
+  font-weight: 700;
+  font-size: 28px;
+
+}
+
+
+//------------review-teacher-info-----------------
+.teacher-info-container {
+  margin-top: 25px;
+  margin-bottom: -15px;
+  display: flex;
+  width: 100%;
+  height: 22px;
+  align-items: center;
+}
+
+.teacher-info-container .link-container {
+  background-color: white;
+  width: 30%;
+  padding: 5px 20px 20px 15px;
+  color: #398dca;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.teacher-info-container .link-container > a {
+  color: #398dca;
+  font-size: 18px;
+  overflow: hidden;
+  text-wrap: nowrap;
+  font-weight: bold;
+}
+.teacher-info-container .link-container > a:hover {
+  text-decoration: underline;
+}
+
+.teacher-info-container .card-horizontal-line {
+  margin-top: 5px;
+  height: 0.5px;
+  width: 90%;
+  border-style: solid;
+  border-color: #00b7ef3f;
+  border-width: 0.5px;
+  border-radius: 100%;
+}
+
+
+
+.main-horizontal-line {
+  display: flex;
+  width: 100%;
+  border-style: solid;
+  border-color: #00b7ef3f;
+  border-width: 0.5px;
+  border-radius: 100%;
+  margin: 10px 0;
+}
+
+
+//------------empty search----------------
+
+.review-container .no-search-results-container {
+  display: flex;
+  flex-direction: column;
+  margin: 3%;
+}
+.review-container .no-search-results-container > span{
+  color: #398dca;
+  font-size: 17px;
+}
+.review-container .no-search-results-container > span >a{
+  color: #398dca;
+  font-weight: 700;
+}
+.review-container .no-search-results-container > span >a:hover{
+  text-decoration: underline;
+}
+.review-container .no-search-results-container .header {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+.review-container .no-search-results-container {
+  display: flex;
+  flex-direction: column;
+}
+.review-container .no-search-results-container {
+  display: flex;
+  flex-direction: column;
+}

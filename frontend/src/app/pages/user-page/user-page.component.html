@@ -1,1 +1,68 @@
 <app-header/>
+<main class="content-container _container">
+    <div class="content-block">
+        <div class="header-container">
+            <span class="page-header">Profile</span>
+        </div>
+        <div class="main-horizontal-line"></div>
+        <div class="flex flex-column w-full">
+            <ng-container *ngIf="userInfo$ | async as user" [ngSwitch]="user.userInfoState">
+                <ng-container *ngSwitchCase="'LOADED'">
+                    <div class="flex flex-column w-full gap-4">
+                        <app-info-field [fieldName]="'Email'" [fieldValue]="user.userInfo?.email!"/>
+                        <app-info-field [fieldName]="'Nickname'" [fieldValue]="user.userInfo?.nickname!"/>
+                        <app-info-field [fieldName]="'Field of studies'" [fieldValue]="user.userInfo?.fieldOfStudies!"/>
+                        <app-info-field [fieldName]="'University'" [fieldValue]="user.userInfo?.university?.name!"/>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'LOADING'">
+                    <div class="spinner-border" role="status" style="margin-top: 25%; color: #01a5d9ff">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'ERROR'">
+                    <app-error></app-error>
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div class="header-container">
+            <span class="page-header">My Reviews</span>
+        </div>
+        <div class="main-horizontal-line"></div>
+        <ng-container *ngIf="userReviews$ | async as state" [ngSwitch]="state.userReviewsState">
+            <ng-container *ngSwitchCase="'LOADED'">
+                <div class="review-container">
+                    @for (review of state.reviewsPage?.content; track review.id; let i = $index) {
+                        <div class="teacher-info-container">
+                            <div class="link-container">
+                                <a routerLink="/teacher/{{ review.teacherId }}">{{ review.teacherName }} {{ review.teacherSurname }}</a>
+                                <div class="card-horizontal-line"></div>
+                            </div>
+                        </div>
+                        <app-simple-review [review]="review" [bgColor]="'white'"/>
+                    } @empty {
+                        <div class="no-search-results-container">
+                            <span class="header">Oops... Nothing found :(</span>
+                            <span>Seems like You didn't write any reviews yet.</span>
+
+                        </div>
+                    }
+                </div>
+                @if (state.reviewsPage!.numberOfElements > 0) {
+                    <app-pagination [currentPageNumber]="state.reviewsPage?.number!"
+                                    [totalPages]="state.reviewsPage?.totalPages!"
+                                    (loadPageEvent)="loadPage($event)"/>
+                }
+            </ng-container>
+            <ng-container *ngSwitchCase="'LOADING'">
+                <div class="spinner-border" role="status" style="margin-top: 25%; color: #01a5d9ff">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'ERROR'">
+                <app-error></app-error>
+            </ng-container>
+        </ng-container>
+    </div>
+</main>
