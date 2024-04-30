@@ -1,11 +1,16 @@
 <app-header/>
 <main class="content-container _container">
     <div class="content-block">
-        <div class="header-container">
+        <div class="header-container flex justify-between items-center">
             <span class="page-header">Profile</span>
+            <div class="action-links-container" style="display: flex; flex-direction: row">
+                <a  class="edit-link" style="margin-right: 7px;">
+                    <i class="fa-solid fa-pencil fa-xl"></i>
+                </a>
+            </div>
         </div>
         <div class="main-horizontal-line"></div>
-        <div class="flex flex-column w-full">
+        <div class="w-full my-4">
             <ng-container *ngIf="userInfo$ | async as user" [ngSwitch]="user.userInfoState">
                 <ng-container *ngSwitchCase="'LOADED'">
                     <div class="flex flex-column w-full gap-4">
