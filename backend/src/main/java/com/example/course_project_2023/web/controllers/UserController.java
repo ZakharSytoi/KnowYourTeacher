@@ -8,6 +8,7 @@ import com.example.course_project_2023.service.dto.UserResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,13 +33,13 @@ public class UserController {
     @PostMapping ("/password")
     ResponseEntity<String> updatePassword(@Valid @RequestBody PasswordUpdateDtoRequest passwordUpdateDtoRequest){
         userService.updateUserPassword(passwordUpdateDtoRequest);
-        return ResponseEntity.ok("Password updated successfully");
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
     }
 
     @PutMapping ()
     ResponseEntity<String> updateUserInfo(@Valid @RequestBody UserInfoUpdateDtoRequest userInfoUpdateDtoRequest){
         userService.updateUserInfo(userInfoUpdateDtoRequest);
-        return ResponseEntity.ok("User info updated successfully");
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
     }
 
 
