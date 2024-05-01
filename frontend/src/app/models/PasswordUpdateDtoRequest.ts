@@ -1,3 +1,4 @@
 export interface PasswordUpdateDtoRequest {
-    password: string;
+    currentPassword: string;
+    newPassword: string;
 }

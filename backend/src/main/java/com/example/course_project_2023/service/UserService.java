@@ -19,6 +19,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,12 @@ public class UserService {
     public void updateUserPassword(PasswordUpdateDtoRequest passwordUpdateDtoRequest) {
         Long userId = userSecurityUtil.getUserIdFromContext();
         SecurityUser securityUser = securityUserRepository.findById(userId).get();
-        securityUser.setPassword(passwordEncoder.encode(passwordUpdateDtoRequest.password()));
+        String fromDb = securityUser.getPassword();
+
+        if(!passwordEncoder.matches(passwordUpdateDtoRequest.currentPassword(), fromDb))
+            throw new BadCredentialsException("Passwords mismatch");
+
+        securityUser.setPassword(passwordEncoder.encode(passwordUpdateDtoRequest.newPassword()));
         securityUserRepository.save(securityUser);
     }
 
