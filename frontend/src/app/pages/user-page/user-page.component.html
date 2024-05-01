@@ -1,17 +1,19 @@
 <app-header/>
 <main class="content-container _container">
     <div class="content-block">
+
         <div class="header-container flex justify-between items-center">
-            <span class="page-header">Profile</span>
+            <span class="page-header">{{ isUserInfoCollapsed ? 'Edit profile information' : 'Profile' }}</span>
             <div class="action-links-container" style="display: flex; flex-direction: row">
                 <a class="edit-link" (click)="swap()" style="margin-right: 7px;">
                     <i class="fa-solid fa-pencil fa-xl"></i>
                 </a>
             </div>
         </div>
-        <div class="main-horizontal-line"></div>
-        <div class="w-full my-4">
 
+        <div class="main-horizontal-line"></div>
+
+        <div class="w-full my-4">
             <ng-container *ngIf="userInfo$ | async as user" [ngSwitch]="user.userInfoState">
                 <div class="visible" #collapse="ngbCollapse" [(ngbCollapse)]="isUserInfoCollapsed">
                     <ng-container *ngSwitchCase="'LOADED'">
@@ -32,26 +34,28 @@
                         <app-error></app-error>
                     </ng-container>
                 </div>
-
-
                 <div class="visible" #collapse="ngbCollapse"
                      [ngbCollapse]="isUserUpdateFormCollapsed">
                     <app-user-update-form (hideFormEvent)="swap()" [userInfo]="user.userInfo!"></app-user-update-form>
                 </div>
-
-
             </ng-container>
-
         </div>
-        <div>
-
-<!--            <app-user-password-update-form></app-user-password-update-form>-->
+        <div class="my-2 text-right w-full">
+            <span class="text-dark-blue text-xl cursor-pointer text-opacity-50 hover:underline hover:text-opacity-100 transition-all duration-200"
+            (click)="togglePasswordUpdateFormCollapseStateChange()">{{isPasswordUpdateFormCollapsed? 'Change password' : 'Cancel password change'}}</span>
+        </div>
+        <div class="visible" #collapse="ngbCollapse"
+             [ngbCollapse]="isPasswordUpdateFormCollapsed">
+            <app-user-password-update-form
+                    (hideFormEvent)="togglePasswordUpdateFormCollapseStateChange()"></app-user-password-update-form>
         </div>
 
-        <div class="header-container">
+        <div class="header-container mt-4">
             <span class="page-header">My Reviews</span>
         </div>
+
         <div class="main-horizontal-line"></div>
+
         <ng-container *ngIf="userReviews$ | async as state" [ngSwitch]="state.userReviewsState">
             <ng-container *ngSwitchCase="'LOADED'">
                 <div class="review-container">
@@ -77,14 +81,17 @@
                                     (loadPageEvent)="loadPage($event)"/>
                 }
             </ng-container>
+
             <ng-container *ngSwitchCase="'LOADING'">
                 <div class="spinner-border" role="status" style="margin-top: 25%; color: #01a5d9ff">
                     <span class="sr-only">Loading...</span>
                 </div>
             </ng-container>
+
             <ng-container *ngSwitchCase="'ERROR'">
                 <app-error></app-error>
             </ng-container>
+
         </ng-container>
     </div>
 </main>

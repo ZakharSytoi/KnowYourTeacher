@@ -5,8 +5,7 @@ import {Page} from "../../models/Page";
 import {SearchedReviewDto} from "../../models/SearchedReviewDto";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserResponseDto} from "../../models/UserResponseDto";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {UniversityService} from "../../services/university.service";
+import {RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {ErrorComponent} from "../../components/error/error.component";
@@ -14,10 +13,7 @@ import {PaginationComponent} from "../../components/pagination/pagination.compon
 import {SimpleReviewComponent} from "../../components/simple-review/simple-review.component";
 import {TeacherSearchComponent} from "../../components/teacher-search/teacher-search.component";
 import {InfoFieldComponent} from "../../components/SmallComponents/info-field/info-field.component";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {UniversityDto} from "../../models/UniversityDto";
-import {AuthService} from "../../services/auth.service";
-import {UserRegistrationRequestDto} from "../../models/UserRegistrationRequestDto";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserUpdateFormComponent} from "../../components/user-update-form/user-update-form.component";
 import {
     UserPasswordUpdateFormComponent
@@ -60,6 +56,7 @@ export class UserPageComponent implements OnInit {
     userInfo$!: Observable<{ userInfoState: string, userInfo?: UserResponseDto, error?: HttpErrorResponse }>
     isUserInfoCollapsed = false;
     isUserUpdateFormCollapsed = true;
+    isPasswordUpdateFormCollapsed = true;
 
     constructor(private readonly userService: UserService) {
     }
@@ -90,26 +87,30 @@ export class UserPageComponent implements OnInit {
         )
     }
 
-    toggleUserInfoCollapseStateChange(){
+    toggleUserInfoCollapseStateChange() {
         this.isUserInfoCollapsed = !this.isUserInfoCollapsed;
-
     }
 
-    toggleUpdateFormCollapseStateChange(){
+    toggleUpdateFormCollapseStateChange() {
         this.isUserUpdateFormCollapsed = !this.isUserUpdateFormCollapsed;
     }
 
-    showInfoHideForm(){
-        this.toggleUpdateFormCollapseStateChange()
-        setTimeout(()=>this.toggleUserInfoCollapseStateChange(), 400 )
-    }
-    showFormHideInfo(){
-        this.toggleUserInfoCollapseStateChange()
-        setTimeout(()=>this.toggleUpdateFormCollapseStateChange(), 400)
+    togglePasswordUpdateFormCollapseStateChange() {
+        this.isPasswordUpdateFormCollapsed = !this.isPasswordUpdateFormCollapsed;
     }
 
-    swap(){
-        if(!this.isUserInfoCollapsed){
+    showInfoHideForm() {
+        this.toggleUpdateFormCollapseStateChange()
+        setTimeout(() => this.toggleUserInfoCollapseStateChange(), 400)
+    }
+
+    showFormHideInfo() {
+        this.toggleUserInfoCollapseStateChange()
+        setTimeout(() => this.toggleUpdateFormCollapseStateChange(), 400)
+    }
+
+    swap() {
+        if (!this.isUserInfoCollapsed) {
             this.showFormHideInfo()
         } else this.showInfoHideForm()
     }
