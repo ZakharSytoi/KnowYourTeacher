@@ -30,10 +30,4 @@ public class AuthController {
         authService.registerUser(userDtoRequest);
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
     }
-
-    @ExceptionHandler({UserWithEmailAlreadyExistsException.class, UserWithNicknameAlreadyExistsException.class})
-    public ResponseEntity<?> handleUserWithEmailAlreadyExistsException(Exception exception){
-        return ResponseEntity.status(409).body(exception.getMessage());
-    }
-
 }

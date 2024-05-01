@@ -1,5 +1,7 @@
 package com.example.course_project_2023.web.exceptionHandling;
 
+import com.example.course_project_2023.service.exception.UserWithEmailAlreadyExistsException;
+import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
 import com.example.course_project_2023.service.exception.likedislike.LikeDislikeException;
 import com.example.course_project_2023.service.exception.notFound.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
@@ -38,6 +40,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(HttpStatus.CONFLICT, request, ex, List.of(ex.getMessage()));
     }
 
+    @ExceptionHandler({UserWithEmailAlreadyExistsException.class, UserWithNicknameAlreadyExistsException.class})
+    public ResponseEntity<?> handleUserWithEmailAlreadyExistsException(Exception exception){
+        return ResponseEntity.status(409).body(exception.getMessage());
+    }
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                HttpHeaders headers, HttpStatusCode status,
