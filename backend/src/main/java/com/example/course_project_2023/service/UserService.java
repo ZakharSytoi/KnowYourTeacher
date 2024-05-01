@@ -10,6 +10,7 @@ import com.example.course_project_2023.service.dto.PasswordUpdateDtoRequest;
 import com.example.course_project_2023.service.dto.SearchedReviewDto;
 import com.example.course_project_2023.service.dto.UserInfoUpdateDtoRequest;
 import com.example.course_project_2023.service.dto.UserResponseDto;
+import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
 import com.example.course_project_2023.service.exception.notFound.UniversityNotFoundException;
 import com.example.course_project_2023.service.mappers.ReviewViewMapper;
 import com.example.course_project_2023.service.mappers.UserMapper;
@@ -59,6 +60,13 @@ public class UserService {
         Long userId = userSecurityUtil.getUserIdFromContext();
 
         User user = userRepository.findById(userId).get();
+
+        if (!user.getNickname().equals(userInfoUpdateDtoRequest.nickname())
+                && existsWithNickname(userInfoUpdateDtoRequest.nickname())) {
+            throw new UserWithNicknameAlreadyExistsException(
+                    String.format("User with nickname %s already exists.", userInfoUpdateDtoRequest.nickname())
+            );
+        }
 
         user.setNickname(userInfoUpdateDtoRequest.nickname());
         user.setUniversity(universityRepository.findById(userInfoUpdateDtoRequest.universityId()).orElseThrow(
