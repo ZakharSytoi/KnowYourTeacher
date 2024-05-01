@@ -66,7 +66,7 @@
                 Profile updated successfully!
             </p>
         }
-        <div class="flex flex-col w-full items-center gap-2 md:flex-row md:gap-4 sm:mx-auto sm:w-[60%]">
+        <div class="flex flex-col w-full items-center gap-2 md:flex-row-reverse md:gap-4 sm:mx-auto sm:w-[60%]">
             <button [disabled]="!userData.valid || getUniversityErrorStatus()" type="submit" class="signInBtn">Update profile</button>
             <button class="signInBtn cancelBtn" (click)="hideFormEvent.emit()" type="button">Cancel update</button>
         </div>
