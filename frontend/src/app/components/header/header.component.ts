@@ -1,19 +1,20 @@
 import {Component} from '@angular/core';
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {Router, RouterModule} from '@angular/router';
 import {JwtUtilsService} from "../../services/jwt-utils.service";
-import { ClickOutsideDirective } from './clickOutside.directive';
+import {ClickOutsideDirective} from './clickOutside.directive';
+import {NgbCollapse} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [RouterModule,NgIf, ClickOutsideDirective],
+    imports: [RouterModule, NgIf, ClickOutsideDirective, NgbCollapse, NgClass],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
     jwtUtilService: JwtUtilsService;
-
+    isMenuCollapsed = true;
 
     constructor(jwtUtilService: JwtUtilsService, readonly router:Router) {
         this.jwtUtilService = jwtUtilService;
@@ -34,14 +35,12 @@ export class HeaderComponent {
         return this.jwtUtilService.GetUserRoles()
     }
 
-    isMenuOpened: boolean = false;
-
-    toggleMenu(): void {
-        this.isMenuOpened = !this.isMenuOpened;
+    changeMenuState(){
+        this.isMenuCollapsed = !this.isMenuCollapsed;
     }
-
     clickedOutside(): void {
-        this.isMenuOpened = false;
+        console.log("clicked")
+        this.isMenuCollapsed = true;
     }
 
     saveCurrentUrl = ()=>sessionStorage.setItem('previousUrl', this.router.url);
