@@ -65,6 +65,7 @@ export class UserPasswordUpdateFormComponent {
                         setTimeout(() => {
                             this.hideFormEvent.emit();
                             this.successfulUpdated = false;
+                            this.userData.reset()
                         }, 1000)
                     },
                     error: err => {
