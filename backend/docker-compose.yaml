@@ -1,16 +1,12 @@
 services:
-  KYT_db:
+  KYT_db2:
     image: postgres:15
     environment:
-      POSTGRES_DB: knowYourTeacher_db
+      POSTGRES_DB: knowYourTeacher_db2
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
     ports:
       - 5433:5432
-    volumes:
-      - "./sql/schema.sql:/docker-entrypoint-initdb.d/1.sql"
-      - "./sql/data.sql:/docker-entrypoint-initdb.d/2.sql"
-      - "./sql/defaultPictures:/docker-entrypoint-initdb.d/pics"
 
   
   know_your_teacher_app:
@@ -18,7 +14,7 @@ services:
     ports:
       - 8082:8082
     depends_on:
-      - KYT_db
+      - KYT_db2
 
 
   know_your_teacher_app_frontend:
