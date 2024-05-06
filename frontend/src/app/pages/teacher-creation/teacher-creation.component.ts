@@ -64,8 +64,7 @@ export class TeacherCreationComponent {
     }
 
     validateImageSize(width: number, height: any, minWidth: number, maxWidth: number, minHeight: number, maxHeight: number): boolean {
-        console.log(`width: ${width}, height:${height}`)
-        return width >= minWidth && width <= maxWidth && height >= minHeight && height <= maxHeight && width / height >= 0.9 && width / height <= 1.1;
+        return width >= minWidth && width <= maxWidth && height >= minHeight && height <= maxHeight && width / height >= 0.8 && width / height <= 1.2;
     }
 
     /*    if (width >= minWidth && width <= maxWidth && height >= minHeight && height <= maxHeight) {
@@ -110,7 +109,7 @@ export class TeacherCreationComponent {
         };
         reader.readAsDataURL(file);
 
-        //this.teacherData.patchValue({photo: file});
+        this.teacherData.patchValue({photo: file});
     }
 
     onSubmit() {
