@@ -1,0 +1,20 @@
+-- Insert data into the 'review' table
+INSERT INTO review (score, teacher_id, subject_name, user_id, review_text, created_date)
+VALUES (5, 1, 'Math', 2, 'Excellent teacher!', '2023-01-05 10:00:00'),
+       (4, 2, 'Physics', 3, 'Very knowledgeable', '2023-01-06 11:00:00'),
+       (3, 3, 'Chemistry', 4, 'Needs improvement', '2023-01-07 12:00:00'),
+       (4, 4, 'Biology', 5, 'Good teaching skills', '2023-01-08 13:00:00'),
+       (3, 5, 'History', 6, 'Average teaching skills', '2023-01-10 14:00:00'),
+       (5, 6, 'Computer Science', 7, 'Fantastic teacher!', '2023-01-11 15:00:00'),
+       (4, 7, 'English', 8, 'Great communication', '2023-01-12 16:00:00'),
+       (3, 8, 'Economics', 9, 'Could be more engaging', '2023-01-13 17:00:00'),
+       (5, 9, 'Art', 10, 'Inspiring lectures', '2023-01-14 18:00:00'),
+       (4, 1, 'Math', 6, 'Clear explanations', '2023-01-15 10:30:00'),
+       (3, 1, 'Math', 7, 'Helpful but could improve', '2023-01-16 11:30:00'),
+       (5, 1, 'Math', 8, 'Best teacher ever!', '2023-01-17 12:30:00'),
+       (4, 2, 'Physics', 9, 'Interactive classes', '2023-01-18 13:30:00'),
+       (5, 2, 'Physics', 10, 'Passionate about the subject', '2023-01-19 14:30:00'),
+       (3, 2, 'Physics', 6, 'Needs more practical examples', '2023-01-20 15:30:00'),
+       (4, 3, 'Chemistry', 7, 'Interesting experiments', '2023-01-21 16:30:00'),
+       (2, 3, 'Chemistry', 8, 'Difficult to understand', '2023-01-22 17:30:00'),
+       (5, 3, 'Chemistry', 9, 'Great at simplifying complex concepts', '2023-01-23 18:30:00');
