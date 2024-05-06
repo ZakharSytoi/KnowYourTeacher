@@ -14,9 +14,7 @@ import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Page;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +25,6 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@Validated
 @RequestMapping("/knowyourteacher-api/v1/teachers")
 public class TeacherController {
     private final TeacherWithMostPopularReviewService teacherWithMostPopularReviewService;
@@ -38,11 +35,6 @@ public class TeacherController {
     public ResponseEntity<List<TeacherPreviewDto>> getTopTenTeachers(
             @RequestParam(required = false, defaultValue = "10") int pageSize) {
         return ResponseEntity.ok().body(teacherWithMostPopularReviewService.getNTeachersWithMostPopularReviews(pageSize));
-    }
-
-    @GetMapping(value = "/pictures/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImg(@PathVariable String id) {
-        return teacherService.getTeacherPictureByPictureId(id);
     }
 
     @GetMapping("/{id:\\d+}")
@@ -73,6 +65,7 @@ public class TeacherController {
     }
 
     @PostMapping("/create")
+    @Valid
     public ResponseEntity<?> createTeacher(
             @Length(min = 2, max = 50, message = "name length must be between 2 and 50 characters")
             @RequestParam("name") String name,
@@ -81,7 +74,6 @@ public class TeacherController {
             @Min(value = 0, message = "universityId value must be greater then or equal 0")
             @Max(value = 10000, message = "universityId value must not exceed 10000")
             @RequestParam("universityId") Long universityId,
-            @Valid
             @ImageResolution(minWidth = 100, minHeight = 100, maxWidth = 1000, maxHeight = 1000)
             @RequestParam("image") MultipartFile photo
     ) throws IOException {
