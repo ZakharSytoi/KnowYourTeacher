@@ -13,10 +13,8 @@ public interface TeacherWithMostPopularReviewMapper {
     TeacherWithMostPopularReviewMapper INSTANCE = Mappers.getMapper(TeacherWithMostPopularReviewMapper.class);
 
     List<TeacherPreviewDto> teacherListToTeacherDtoResponseList(List<TeacherWithMostPopularReview> teachers);
+
     @Mapping(target = "teacherPictureUri",
-            expression = "java( org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath()\n" +
-                    "                .path(\"/knowyourteacher-api/v1/teachers/pictures/\")\n" +
-                    "                .path(teacher.getTeacherPictureId())\n" +
-                    "                .toUriString(); )")
+            source = "profileImageLink")
     TeacherPreviewDto teacherToTeacherDtoResponse(TeacherWithMostPopularReview teacher);
 }

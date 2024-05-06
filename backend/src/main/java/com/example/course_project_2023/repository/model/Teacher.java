@@ -24,9 +24,8 @@ public class Teacher {
     private String surname;
     @Column(name = "avg_score")
     private Double avgScore;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "picture_id")
-    private Picture picture;
+    @Column(name = "profile_image_link")
+    private String profileImageLink;
     @ManyToOne()
     @JoinColumn(name = "university_id")
     private University university;

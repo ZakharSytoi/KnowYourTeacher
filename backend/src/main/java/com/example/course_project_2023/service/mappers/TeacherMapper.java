@@ -16,10 +16,7 @@ public interface TeacherMapper {
             @Mapping(target = "universityName",
                     expression = "java( teacher.getUniversity().getName() )"),
             @Mapping(target = "teacherPictureUri",
-                    expression = "java( org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath()\n" +
-                            "                .path(\"/knowyourteacher-api/v1/teachers/pictures/\")\n" +
-                            "                .path(teacher.getPicture().getId().toString())\n" +
-                            "                .toUriString(); )"),
+                     source = "profileImageLink"),
             @Mapping(target = "teacherReviewsUri",
                     expression = "java( org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath()\n" +
                             "                .path(\"/knowyourteacher-api/v1/teachers/\")\n" +
