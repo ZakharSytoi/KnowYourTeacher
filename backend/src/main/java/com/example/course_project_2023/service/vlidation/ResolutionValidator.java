@@ -33,7 +33,7 @@ public class ResolutionValidator implements ConstraintValidator<ImageResolution,
             return image != null
                     && image.getWidth() >= minWidth && image.getHeight() >= minHeight
                     && image.getWidth() <= maxWidth && image.getHeight() <= maxHeight
-                    && image.getWidth() * 1.0 / image.getHeight() >= 0.9 && image.getWidth() * 1.0 / image.getHeight() <= 1.1;
+                    && image.getWidth() * 1.0 / image.getHeight() >= 0.8 && image.getWidth() * 1.0 / image.getHeight() <= 1.2;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
