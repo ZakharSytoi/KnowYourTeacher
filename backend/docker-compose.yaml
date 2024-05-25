@@ -10,7 +10,7 @@ services:
 
   
   know_your_teacher_app:
-    image: zakharsytoi/know_your_teacher_app:1.71
+    image: zakharsytoi/know_your_teacher_app:1.76
     ports:
       - 8082:8082
     depends_on:
