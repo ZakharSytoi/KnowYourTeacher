@@ -30,4 +30,10 @@ public class AuthController {
         authService.registerUser(userDtoRequest);
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
     }
+
+    @GetMapping("/activate/{id}")
+    public ResponseEntity<?> activate(@PathVariable String id) {
+        authService.activateProfile(id);
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
+    }
 }
