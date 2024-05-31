@@ -11,6 +11,7 @@ import com.example.course_project_2023.service.dto.UserRegisterDtoRequest;
 import com.example.course_project_2023.service.exception.UserWithEmailAlreadyExistsException;
 import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
 import com.example.course_project_2023.service.exception.notFound.ProfileNotFoundException;
+import com.example.course_project_2023.service.kafka.KafkaService;
 import com.example.course_project_2023.service.security.UserDetailServiceImpl;
 import com.example.course_project_2023.service.security.util.JwtUtil;
 import jakarta.transaction.Transactional;
@@ -36,6 +37,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final UniversityRepository universityRepository;
     private final UserService userService;
+    private final KafkaService kafkaService;
 
     public String authenticateUser(UserLoginDtoRequest userLoginDtoRequest) {
         authenticationManager.authenticate(
@@ -59,7 +61,7 @@ public class AuthService {
         }
 
         UserRegistration userRegistration = userRegistrationRepository.save(new UserRegistration(request));
-        System.out.println(userRegistration.getId());
+        kafkaService.sendRegistrationAttemptMessage(userRegistration.getId());
     }
 
     public void activateProfile(String id) {
