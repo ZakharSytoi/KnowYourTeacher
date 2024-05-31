@@ -7,19 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Getter
-@RedisHash(value = "userRegistration", timeToLive = 900L)
+@RedisHash(value = "userRegistration", timeToLive = 10L)
 public class UserRegistration {
     @Id
     private String id;
-    private String nickname;
+    @Indexed private String nickname;
     private Long universityId;
     private String fieldOfStudies;
-    private String email;
+    @Indexed private String email;
     private String password;
 
     public UserRegistration(UserRegisterDtoRequest dtoRequest){
