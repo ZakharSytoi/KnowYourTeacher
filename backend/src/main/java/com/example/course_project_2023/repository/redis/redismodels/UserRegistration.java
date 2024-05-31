@@ -12,7 +12,7 @@ import org.springframework.data.redis.core.RedisHash;
 @NoArgsConstructor
 @ToString
 @Getter
-@RedisHash("userRegistration")
+@RedisHash(value = "userRegistration", timeToLive = 900L)
 public class UserRegistration {
     @Id
     private String id;
