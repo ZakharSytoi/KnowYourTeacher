@@ -1,4 +1,4 @@
-package com.example.mailingservice;
+package com.example.mailingservice.service.registrationObserver;
 
 import com.example.mailingservice.model.RegistrationAttempt;
 
