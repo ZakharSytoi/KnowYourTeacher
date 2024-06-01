@@ -8,6 +8,7 @@ import com.example.course_project_2023.repository.redis.redismodels.UserRegistra
 import com.example.course_project_2023.repository.redis.redisrepos.UserRegistrationRepository;
 import com.example.course_project_2023.service.dto.UserLoginDtoRequest;
 import com.example.course_project_2023.service.dto.UserRegisterDtoRequest;
+import com.example.course_project_2023.service.dto.kafka.RegistrationAttempt;
 import com.example.course_project_2023.service.exception.UserWithEmailAlreadyExistsException;
 import com.example.course_project_2023.service.exception.UserWithNicknameAlreadyExistsException;
 import com.example.course_project_2023.service.exception.notFound.ProfileNotFoundException;
@@ -61,7 +62,7 @@ public class AuthService {
         }
 
         UserRegistration userRegistration = userRegistrationRepository.save(new UserRegistration(request));
-        kafkaService.sendRegistrationAttemptMessage(userRegistration.getId());
+        kafkaService.sendRegistrationAttemptMessage(new RegistrationAttempt(userRegistration.getEmail(), userRegistration.getId()));
     }
 
     public void activateProfile(String id) {
