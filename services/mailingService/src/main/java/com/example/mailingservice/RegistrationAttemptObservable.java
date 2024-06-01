@@ -1,5 +1,7 @@
 package com.example.mailingservice;
 
+import com.example.mailingservice.model.RegistrationAttempt;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class RegistrationAttemptObservable {
         observers.remove(registrationAttemptObserver);
     }
 
-    public void notifyObservers(String message){
+    public void notifyObservers(RegistrationAttempt message){
         for (var observer :
                 observers) {
             observer.update(message);
