@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.index.Indexed;
 @NoArgsConstructor
 @ToString
 @Getter
-@RedisHash(value = "userRegistration", timeToLive = 10L)
+@RedisHash(value = "userRegistration", timeToLive = 900L) //15 min long registration
 public class UserRegistration {
     @Id
     private String id;
