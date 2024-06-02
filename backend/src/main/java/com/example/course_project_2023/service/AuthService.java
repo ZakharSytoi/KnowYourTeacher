@@ -62,7 +62,7 @@ public class AuthService {
         }
 
         UserRegistration userRegistration = userRegistrationRepository.save(new UserRegistration(request));
-        kafkaService.sendRegistrationAttemptMessage(new RegistrationAttempt(userRegistration.getEmail(), userRegistration.getId()));
+        kafkaService.sendRegistrationAttemptMessage(new RegistrationAttempt(userRegistration.getNickname(), userRegistration.getEmail(), userRegistration.getId()));
     }
 
     public void activateProfile(String id) {
