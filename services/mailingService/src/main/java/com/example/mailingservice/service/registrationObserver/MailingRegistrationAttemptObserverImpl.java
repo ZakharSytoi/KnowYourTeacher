@@ -39,7 +39,7 @@ public class MailingRegistrationAttemptObserverImpl implements RegistrationAttem
             );
             Message message = MessageCreator.createMessageWithEmail(mimeMessage);
 
-            gmail.users().messages().send("me", message).execute();
+            System.out.println(gmail.users().messages().send("me", message).execute());
         } catch (Exception e){
             System.out.println(e);
         }
