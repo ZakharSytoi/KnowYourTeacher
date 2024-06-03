@@ -19,7 +19,7 @@ public record UserRegisterDtoRequest(
         String fieldOfStudies,
         @NotNull(message = "email can not be null")
         @Email(message = "email value must be a valid email address")
-        @Length(max = 60, message = "email length must not exceed 60 characters")
+        @Length(max = 100, message = "email length must not exceed 60 characters")
         String email,
         @NotNull(message = "password can not be null")
         @Length(min = 8, max = 30, message = "password length must be between 8 and 30 characters")
