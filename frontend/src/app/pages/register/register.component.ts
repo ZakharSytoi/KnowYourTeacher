@@ -37,6 +37,8 @@ export class RegisterComponent {
     existingNicknameError: boolean = false;
     unknownRegistrationError: boolean = false;
 
+    registrationCompleted: boolean = false;
+
     constructor(
         private authService: AuthService,
         private universityService: UniversityService,
@@ -94,7 +96,7 @@ export class RegisterComponent {
                     )
                 )
                 .subscribe({
-                    next: () => this.router.navigate(["/login"]),
+                    next: () => this.handleSuccessfulRegistration(),
                     error: err => {
                         this.handleUnsuccessfulLogin(err);
                     },
@@ -102,6 +104,10 @@ export class RegisterComponent {
         } else {
             console.log("invalid data");
         }
+    }
+
+    handleSuccessfulRegistration() {
+        this.registrationCompleted = true;
     }
 
     handleUnsuccessfulLogin(error: HttpErrorResponse): any {
