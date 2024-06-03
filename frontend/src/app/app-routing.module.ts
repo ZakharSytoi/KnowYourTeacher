@@ -12,6 +12,7 @@ import {ContactsComponent} from "./pages/contacts/contacts.component";
 import {QandaComponent} from "./pages/qanda/qanda.component";
 import {UserPageComponent} from "./pages/user-page/user-page.component";
 import {authorizedGuard} from "./guards/authorized.guard";
+import {ActivationComponent} from "./pages/activation/activation.component";
 
 const routes: Routes = [
     {
@@ -69,6 +70,11 @@ const routes: Routes = [
     {
         path: 'qa',
         component: QandaComponent,
+        title: 'Q&A'
+    },
+    {
+        path: 'activate/:id',
+        component: ActivationComponent,
         title: 'Q&A'
     },
     {
