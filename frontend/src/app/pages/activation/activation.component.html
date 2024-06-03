@@ -1,0 +1,28 @@
+<app-short-header></app-short-header>
+<main class="content-container _container items-center">
+    <div class="content-block mt-[10%]">
+        <ng-container *ngIf="activationState$ | async as state" [ngSwitch]="state.teacherCardState">
+            <ng-container *ngSwitchCase="'LOADED'">
+                <div class="no-search-results-container h-full">
+                    <span class="header">Your registration completed!</span>
+                    <span>Your account is activated successfully. Now You can <a href="/login"
+                                                                                 class="font-bold text-decoration-underline">Log in</a></span>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'LOADING'">
+                <span class="header">Activation in process.....</span>
+                <div class="spinner-border" role="status" style="margin-top: 25%; color: #01a5d9ff">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'ERROR'">
+                <div class="no-search-results-container">
+                    <span class="header">Oops... No such account to be activated</span>
+                    <span>
+                                        Seems like the account You are trying to activate does not exist.
+                                    </span>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</main>
