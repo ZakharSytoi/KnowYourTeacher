@@ -10,15 +10,16 @@ services:
 
   
   know_your_teacher_app:
-    image: zakharsytoi/know_your_teacher_app:1.76
+    image: zakharsytoi/know_your_teacher_app:1.8
     ports:
       - 8082:8082
     depends_on:
       - KYT_db2
+      - kafka
 
 
   know_your_teacher_app_frontend:
-    image: zakharsytoi/know_your_teacher_frontend:0.71
+    image: zakharsytoi/know_your_teacher_frontend:1.25
     ports:
       - 8077:80
     depends_on:
@@ -58,3 +59,10 @@ services:
       - REDIS_PASSWORD=secret
       - REDIS_PORT=6379
       - REDIS_DATABASES=1
+
+  mailingService:
+    image: zakharsytoi/mailing-service:1.0
+    ports:
+      - 8888:8888
+    depends_on:
+      - kafka

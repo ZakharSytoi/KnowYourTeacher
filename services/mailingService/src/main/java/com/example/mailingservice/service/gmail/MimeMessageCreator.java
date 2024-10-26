@@ -1,11 +1,13 @@
 package com.example.mailingservice.service.gmail;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 import java.util.Properties;
 
 @Service
@@ -14,14 +16,14 @@ public class MimeMessageCreator {
                                           String fromEmailAddress,
                                           String subject,
                                           String bodyText)
-            throws MessagingException {
+            throws MessagingException, AddressException {
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
 
         MimeMessage email = new MimeMessage(session);
 
         email.setFrom(new InternetAddress(fromEmailAddress));
-        email.addRecipient(javax.mail.Message.RecipientType.TO,
+        email.addRecipient(MimeMessage.RecipientType.TO,
                 new InternetAddress(toEmailAddress));
         email.setSubject(subject);
         email.setContent(bodyText, "text/html");

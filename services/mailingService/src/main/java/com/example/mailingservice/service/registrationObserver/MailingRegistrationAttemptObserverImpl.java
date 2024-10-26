@@ -2,26 +2,25 @@ package com.example.mailingservice.service.registrationObserver;
 
 import com.example.mailingservice.model.RegistrationAttempt;
 import com.example.mailingservice.service.ActivationLinkConstructor;
-import com.example.mailingservice.service.gmail.MessageCreator;
 import com.example.mailingservice.service.gmail.MimeMessageCreator;
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.model.Message;
+import jakarta.mail.internet.MimeMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import javax.mail.internet.MimeMessage;
+
 
 @Service
 public class MailingRegistrationAttemptObserverImpl implements RegistrationAttemptObserver {
     private final TemplateEngine templateEngine;
     private final ActivationLinkConstructor activationLinkConstructor;
-    private final Gmail gmail;
+    private final JavaMailSender emailSender;
 
-    public MailingRegistrationAttemptObserverImpl(TemplateEngine templateEngine, ActivationLinkConstructor activationLinkConstructor, Gmail gmail) {
+    public MailingRegistrationAttemptObserverImpl(TemplateEngine templateEngine, ActivationLinkConstructor activationLinkConstructor, JavaMailSender emailSender) {
         this.templateEngine = templateEngine;
         this.activationLinkConstructor = activationLinkConstructor;
-        this.gmail = gmail;
+        this.emailSender = emailSender;
     }
 
     @Override
@@ -37,9 +36,8 @@ public class MailingRegistrationAttemptObserverImpl implements RegistrationAttem
                     "KnowYourTeacher profile activation",
                     messageBody
             );
-            Message message = MessageCreator.createMessageWithEmail(mimeMessage);
-
-            System.out.println(gmail.users().messages().send("me", message).execute());
+            emailSender.send(mimeMessage);
+            System.out.println("successfully sent email to " + registrationAttempt.email());
         } catch (Exception e){
             System.out.println(e);
         }
